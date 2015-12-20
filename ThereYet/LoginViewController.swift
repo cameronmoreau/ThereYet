@@ -26,7 +26,7 @@ class LoginViewController: UIViewController {
             PKHUD.sharedHUD.contentView = PKHUDProgressView()
             PKHUD.sharedHUD.show()
             
-            User.login(textFieldUsername.text!, password: textFieldPassword.text!, completion: {
+            PearsonAPI.login(textFieldUsername.text!, password: textFieldPassword.text!, completion: {
                 (success: Bool, error: NSError?) in
                 
                 PKHUD.sharedHUD.hide()

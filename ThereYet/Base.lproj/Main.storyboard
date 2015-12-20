@@ -57,7 +57,7 @@
         <!--Debug Menu-->
         <scene sceneID="Jsl-mp-icz">
             <objects>
-                <tableViewController id="mv1-US-7QR" sceneMemberID="viewController">
+                <tableViewController id="mv1-US-7QR" customClass="DebugTableViewController" customModule="ThereYet" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="DjY-pe-HVd">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -115,6 +115,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="BYZ-38-t0r" kind="showDetail" identifier="logoutSegue" id="KBf-zX-TXa"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -133,7 +136,7 @@
         <!--Navigation Controller-->
         <scene sceneID="fV6-O7-1nT">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Pey-Vd-yL6" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="HomeNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="Pey-Vd-yL6" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="WCq-Vm-huj">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

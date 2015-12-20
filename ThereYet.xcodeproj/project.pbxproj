@@ -7,18 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7E9BBF4D1C263A5200ECA0B7 /* PearsonAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9BBF4C1C263A5200ECA0B7 /* PearsonAPI.swift */; };
+		7E9BBF4F1C26880700ECA0B7 /* AuthData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9BBF4E1C26880700ECA0B7 /* AuthData.swift */; };
+		7E9BBF541C26956A00ECA0B7 /* DebugTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9BBF531C26956A00ECA0B7 /* DebugTableViewController.swift */; };
 		7ED52CB61C23E8A40028172D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED52CB51C23E8A40028172D /* AppDelegate.swift */; };
 		7ED52CBB1C23E8A40028172D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7ED52CB91C23E8A40028172D /* Main.storyboard */; };
 		7ED52CBD1C23E8A40028172D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7ED52CBC1C23E8A40028172D /* Assets.xcassets */; };
 		7ED52CC01C23E8A40028172D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7ED52CBE1C23E8A40028172D /* LaunchScreen.storyboard */; };
 		7ED52CCC1C23E90A0028172D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED52CCB1C23E90A0028172D /* LoginViewController.swift */; };
 		7ED52CCE1C23E9120028172D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED52CCD1C23E9120028172D /* User.swift */; };
+		7EEB9D9D1C24E827006F7CF3 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEB9D9C1C24E827006F7CF3 /* Course.swift */; };
 		D28B8E7252BF7C2847AFF489 /* Pods_ThereYet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A2E4613E4D867E1E294C6C4 /* Pods_ThereYet.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		325B89EAD6597DCF406FC5DB /* Pods-ThereYet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThereYet.release.xcconfig"; path = "Pods/Target Support Files/Pods-ThereYet/Pods-ThereYet.release.xcconfig"; sourceTree = "<group>"; };
 		6A2E4613E4D867E1E294C6C4 /* Pods_ThereYet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ThereYet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7E9BBF4C1C263A5200ECA0B7 /* PearsonAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PearsonAPI.swift; sourceTree = "<group>"; };
+		7E9BBF4E1C26880700ECA0B7 /* AuthData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthData.swift; sourceTree = "<group>"; };
+		7E9BBF531C26956A00ECA0B7 /* DebugTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugTableViewController.swift; sourceTree = "<group>"; };
 		7ED52CB21C23E8A40028172D /* ThereYet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ThereYet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7ED52CB51C23E8A40028172D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7ED52CBA1C23E8A40028172D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -27,6 +34,7 @@
 		7ED52CC11C23E8A40028172D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7ED52CCB1C23E90A0028172D /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		7ED52CCD1C23E9120028172D /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		7EEB9D9C1C24E827006F7CF3 /* Course.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
 		977DCC34FFB2384614B29273 /* Pods-ThereYet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThereYet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ThereYet/Pods-ThereYet.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -50,6 +58,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		7E9BBF491C263A1300ECA0B7 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				7E9BBF4C1C263A5200ECA0B7 /* PearsonAPI.swift */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
 		7ED52CA91C23E8A40028172D = {
 			isa = PBXGroup;
 			children = (
@@ -71,6 +87,7 @@
 		7ED52CB41C23E8A40028172D /* ThereYet */ = {
 			isa = PBXGroup;
 			children = (
+				7E9BBF491C263A1300ECA0B7 /* Helpers */,
 				7ED52CCA1C23E8F10028172D /* Resources */,
 				7ED52CC91C23E8E50028172D /* SupportingFiles */,
 				7ED52CC81C23E8E10028172D /* Models */,
@@ -83,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				7ED52CCB1C23E90A0028172D /* LoginViewController.swift */,
+				7E9BBF531C26956A00ECA0B7 /* DebugTableViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -91,6 +109,8 @@
 			isa = PBXGroup;
 			children = (
 				7ED52CCD1C23E9120028172D /* User.swift */,
+				7EEB9D9C1C24E827006F7CF3 /* Course.swift */,
+				7E9BBF4E1C26880700ECA0B7 /* AuthData.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -245,7 +265,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E9BBF541C26956A00ECA0B7 /* DebugTableViewController.swift in Sources */,
+				7EEB9D9D1C24E827006F7CF3 /* Course.swift in Sources */,
+				7E9BBF4F1C26880700ECA0B7 /* AuthData.swift in Sources */,
 				7ED52CCC1C23E90A0028172D /* LoginViewController.swift in Sources */,
+				7E9BBF4D1C263A5200ECA0B7 /* PearsonAPI.swift in Sources */,
 				7ED52CB61C23E8A40028172D /* AppDelegate.swift in Sources */,
 				7ED52CCE1C23E9120028172D /* User.swift in Sources */,
 			);

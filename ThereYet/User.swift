@@ -11,31 +11,55 @@ import SwiftyJSON
 
 class User {
     
-    static func login(username: String, password: String, completion: ((success: Bool, error: NSError?) -> ())) {
-        let params = [
-            "client_id": "99af8915-a27e-47d1-8b15-8e126e38c610",
-            "grant_type": "password",
-            "username": "gbtestc\\\(username)",
-            "password": password
-        ]
-        
-        Alamofire.request(.POST, "http://api.learningstudio.com/token", parameters: params)
-            .responseJSON { response in
-                
-                if let data = response.result.value {
-                    let json = JSON(data)
-                    
-                    if json["access_token"].isExists() {
-                        completion(success: true, error: nil)
-                        return
-                    }
-                }
-                
-                completion(success: false, error: NSError(domain: "UserAuth", code: 0, userInfo: ["error": "Invalid username/password"]))
-                return
+    let authData: AuthData!
+    
+    var id: Int?
+    var firstName: String?
+    var lastName: String?
+    var email: String?
+    
+    private let KEY_ID = "userId"
+    private let KEY_FIRST_NAME = "userFirstName"
+    private let KEY_LAST_NAME = "userLastName"
+    private let KEY_EMAIL = "userEmail"
+    
+    init() {
+        self.authData = AuthData()
+        loadData()
+    }
+    
+    func isLoggedIn() -> Bool {
+        if authData.hasData() && !authData.isExpired() && id != nil {
+            return true
         }
         
-        //TODO: Network error
+        return false
+    }
+    
+    func save() {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setObject(id, forKey: KEY_ID)
+        defaults.setObject(firstName, forKey: KEY_FIRST_NAME)
+        defaults.setObject(lastName, forKey: KEY_LAST_NAME)
+        defaults.setObject(email, forKey: KEY_EMAIL)
+        defaults.synchronize()
+    }
+    
+    func destroy() {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setObject(nil, forKey: KEY_ID)
+        defaults.setObject(nil, forKey: KEY_FIRST_NAME)
+        defaults.setObject(nil, forKey: KEY_LAST_NAME)
+        defaults.setObject(nil, forKey: KEY_EMAIL)
+        defaults.synchronize()
+    }
+    
+    private func loadData() {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        self.id = defaults.integerForKey(KEY_ID)
+        self.firstName = defaults.stringForKey(KEY_FIRST_NAME)
+        self.lastName = defaults.stringForKey(KEY_LAST_NAME)
+        self.email = defaults.stringForKey(KEY_EMAIL)
     }
     
 }

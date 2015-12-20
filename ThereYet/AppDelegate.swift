@@ -15,8 +15,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        //Check if user is already logged in
+        let auth = AuthData()
+        if auth.hasData() {
+            if !auth.isExpired() {
+                skipLogin()
+            }
+            
+            //Refresh Token
+            else {
+            }
+        }
+        
         return true
+    }
+    
+    private func skipLogin() {
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        self.window?.rootViewController = sb.instantiateViewControllerWithIdentifier("HomeNavigationController")
     }
 
     func applicationWillResignActive(application: UIApplication) {
