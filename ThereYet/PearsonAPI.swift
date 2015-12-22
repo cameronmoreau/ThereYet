@@ -15,6 +15,9 @@ class PearsonAPI {
     private static let url = "http://api.learningstudio.com/"
     private static let clientId = "99af8915-a27e-47d1-8b15-8e126e38c610"
     
+    private static let TYPE_LOGIN = 0
+    private static let TYPE_REFRESH = 0
+    
     static func login(username: String, password: String, completion: ((success: Bool, error: NSError?) -> ())) {
         let params = [
             "client_id": self.clientId,
@@ -23,74 +26,122 @@ class PearsonAPI {
             "password": password
         ]
 
-        Alamofire.request(.POST, "\(self.url)token", parameters: params)
-            .responseJSON { response in
-                
-                if let data = response.result.value {
-                    let json = JSON(data)
+        authRequest(TYPE_REFRESH, params: params, completion: {
+            (auth, error) in
+            
+            if auth != nil {
+                self.apiRequest(auth!, path: "/me", completion: {
+                    json in
                     
-                    let accessToken = json["access_token"].stringValue
-                    let refreshToken = json["refresh_token"].stringValue
-                    let expireToken = NSDate().dateByAddingTimeInterval(json["expires_in"].doubleValue)
-                    
-                    //Check if error occured
-                    if json["access_token"].isExists() {
+                    if let data = json?["me"] {
+                        let id = data["id"].intValue
+                        let firstName = data["firstName"].stringValue
+                        let lastName = data["lastName"].stringValue
+                        let email = data["emailAddress"].stringValue
+                        let username = data["userName"].stringValue
                         
-                        //Store details
-                        let auth = AuthData(accessToken: accessToken, refreshToken: refreshToken, expireDate: expireToken)
-                        auth.store()
+                        let user = User(id: id, firstName: firstName, lastName: lastName, username: username, email: email, auth: auth!)
+                        user.save()
                         
-                        completion(success: true, error: nil)
-                        return
+                        return completion(success: true, error: error)
                     }
-                }
-                
-                completion(success: false, error: NSError(domain: "UserAuth", code: 0, userInfo: ["error": "Invalid username/password"]))
-                return
-        }
-        
-        //TODO: Network error
+                })
+            }
+            
+            else {
+                return completion(success: false, error: error)
+            }
+        })
     }
     
-    static func refreshToken(auth: AuthData, completion: (() -> ())) {
+    static func refreshToken(auth: AuthData, completion: ((success: Bool, error: NSError?) -> ())) {
         let params = [
             "client_id": self.clientId,
             "grant_type": "refresh_token",
             "refresh_token": auth.refreshToken!
         ]
         
-        Alamofire.request(.POST, "\(self.url)token", parameters: params)
-            .responseJSON { response in
-                
-                
-        }
+        authRequest(TYPE_REFRESH, params: params, completion: {
+            (auth, error) in
+            
+            return completion(success: auth != nil, error: error)
+        })
     }
     
     static func retreiveCourses(user: User, completion: ((courses: [Course]?) -> ())) {
-        var courseIds:[Int] = []
+        var courses: [Course] = []
         
-        self.apiRequest(user, path: "courses", completion: {
+        self.apiRequest(user.authData, path: "users/\(user.id!)/courses", completion: {
             json in
             
             if let dataList = json?["courses"].array {
                 for dataItem in dataList {
                     let dataPath = dataItem["links"][0]["href"].stringValue
                     if !dataPath.isEmpty {
-                        let dataId = Int(NSURL(string: "dataId")!.pathComponents![1])
-                        courseIds.append(dataId!)
+                        
+                        var course = Course()
+                        course.id = Int(NSURL(string: "\(dataPath)")!.pathComponents![2])
+                        
+                        self.apiRequest(user.authData, path: "courses/\(course.id!)", completion: {
+                            json in
+                            
+                            if let courseData = json?["courses"][0] {
+                                course.title = courseData["title"].stringValue
+                                
+                                courses.append(course)
+                            }
+                            
+                        print(courses)
+                        })
                     }
                 }
             }
             
-            print(courseIds)
             
         })
     }
     
-    private static func apiRequest(user: User, path: String, completion: ((json: JSON?) -> ())) {
+    private static func authRequest(type: Int, params: [String: AnyObject]?,
+        completion: ((auth: AuthData?, error: NSError?) -> ())) {
+            
+            Alamofire.request(.POST, "\(self.url)token", parameters: params)
+                .responseJSON { response in
+                    
+                    if let data = response.result.value {
+                        let json = JSON(data)
+                        
+                        let accessToken = json["access_token"].stringValue
+                        let refreshToken = json["refresh_token"].stringValue
+                        let expireToken = NSDate().dateByAddingTimeInterval(json["expires_in"].doubleValue)
+                        
+                        //Check if error occured
+                        if json["access_token"].isExists() {
+                            
+                            //Store details
+                            let auth = AuthData(accessToken: accessToken, refreshToken: refreshToken, expireDate: expireToken)
+                            auth.store()
+                            
+                            completion(auth: auth, error: nil)
+                            return
+                        }
+                    }
+                    
+                    if type == TYPE_LOGIN {
+                        completion(auth: nil, error: NSError(domain: "UserAuth", code: 0, userInfo: ["error": "Invalid username/password"]))
+                    } else {
+                        completion(auth: nil, error: NSError(domain: "UserAuth", code: 0, userInfo: ["error": "Could not validate a key"]))
+                    }
+            }
+            
+            //TODO: Network error
+    }
+    
+    private static func apiRequest(auth: AuthData, path: String, completion: ((json: JSON?) -> ())) {
+        let headers = [
+            "X-Authorization": "Access_Token access_token=\(auth.accessToken!)"
+        ]
         
-        let headers = ["X-Authorization": "Access_Token access_token="]
-        Alamofire.request(.GET, "\(self.url)\(url)", headers: headers)
+        Alamofire.request(.GET, "\(self.url)\(path)", headers: headers)
             .responseJSON { response in
                 
                 if let data = response.result.value {

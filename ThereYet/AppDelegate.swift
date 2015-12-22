@@ -20,11 +20,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let auth = AuthData()
         if auth.hasData() {
             if !auth.isExpired() {
-                skipLogin()
+                self.skipLogin()
             }
             
             //Refresh Token
             else {
+                PearsonAPI.refreshToken(auth, completion: {
+                    (success, error) in
+                    
+                    if success {
+                        self.skipLogin()
+                    }
+                })
             }
         }
         

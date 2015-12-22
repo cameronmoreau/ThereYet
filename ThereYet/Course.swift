@@ -9,9 +9,9 @@
 import UIKit
 import CoreData
 
-class Course: NSManagedObject {
-    @NSManaged var id: NSNumber?
-    @NSManaged var name: String?
-    @NSManaged var instructor: String?
-    @NSManaged var hexColor: String?
+class Course {
+    var id: NSNumber?
+    var title: String?
+    var instructor: String?
+    var hexColor: String?
 }
