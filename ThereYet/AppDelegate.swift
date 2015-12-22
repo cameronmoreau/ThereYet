@@ -39,8 +39,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func skipLogin() {
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        self.window?.rootViewController = sb.instantiateViewControllerWithIdentifier("HomeNavigationController")
+        let containerViewController = ContainerViewController(initialMenuItem: MenuItems.menuItems(0)[0])
+        self.window?.rootViewController = containerViewController
     }
 
     func applicationWillResignActive(application: UIApplication) {

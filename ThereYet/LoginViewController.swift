@@ -9,7 +9,7 @@
 import UIKit
 import PKHUD
 
-class LoginViewController: UIViewController {
+class LoginViewController: CenterViewController {
     @IBOutlet weak var textFieldUsername: UITextField!
     @IBOutlet weak var textFieldPassword: UITextField!
     
@@ -32,7 +32,9 @@ class LoginViewController: UIViewController {
                 PKHUD.sharedHUD.hide()
                 
                 if success {
-                    self.performSegueWithIdentifier("loginSegue", sender: self)
+                    let appDelegate = UIApplication.sharedApplication().delegate
+                    let containerViewController = ContainerViewController(initialMenuItem: MenuItems.menuItems(0)[0])
+                    appDelegate?.window??.rootViewController = containerViewController
                 } else {
                     self.showBasicError(error!.userInfo["error"] as! String)
                 }
@@ -47,6 +49,10 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.draggable = false
+        
+        self.navigationController?.navigationBar.hidden = true
     }
     
     override func didReceiveMemoryWarning() {
