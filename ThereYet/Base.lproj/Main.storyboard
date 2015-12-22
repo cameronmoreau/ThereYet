@@ -8,7 +8,7 @@
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="ThereYet" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="LoginViewController" customModule="ThereYet" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -53,6 +53,43 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="305" y="353"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="fJ8-rq-2nS">
+            <objects>
+                <navigationController storyboardIdentifier="Home" useStoryboardIdentifierAsRestorationIdentifier="YES" id="N2E-6P-q5H" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Lcf-cS-zao">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="LUb-zc-fB6" kind="relationship" relationship="rootViewController" id="wGN-VB-UPf"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="G23-za-dCt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1020" y="353"/>
+        </scene>
+        <!--Home-->
+        <scene sceneID="mDF-rq-rSn">
+            <objects>
+                <viewController id="LUb-zc-fB6" customClass="HomeViewController" customModule="ThereYet" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="36g-pp-zJu"/>
+                        <viewControllerLayoutGuide type="bottom" id="883-1b-UkI"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="wky-YO-cEc">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Home" id="9w6-mR-aWt">
+                        <barButtonItem key="leftBarButtonItem" image="menu.png" id="VGG-xd-tmx"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DbA-a6-rMN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1687" y="353"/>
         </scene>
         <!--Debug Menu-->
         <scene sceneID="Jsl-mp-icz">
@@ -136,7 +173,7 @@
         <!--Navigation Controller-->
         <scene sceneID="fV6-O7-1nT">
             <objects>
-                <navigationController storyboardIdentifier="HomeNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="Pey-Vd-yL6" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="DebugViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Pey-Vd-yL6" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="WCq-Vm-huj">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -152,4 +189,7 @@
             <point key="canvasLocation" x="694" y="1063"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="menu.png" width="20" height="15"/>
+    </resources>
 </document>
