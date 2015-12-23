@@ -9,10 +9,12 @@
 import UIKit
 
 class HomeViewController: CenterViewController {
+    
+    var user: User!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        user = User()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -42,11 +44,20 @@ class HomeViewController: CenterViewController {
         
         switch menuItem.name {
             case "Sign Out":
-                let user = User()
                 user.authData.destroy()
                 user.destroy()
                 
                 self.navigateToViewController(MenuItem(name: "LoginViewController", color: UIColor.lightGrayColor(), action: .Navigation))
+                break
+            
+            case "Show Schedule":
+                PearsonAPI.retreiveCourses(user, completion: {
+                    courses in
+                    
+                    for course in courses {
+                        print("\(course.title) \(course.id)")
+                    }
+                })
                 break
             default:
                 break

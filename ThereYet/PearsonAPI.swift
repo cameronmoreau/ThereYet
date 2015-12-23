@@ -68,32 +68,50 @@ class PearsonAPI {
         })
     }
     
-    static func retreiveCourses(user: User, completion: ((courses: [Course]?) -> ())) {
+    static func retreiveCourses(user: User, completion: ((courses: [Course]) -> ())) {
         var courses: [Course] = []
         
         self.apiRequest(user.authData, path: "users/\(user.id!)/courses", completion: {
             json in
             
             if let dataList = json?["courses"].array {
+                
+                //Get all courses
                 for dataItem in dataList {
                     let dataPath = dataItem["links"][0]["href"].stringValue
                     if !dataPath.isEmpty {
                         
-                        var course = Course()
+                        let course = Course()
                         course.id = Int(NSURL(string: "\(dataPath)")!.pathComponents![2])
+                        courses.append(course)
+                    }
+                }
+                
+                //Get all course details
+                for (i, course) in courses.enumerate() {
+                    self.apiRequest(user.authData, path: "courses/\(course.id!)", completion: {
+                        json in
                         
-                        self.apiRequest(user.authData, path: "courses/\(course.id!)", completion: {
-                            json in
+                        if let courseData = json?["courses"][0] {
+                            //Check for "API Sandbox Course for cameron.cm6 Moreau" error
+                            var tempTitle = courseData["title"].stringValue
+                            var tempTitleArray = tempTitle.componentsSeparatedByString("for")
                             
-                            if let courseData = json?["courses"][0] {
-                                course.title = courseData["title"].stringValue
-                                
-                                courses.append(course)
+                            if tempTitleArray.count > 1 {
+                                tempTitleArray.removeLast()
+                                tempTitle = tempTitleArray.joinWithSeparator("")
+                                tempTitle = String(tempTitle.characters.dropLast())
                             }
                             
-                        print(courses)
-                        })
-                    }
+                            course.title = tempTitle
+                            
+                            //Check for last
+                            if i >= courses.count - 1 {
+                                completion(courses: courses)
+                            }
+                        }
+                        
+                    })
                 }
             }
             

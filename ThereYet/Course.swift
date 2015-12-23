@@ -12,6 +12,5 @@ import CoreData
 class Course {
     var id: NSNumber?
     var title: String?
-    var instructor: String?
     var hexColor: String?
 }
