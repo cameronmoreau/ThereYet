@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import PKHUD
+import CoreData
+import JGProgressHUD
 
 class LoginViewController: CenterViewController {
     @IBOutlet weak var textFieldUsername: UITextField!
@@ -23,18 +24,38 @@ class LoginViewController: CenterViewController {
         
         //Attempt Login
         if formIsValid() {
-            PKHUD.sharedHUD.contentView = PKHUDProgressView()
-            PKHUD.sharedHUD.show()
+            let loadingHUD = JGProgressHUD(style: .Dark)
+            loadingHUD.textLabel.text = "Loading"
             
+            loadingHUD.showInView(self.view, animated: true)
+            
+            //Login with pearson api
             PearsonAPI.login(textFieldUsername.text!, password: textFieldPassword.text!, completion: {
-                (success: Bool, error: NSError?) in
+                (user: User?, error: NSError?) in
                 
-                PKHUD.sharedHUD.hide()
-                
-                if success {
-                    let appDelegate = UIApplication.sharedApplication().delegate
-                    let containerViewController = ContainerViewController(initialMenuItem: MenuItems.menuItems(0)[0])
-                    appDelegate?.window??.rootViewController = containerViewController
+                if user != nil {
+                    
+                    //Retreive user's courses
+                    PearsonAPI.retreiveCourses(user!, completion: {
+                        courses in
+                        
+                        //Save all courses to core data
+                        for course in courses {
+                            do {
+                                try course.managedObjectContext?.save()
+                                print("Saving \(course.title!)")
+                            } catch let error as NSError {
+                                print(error)
+                            }
+                        }
+                        
+                        loadingHUD.dismiss()
+                        
+                        //Contineu to home page
+                        let appDelegate = UIApplication.sharedApplication().delegate
+                        let containerViewController = ContainerViewController(initialMenuItem: MenuItems.menuItems(0)[0])
+                        appDelegate?.window??.rootViewController = containerViewController
+                    })
                 } else {
                     self.showBasicError(error!.userInfo["error"] as! String)
                 }

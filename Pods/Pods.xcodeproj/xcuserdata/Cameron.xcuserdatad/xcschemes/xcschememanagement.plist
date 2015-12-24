@@ -9,7 +9,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>PKHUD.xcscheme</key>
+		<key>JGProgressHUD.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -27,12 +27,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>5146EE461436EC8A5A1F9E3661A5D4C9</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>8783790F953A995747F7A514108F6692</key>
+		<key>3FA0E2D4F5E97607B3B2849FE16C22F9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -42,7 +37,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>BBF80342848B6344C5359BEB02105AE4</key>
+		<key>D8FCFCEC7202B3CE6F49F38EB06D5E5B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F44631E561FFACD9160EE979B13BECD0</key>
 		<dict>
 			<key>primary</key>
 			<true/>

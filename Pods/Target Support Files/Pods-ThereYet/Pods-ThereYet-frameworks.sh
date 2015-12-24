@@ -53,11 +53,11 @@ code_sign_if_enabled() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework 'Pods-ThereYet/Alamofire.framework'
-  install_framework 'Pods-ThereYet/PKHUD.framework'
+  install_framework 'Pods-ThereYet/JGProgressHUD.framework'
   install_framework 'Pods-ThereYet/SwiftyJSON.framework'
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework 'Pods-ThereYet/Alamofire.framework'
-  install_framework 'Pods-ThereYet/PKHUD.framework'
+  install_framework 'Pods-ThereYet/JGProgressHUD.framework'
   install_framework 'Pods-ThereYet/SwiftyJSON.framework'
 fi

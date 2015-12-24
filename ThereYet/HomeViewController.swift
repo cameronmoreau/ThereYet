@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class HomeViewController: CenterViewController {
     
@@ -28,6 +29,25 @@ class HomeViewController: CenterViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func deleteAllData(entity: String) {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext
+        let fetchRequest = NSFetchRequest(entityName: entity)
+        fetchRequest.returnsObjectsAsFaults = false
+        
+        do
+        {
+            let results = try managedContext.executeFetchRequest(fetchRequest)
+            for managedObject in results
+            {
+                let managedObjectData:NSManagedObject = managedObject as! NSManagedObject
+                managedContext.deleteObject(managedObjectData)
+            }
+        } catch let error as NSError {
+            print("Detele all data in \(entity) error : \(error) \(error.userInfo)")
+        }
+    }
+    
 
     /*
     // MARK: - Navigation
@@ -44,6 +64,7 @@ class HomeViewController: CenterViewController {
         
         switch menuItem.name {
             case "Sign Out":
+                deleteAllData("Course")
                 user.authData.destroy()
                 user.destroy()
                 
@@ -51,13 +72,22 @@ class HomeViewController: CenterViewController {
                 break
             
             case "Show Schedule":
-                PearsonAPI.retreiveCourses(user, completion: {
-                    courses in
+                var courses  = [Course]()
+                let fetchRequest = NSFetchRequest(entityName: "Course")
+                let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+                
+                do {
+                    try courses = context.executeFetchRequest(fetchRequest) as! [Course]
                     
                     for course in courses {
-                        print("\(course.title) \(course.id)")
+                        print("Saved course \(course.title)")
                     }
-                })
+                    
+                } catch let error as NSError {
+                    print(error)
+                }
+                
+                
                 break
             default:
                 break

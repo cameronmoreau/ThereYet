@@ -20,13 +20,14 @@
 		7E9BBF4D1C263A5200ECA0B7 /* PearsonAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9BBF4C1C263A5200ECA0B7 /* PearsonAPI.swift */; };
 		7E9BBF4F1C26880700ECA0B7 /* AuthData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9BBF4E1C26880700ECA0B7 /* AuthData.swift */; };
 		7E9BBF541C26956A00ECA0B7 /* DebugTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9BBF531C26956A00ECA0B7 /* DebugTableViewController.swift */; };
+		7EA24C471C2BA8A5005705C5 /* ThereYet.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7EA24C451C2BA8A5005705C5 /* ThereYet.xcdatamodeld */; };
+		7EA24C6C1C2BB748005705C5 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA24C6A1C2BB748005705C5 /* Course.swift */; };
 		7ED52CB61C23E8A40028172D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED52CB51C23E8A40028172D /* AppDelegate.swift */; };
 		7ED52CBB1C23E8A40028172D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7ED52CB91C23E8A40028172D /* Main.storyboard */; };
 		7ED52CBD1C23E8A40028172D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7ED52CBC1C23E8A40028172D /* Assets.xcassets */; };
 		7ED52CC01C23E8A40028172D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7ED52CBE1C23E8A40028172D /* LaunchScreen.storyboard */; };
 		7ED52CCC1C23E90A0028172D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED52CCB1C23E90A0028172D /* LoginViewController.swift */; };
 		7ED52CCE1C23E9120028172D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED52CCD1C23E9120028172D /* User.swift */; };
-		7EEB9D9D1C24E827006F7CF3 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEB9D9C1C24E827006F7CF3 /* Course.swift */; };
 		D28B8E7252BF7C2847AFF489 /* Pods_ThereYet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A2E4613E4D867E1E294C6C4 /* Pods_ThereYet.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -46,6 +47,8 @@
 		7E9BBF4C1C263A5200ECA0B7 /* PearsonAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PearsonAPI.swift; sourceTree = "<group>"; };
 		7E9BBF4E1C26880700ECA0B7 /* AuthData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthData.swift; sourceTree = "<group>"; };
 		7E9BBF531C26956A00ECA0B7 /* DebugTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugTableViewController.swift; sourceTree = "<group>"; };
+		7EA24C461C2BA8A5005705C5 /* ThereYet.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ThereYet.xcdatamodel; sourceTree = "<group>"; };
+		7EA24C6A1C2BB748005705C5 /* Course.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
 		7ED52CB21C23E8A40028172D /* ThereYet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ThereYet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7ED52CB51C23E8A40028172D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7ED52CBA1C23E8A40028172D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -54,7 +57,6 @@
 		7ED52CC11C23E8A40028172D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7ED52CCB1C23E90A0028172D /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		7ED52CCD1C23E9120028172D /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		7EEB9D9C1C24E827006F7CF3 /* Course.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
 		977DCC34FFB2384614B29273 /* Pods-ThereYet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThereYet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ThereYet/Pods-ThereYet.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -147,8 +149,8 @@
 			isa = PBXGroup;
 			children = (
 				7ED52CCD1C23E9120028172D /* User.swift */,
-				7EEB9D9C1C24E827006F7CF3 /* Course.swift */,
 				7E9BBF4E1C26880700ECA0B7 /* AuthData.swift */,
+				7EA24C6A1C2BB748005705C5 /* Course.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -168,6 +170,7 @@
 				7ED52CB91C23E8A40028172D /* Main.storyboard */,
 				7ED52CBC1C23E8A40028172D /* Assets.xcassets */,
 				7ED52CBE1C23E8A40028172D /* LaunchScreen.storyboard */,
+				7EA24C451C2BA8A5005705C5 /* ThereYet.xcdatamodeld */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -308,8 +311,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E9BBF541C26956A00ECA0B7 /* DebugTableViewController.swift in Sources */,
+				7EA24C471C2BA8A5005705C5 /* ThereYet.xcdatamodeld in Sources */,
 				4990FA2D1C28DDAF00164F6F /* CUSTOMIZE-MenuItems.swift in Sources */,
-				7EEB9D9D1C24E827006F7CF3 /* Course.swift in Sources */,
 				7E9BBF4F1C26880700ECA0B7 /* AuthData.swift in Sources */,
 				7ED52CCC1C23E90A0028172D /* LoginViewController.swift in Sources */,
 				7E9BBF4D1C263A5200ECA0B7 /* PearsonAPI.swift in Sources */,
@@ -318,6 +321,7 @@
 				4990FA311C28DDAF00164F6F /* MenuItem.swift in Sources */,
 				4990FA2C1C28DDAF00164F6F /* ContainerViewController.swift in Sources */,
 				7ED52CCE1C23E9120028172D /* User.swift in Sources */,
+				7EA24C6C1C2BB748005705C5 /* Course.swift in Sources */,
 				4990FA351C28DE5F00164F6F /* HomeViewController.swift in Sources */,
 				4990FA331C28DDAF00164F6F /* SideViewController.swift in Sources */,
 			);
@@ -474,6 +478,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		7EA24C451C2BA8A5005705C5 /* ThereYet.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				7EA24C461C2BA8A5005705C5 /* ThereYet.xcdatamodel */,
+			);
+			currentVersion = 7EA24C461C2BA8A5005705C5 /* ThereYet.xcdatamodel */;
+			path = ThereYet.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 7ED52CAA1C23E8A40028172D /* Project object */;
 }

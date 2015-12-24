@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData
 import Alamofire
 import SwiftyJSON
 
@@ -18,7 +19,7 @@ class PearsonAPI {
     private static let TYPE_LOGIN = 0
     private static let TYPE_REFRESH = 0
     
-    static func login(username: String, password: String, completion: ((success: Bool, error: NSError?) -> ())) {
+    static func login(username: String, password: String, completion: ((user: User?, error: NSError?) -> ())) {
         let params = [
             "client_id": self.clientId,
             "grant_type": "password",
@@ -43,13 +44,13 @@ class PearsonAPI {
                         let user = User(id: id, firstName: firstName, lastName: lastName, username: username, email: email, auth: auth!)
                         user.save()
                         
-                        return completion(success: true, error: error)
+                        return completion(user: user, error: error)
                     }
                 })
             }
             
             else {
-                return completion(success: false, error: error)
+                return completion(user: nil, error: error)
             }
         })
     }
@@ -70,6 +71,8 @@ class PearsonAPI {
     
     static func retreiveCourses(user: User, completion: ((courses: [Course]) -> ())) {
         var courses: [Course] = []
+        let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+        let entity = NSEntityDescription.entityForName("Course", inManagedObjectContext: context)
         
         self.apiRequest(user.authData, path: "users/\(user.id!)/courses", completion: {
             json in
@@ -80,16 +83,16 @@ class PearsonAPI {
                 for dataItem in dataList {
                     let dataPath = dataItem["links"][0]["href"].stringValue
                     if !dataPath.isEmpty {
-                        
-                        let course = Course()
-                        course.id = Int(NSURL(string: "\(dataPath)")!.pathComponents![2])
+                        let course = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: context) as! Course
+                        course.pearson_id = Int(NSURL(string: "\(dataPath)")!.pathComponents![2])
+                        course.createdAt = NSDate()
                         courses.append(course)
                     }
                 }
                 
                 //Get all course details
                 for (i, course) in courses.enumerate() {
-                    self.apiRequest(user.authData, path: "courses/\(course.id!)", completion: {
+                    self.apiRequest(user.authData, path: "courses/\(course.pearson_id!)", completion: {
                         json in
                         
                         if let courseData = json?["courses"][0] {
