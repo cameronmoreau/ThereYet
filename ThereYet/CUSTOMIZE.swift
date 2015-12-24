@@ -44,11 +44,11 @@ class MenuItems {
         
         if section == 0 {
             return [
-                MenuItem(storyboardID: "HomeViewController", name: "Home", image: UIImage(named: "ic_side_home"), highlightedImage: nil, color: mainColor, action: .Navigation),
-                MenuItem(storyboardID: "HomeViewController", name: "Overview", image: UIImage(named: "ic_side_overview"), highlightedImage: nil, color: mainColor, action: .Navigation),
-                MenuItem(storyboardID: "CoursesViewController", name: "My Classes", image: UIImage(named: "ic_side_courses"), highlightedImage: nil, color: mainColor, action: .Navigation),
-                MenuItem(storyboardID: "RewardsViewController", name: "My Rewards", image: UIImage(named: "ic_side_rewards"), highlightedImage: nil, color: mainColor, action: .Navigation),
-                MenuItem(storyboardID: "HomeViewController", name: "Setting", image: UIImage(named: "ic_side_settings"), highlightedImage: nil, color: mainColor, action: .Navigation)
+                MenuItem(storyboardID: "HomeViewController", name: "Home", image: UIImage(named: "ic_side_home")?.imageWithRenderingMode(.AlwaysTemplate), highlightedImage: nil, color: mainColor, action: .Navigation),
+                MenuItem(storyboardID: "HomeViewController", name: "Overview", image: UIImage(named: "ic_side_overview")?.imageWithRenderingMode(.AlwaysTemplate), highlightedImage: nil, color: mainColor, action: .Navigation),
+                MenuItem(storyboardID: "CoursesViewController", name: "My Classes", image: UIImage(named: "ic_side_courses")?.imageWithRenderingMode(.AlwaysTemplate), highlightedImage: nil, color: mainColor, action: .Navigation),
+                MenuItem(storyboardID: "RewardsViewController", name: "My Rewards", image: UIImage(named: "ic_side_rewards")?.imageWithRenderingMode(.AlwaysTemplate), highlightedImage: nil, color: mainColor, action: .Navigation),
+                MenuItem(storyboardID: "HomeViewController", name: "Setting", image: UIImage(named: "ic_side_settings")?.imageWithRenderingMode(.AlwaysTemplate), highlightedImage: nil, color: mainColor, action: .Navigation)
             ]
         } else if section == 1 {
             return [MenuItem(storyboardID: nil, name: "Show Schedule", image: nil, highlightedImage: nil, color: UIColor.blueColor(), action: .Selector),

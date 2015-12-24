@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		491A3C141C2CA4040093EB6D /* UIImageView+RenderingMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491A3C131C2CA4040093EB6D /* UIImageView+RenderingMode.swift */; };
 		4990FA351C28DE5F00164F6F /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4990FA341C28DE5F00164F6F /* HomeViewController.swift */; };
 		499812961C2C88ED00346D27 /* CenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4998128D1C2C88ED00346D27 /* CenterViewController.swift */; };
 		499812971C2C88ED00346D27 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4998128E1C2C88ED00346D27 /* ContainerViewController.swift */; };
@@ -34,6 +35,7 @@
 
 /* Begin PBXFileReference section */
 		325B89EAD6597DCF406FC5DB /* Pods-ThereYet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThereYet.release.xcconfig"; path = "Pods/Target Support Files/Pods-ThereYet/Pods-ThereYet.release.xcconfig"; sourceTree = "<group>"; };
+		491A3C131C2CA4040093EB6D /* UIImageView+RenderingMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+RenderingMode.swift"; sourceTree = "<group>"; };
 		4990FA341C28DE5F00164F6F /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		4998128D1C2C88ED00346D27 /* CenterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CenterViewController.swift; sourceTree = "<group>"; };
 		4998128E1C2C88ED00346D27 /* ContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 				499812901C2C88ED00346D27 /* menu.png */,
 				499812911C2C88ED00346D27 /* menu@2x.png */,
 				499812921C2C88ED00346D27 /* menu@3x.png */,
+				491A3C131C2CA4040093EB6D /* UIImageView+RenderingMode.swift */,
 				499812931C2C88ED00346D27 /* MenuItem.swift */,
 				4998128E1C2C88ED00346D27 /* ContainerViewController.swift */,
 				4998128D1C2C88ED00346D27 /* CenterViewController.swift */,
@@ -317,6 +320,7 @@
 				499812981C2C88ED00346D27 /* CUSTOMIZE.swift in Sources */,
 				7EA24C471C2BA8A5005705C5 /* ThereYet.xcdatamodeld in Sources */,
 				7E9BBF4F1C26880700ECA0B7 /* AuthData.swift in Sources */,
+				491A3C141C2CA4040093EB6D /* UIImageView+RenderingMode.swift in Sources */,
 				7ED52CCC1C23E90A0028172D /* LoginViewController.swift in Sources */,
 				4998129E1C2C88ED00346D27 /* SideViewController.swift in Sources */,
 				7E9BBF4D1C263A5200ECA0B7 /* PearsonAPI.swift in Sources */,

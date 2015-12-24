@@ -41,9 +41,10 @@ class SideViewController: UIViewController, UITableViewDataSource, UITableViewDe
         cell.textLabel?.highlightedTextColor = menuItem.color
         cell.textLabel?.textColor = UIColor(red: 100/255.0, green: 100/255.0, blue: 100/255.0, alpha: 1.0)
         
+        cell.imageView?.tintColor = UIColor(red: 100/255.0, green: 100/255.0, blue: 100/255.0, alpha: 1.0)
+        
         cell.imageView?.image = menuItem.image
         cell.imageView?.highlightedImage = menuItem.highlightedImage
-        cell.imageView?.tintColor = menuItem.color
         
         return cell
     }
