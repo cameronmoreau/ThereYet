@@ -18,6 +18,7 @@
 		4998129D1C2C88ED00346D27 /* SideViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 499812941C2C88ED00346D27 /* SideViewController.storyboard */; };
 		4998129E1C2C88ED00346D27 /* SideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499812951C2C88ED00346D27 /* SideViewController.swift */; };
 		49E4F7A11C2BD43C00F7FFBA /* CoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E4F7A01C2BD43C00F7FFBA /* CoursesViewController.swift */; };
+		7E57E6AC1C2CA05800AC907D /* RewardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E57E6AB1C2CA05800AC907D /* RewardsViewController.swift */; };
 		7E9BBF4D1C263A5200ECA0B7 /* PearsonAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9BBF4C1C263A5200ECA0B7 /* PearsonAPI.swift */; };
 		7E9BBF4F1C26880700ECA0B7 /* AuthData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9BBF4E1C26880700ECA0B7 /* AuthData.swift */; };
 		7EA24C471C2BA8A5005705C5 /* ThereYet.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7EA24C451C2BA8A5005705C5 /* ThereYet.xcdatamodeld */; };
@@ -45,6 +46,7 @@
 		499812951C2C88ED00346D27 /* SideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideViewController.swift; sourceTree = "<group>"; };
 		49E4F7A01C2BD43C00F7FFBA /* CoursesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursesViewController.swift; sourceTree = "<group>"; };
 		6A2E4613E4D867E1E294C6C4 /* Pods_ThereYet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ThereYet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7E57E6AB1C2CA05800AC907D /* RewardsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RewardsViewController.swift; sourceTree = "<group>"; };
 		7E9BBF4C1C263A5200ECA0B7 /* PearsonAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PearsonAPI.swift; sourceTree = "<group>"; };
 		7E9BBF4E1C26880700ECA0B7 /* AuthData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthData.swift; sourceTree = "<group>"; };
 		7EA24C461C2BA8A5005705C5 /* ThereYet.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ThereYet.xcdatamodel; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 				7ED52CCB1C23E90A0028172D /* LoginViewController.swift */,
 				4990FA341C28DE5F00164F6F /* HomeViewController.swift */,
 				49E4F7A01C2BD43C00F7FFBA /* CoursesViewController.swift */,
+				7E57E6AB1C2CA05800AC907D /* RewardsViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -310,6 +313,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E57E6AC1C2CA05800AC907D /* RewardsViewController.swift in Sources */,
 				499812981C2C88ED00346D27 /* CUSTOMIZE.swift in Sources */,
 				7EA24C471C2BA8A5005705C5 /* ThereYet.xcdatamodeld in Sources */,
 				7E9BBF4F1C26880700ECA0B7 /* AuthData.swift in Sources */,

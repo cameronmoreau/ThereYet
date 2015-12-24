@@ -111,7 +111,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SPp-AQ-aVX">
                                                     <rect key="frame" x="23" y="8" width="53" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -169,6 +169,78 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DbA-a6-rMN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1687" y="353"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="pTH-yb-MYL">
+            <objects>
+                <navigationController storyboardIdentifier="RewardsViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="1WQ-r7-S1S" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ajn-nX-j7Q">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="kfX-ji-den" kind="relationship" relationship="rootViewController" id="r0v-fd-Qbi"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="idI-6O-a30" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1020" y="1745"/>
+        </scene>
+        <!--My Rewards-->
+        <scene sceneID="wxz-T4-ENM">
+            <objects>
+                <viewController id="kfX-ji-den" customClass="RewardsViewController" customModule="ThereYet" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Mz3-mJ-cP8"/>
+                        <viewControllerLayoutGuide type="bottom" id="dXn-aL-3s0"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="eVs-pw-JdF">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="P44-41-76E">
+                                <rect key="frame" x="0.0" y="117" width="600" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="eOy-ft-USX">
+                                <rect key="frame" x="128" y="80" width="345" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="345" id="ZHZ-eP-gnj"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="Offers"/>
+                                    <segment title="Gift Cards"/>
+                                    <segment title="Redeem History"/>
+                                </segments>
+                            </segmentedControl>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lYY-3b-6pg">
+                                <rect key="frame" x="0.0" y="161" width="600" height="439"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="eOy-ft-USX" firstAttribute="top" secondItem="Mz3-mJ-cP8" secondAttribute="bottom" constant="16" id="2qo-yY-Zui"/>
+                            <constraint firstAttribute="trailing" secondItem="lYY-3b-6pg" secondAttribute="trailing" id="CgX-do-n4I"/>
+                            <constraint firstItem="P44-41-76E" firstAttribute="leading" secondItem="lYY-3b-6pg" secondAttribute="leading" id="D8h-Zd-lbo"/>
+                            <constraint firstItem="P44-41-76E" firstAttribute="trailing" secondItem="lYY-3b-6pg" secondAttribute="trailing" id="I7W-mx-kRH"/>
+                            <constraint firstItem="lYY-3b-6pg" firstAttribute="top" secondItem="P44-41-76E" secondAttribute="bottom" id="Kis-uZ-sVl"/>
+                            <constraint firstItem="P44-41-76E" firstAttribute="top" secondItem="eOy-ft-USX" secondAttribute="bottom" constant="9" id="Pjv-03-ikp"/>
+                            <constraint firstItem="lYY-3b-6pg" firstAttribute="leading" secondItem="eVs-pw-JdF" secondAttribute="leading" id="dSm-Kc-Uq0"/>
+                            <constraint firstItem="P44-41-76E" firstAttribute="centerX" secondItem="eOy-ft-USX" secondAttribute="centerX" id="fZq-Lt-AC7"/>
+                            <constraint firstItem="lYY-3b-6pg" firstAttribute="bottom" secondItem="dXn-aL-3s0" secondAttribute="top" id="s4n-QX-9Jb"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="My Rewards" id="0XN-Ov-3Ml"/>
+                    <connections>
+                        <outlet property="tableView" destination="lYY-3b-6pg" id="Azh-jI-sUx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dz3-W5-l9z" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1684" y="1745"/>
         </scene>
     </scenes>
     <resources>

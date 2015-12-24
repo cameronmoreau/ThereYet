@@ -43,8 +43,13 @@ class MenuItems {
         let mainColor = UIColor(red: 30/255.0, green: 170/255.0, blue: 241/255.0, alpha: 1.0)
         
         if section == 0 {
-            return [MenuItem(storyboardID: "HomeViewController", name: "Home", image: nil, highlightedImage: nil, color: mainColor, action: .Navigation),
-                MenuItem(storyboardID: "CoursesViewController", name: "Courses", image: nil, highlightedImage: nil, color: mainColor, action: .Navigation)]
+            return [
+                MenuItem(storyboardID: "HomeViewController", name: "Home", image: UIImage(named: "ic_side_home"), highlightedImage: nil, color: mainColor, action: .Navigation),
+                MenuItem(storyboardID: "HomeViewController", name: "Overview", image: UIImage(named: "ic_side_overview"), highlightedImage: nil, color: mainColor, action: .Navigation),
+                MenuItem(storyboardID: "CoursesViewController", name: "My Classes", image: UIImage(named: "ic_side_courses"), highlightedImage: nil, color: mainColor, action: .Navigation),
+                MenuItem(storyboardID: "RewardsViewController", name: "My Rewards", image: UIImage(named: "ic_side_rewards"), highlightedImage: nil, color: mainColor, action: .Navigation),
+                MenuItem(storyboardID: "HomeViewController", name: "Setting", image: UIImage(named: "ic_side_settings"), highlightedImage: nil, color: mainColor, action: .Navigation)
+            ]
         } else if section == 1 {
             return [MenuItem(storyboardID: nil, name: "Show Schedule", image: nil, highlightedImage: nil, color: UIColor.blueColor(), action: .Selector),
                 MenuItem(storyboardID: nil, name: "Show Login Data", image: nil, highlightedImage: nil, color: UIColor.greenColor(), action: .Selector),
