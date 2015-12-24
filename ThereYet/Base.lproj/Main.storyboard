@@ -234,9 +234,6 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="My Rewards" id="0XN-Ov-3Ml"/>
-                    <connections>
-                        <outlet property="tableView" destination="lYY-3b-6pg" id="Azh-jI-sUx"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dz3-W5-l9z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
