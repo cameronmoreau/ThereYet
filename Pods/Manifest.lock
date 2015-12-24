@@ -1,16 +1,19 @@
 PODS:
   - Alamofire (3.1.4)
+  - Charts (2.1.6)
   - JGProgressHUD (1.3.1)
   - SwiftyJSON (2.3.2)
 
 DEPENDENCIES:
   - Alamofire (~> 3.1.4)
+  - Charts (~> 2.1.6)
   - JGProgressHUD (~> 1.3.1)
   - SwiftyJSON (~> 2.3.2)
 
 SPEC CHECKSUMS:
   Alamofire: fbc829692f351fa1d8a31dd75fd7f7f56fea31fb
+  Charts: 5e1e5ac23898e5b09d226a2fc3e9d86bc281937e
   JGProgressHUD: 153053a21d81208cb5f659691996bcefce6a9885
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-COCOAPODS: 0.38.2
+COCOAPODS: 0.39.0

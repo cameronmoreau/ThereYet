@@ -41,11 +41,6 @@ class CenterViewController: UIViewController, SideViewControllerDelegate {
         menuButton.tintColor = UIColor.whiteColor()
         self.navigationItem.leftBarButtonItem = menuButton
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         delegate?.collapseSidePanel!()
@@ -70,7 +65,7 @@ class CenterViewController: UIViewController, SideViewControllerDelegate {
     
     func navigateToViewController(menuItem: MenuItem) {
         let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-        let vc = storyboard.instantiateViewControllerWithIdentifier(menuItem.name) //FIXME: will crash if the storyboardID doesn't exist!
+        let vc = storyboard.instantiateViewControllerWithIdentifier(menuItem.storyboardID!) //FIXME: will crash if the storyboardID doesn't exist!
        
         self.navigationController?.popViewControllerAnimated(false)
         
@@ -93,23 +88,11 @@ class CenterViewController: UIViewController, SideViewControllerDelegate {
     
     func performAction(menuItem: MenuItem) {
         switch menuItem.name {
-            //TODO: make cases for each menu item action
+            //TODO: override to make cases for each menu item selector type
             default:
                 print("\(menuItem.name)")
                 break
         }
-        
-        
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

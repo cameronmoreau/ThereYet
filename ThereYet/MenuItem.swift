@@ -16,6 +16,8 @@ enum MenuItemActionType {
 
 public class MenuItem: Equatable {
     
+    let storyboardID: String?
+    
     let name: String
     let color: UIColor
     
@@ -25,6 +27,8 @@ public class MenuItem: Equatable {
     let action: MenuItemActionType
     
     init() {
+        self.storyboardID = nil
+        
         self.name = "Title"
         self.color = UIColor.lightGrayColor()
         
@@ -34,7 +38,9 @@ public class MenuItem: Equatable {
         self.action = .Selector
     }
     
-    init(name: String, image: UIImage?, highlightedImage: UIImage?, color: UIColor, action: MenuItemActionType) {
+    init(storyboardID: String?, name: String, image: UIImage?, highlightedImage: UIImage?, color: UIColor, action: MenuItemActionType) {
+        self.storyboardID = storyboardID
+            
         self.name = name
         self.color = color
         
@@ -44,7 +50,9 @@ public class MenuItem: Equatable {
         self.action = action
     }
     
-    init(name: String, color: UIColor, action: MenuItemActionType) {
+    init(storyboardID: String?, name: String, color: UIColor, action: MenuItemActionType) {
+        self.storyboardID = storyboardID
+        
         self.name = name
         self.color = color
         
@@ -58,9 +66,10 @@ public class MenuItem: Equatable {
 
 public func ==(lhs: MenuItem, rhs: MenuItem) -> Bool {
     return
-        (lhs.name == rhs.name &&
-            lhs.color == rhs.color &&
-            lhs.image == rhs.image &&
-            lhs.highlightedImage == rhs.highlightedImage &&
-            lhs.action == rhs.action)
+        (lhs.storyboardID == lhs.storyboardID &&
+        lhs.name == rhs.name &&
+        lhs.color == rhs.color &&
+        lhs.image == rhs.image &&
+        lhs.highlightedImage == rhs.highlightedImage &&
+        lhs.action == rhs.action)
 }

@@ -9,12 +9,15 @@
 import UIKit
 import CoreData
 
+import Charts
+
 class HomeViewController: CenterViewController {
     
     var user: User!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         user = User()
     }
     
@@ -68,7 +71,7 @@ class HomeViewController: CenterViewController {
                 user.authData.destroy()
                 user.destroy()
                 
-                self.navigateToViewController(MenuItem(name: "LoginViewController", color: UIColor.lightGrayColor(), action: .Navigation))
+                self.navigateToViewController(MenuItem(storyboardID: "LoginViewController", name: "Login", color: UIColor.lightGrayColor(), action: .Navigation))
                 break
             
             case "Show Schedule":

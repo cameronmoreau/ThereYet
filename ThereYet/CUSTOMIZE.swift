@@ -8,7 +8,7 @@
 
 import UIKit
 
-//TODO: fill in with data for specific project!
+//TODO: customize -- fill in with your own data!
 
 class MenuItems {
 
@@ -40,12 +40,15 @@ class MenuItems {
     }
     
     static func menuItems(section: Int) -> Array<MenuItem> {
+        let mainColor = UIColor(red: 30/255.0, green: 170/255.0, blue: 241/255.0, alpha: 1.0)
+        
         if section == 0 {
-            return [MenuItem(name: "Home", image: nil, highlightedImage: nil, color: UIColor.lightGrayColor(), action: .Navigation)]
+            return [MenuItem(storyboardID: "HomeViewController", name: "Home", image: nil, highlightedImage: nil, color: mainColor, action: .Navigation),
+                MenuItem(storyboardID: "CoursesViewController", name: "Courses", image: nil, highlightedImage: nil, color: mainColor, action: .Navigation)]
         } else if section == 1 {
-            return [MenuItem(name: "Show Schedule", image: nil, highlightedImage: nil, color: UIColor.blueColor(), action: .Selector),
-                    MenuItem(name: "Show Login Data", image: nil, highlightedImage: nil, color: UIColor.greenColor(), action: .Selector),
-                    MenuItem(name: "Sign Out", image: nil, highlightedImage: nil, color: UIColor.redColor(), action: .Selector),]
+            return [MenuItem(storyboardID: nil, name: "Show Schedule", image: nil, highlightedImage: nil, color: UIColor.blueColor(), action: .Selector),
+                MenuItem(storyboardID: nil, name: "Show Login Data", image: nil, highlightedImage: nil, color: UIColor.greenColor(), action: .Selector),
+                MenuItem(storyboardID: nil, name: "Sign Out", image: nil, highlightedImage: nil, color: UIColor.redColor(), action: .Selector),]
         } else {
             return []
         }

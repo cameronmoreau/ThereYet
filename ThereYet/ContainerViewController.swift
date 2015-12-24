@@ -54,12 +54,12 @@ class ContainerViewController: UIViewController, UIGestureRecognizerDelegate, Ce
         super.viewDidLoad()
 
         let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-        var vc = storyboard.instantiateViewControllerWithIdentifier(initialMenuItem.name)
+        var vc = storyboard.instantiateViewControllerWithIdentifier(initialMenuItem.storyboardID!) //FIXME: will crash if the storyboardID doesn't exist!
         if vc.isKindOfClass(UINavigationController) {
             let navController = vc as! UINavigationController
             vc = navController.viewControllers[0]
         }
-        centerViewController = vc as! CenterViewController //FIXME: will crash if the storyboardID doesn't exist!
+        centerViewController = vc as! CenterViewController
         centerViewController.delegate = self
         centerViewController.containerViewController = self
         
@@ -71,13 +71,14 @@ class ContainerViewController: UIViewController, UIGestureRecognizerDelegate, Ce
         
         centerNavigationController.didMoveToParentViewController(self)
         
+        centerViewController.color = initialMenuItem.color
+        
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: "handlePanGesture:")
         centerNavigationController.view.addGestureRecognizer(panGestureRecognizer)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return .LightContent
     }
     
     func handlePanGesture(recognizer: UIPanGestureRecognizer) {
@@ -175,15 +176,5 @@ class ContainerViewController: UIViewController, UIGestureRecognizerDelegate, Ce
             centerNavigationController.view.layer.shadowOpacity = 0.0
         }
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

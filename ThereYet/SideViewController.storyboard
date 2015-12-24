@@ -8,7 +8,7 @@
         <!--Side View Controller-->
         <scene sceneID="pT7-8j-xTy">
             <objects>
-                <viewController storyboardIdentifier="SideViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="bmX-ms-xze" customClass="SideViewController" customModule="AWSideBar" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SideViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="bmX-ms-xze" customClass="SideViewController" customModule="ThereYet" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Zeq-6h-5Jt"/>
                         <viewControllerLayoutGuide type="bottom" id="Wtc-gQ-SC0"/>
