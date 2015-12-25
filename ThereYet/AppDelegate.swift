@@ -8,6 +8,8 @@
 
 import UIKit
 import CoreData
+import Parse
+import Bolts
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +18,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        
+        //Parse stuff
+        Offer.registerSubclass()
+        
+        Parse.enableLocalDatastore()
+        Parse.setApplicationId("gzjwijvyKb8fPaIwQw4PqTBI2ieM20XikV7Umdlf", clientKey: "6SSyXw6piYNbxPBJ6eSTzgjEjufL6BWgK6Wj4aaC")
+        PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
         
         //Check if user is already logged in
         let auth = AuthData()
@@ -26,8 +35,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             //Refresh Token
             else {
+                print("Start Refresh")
                 PearsonAPI.refreshToken(auth, completion: {
                     (success, error) in
+                    
+                    print("Refresh \(success) \(error)")
                     
                     if success {
                         self.skipLogin()

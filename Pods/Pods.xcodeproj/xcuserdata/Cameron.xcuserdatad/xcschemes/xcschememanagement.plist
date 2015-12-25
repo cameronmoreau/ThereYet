@@ -8,64 +8,41 @@
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>1</integer>
 		</dict>
 		<key>Charts.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>4</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>JGProgressHUD.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>5</integer>
 		</dict>
 		<key>Pods-ThereYet.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>2</integer>
 		</dict>
 		<key>SwiftyJSON.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>3</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>24090FBCEF7A50AE384678B5C071804B</key>
+		<key>21697FF7C1697170B6B784FA3500D923</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3FA0E2D4F5E97607B3B2849FE16C22F9</key>
+		<key>9D55965A91CE090D1970022145FCB51C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>432ECC54282C84882B482CCB4CF227FC</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>617B0FC57CCB604D47A24E6198763D04</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>814A7F450493BAD4984FE276B39E0B0F</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>AFAE003B6F672821A7859D8D77FCCE10</key>
+		<key>ADFFC71DCC03113F0469B49FBA3E5DF0</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -75,12 +52,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D8FCFCEC7202B3CE6F49F38EB06D5E5B</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>F44631E561FFACD9160EE979B13BECD0</key>
+		<key>EE74EC200E583E6623FAFD7F5B78EA03</key>
 		<dict>
 			<key>primary</key>
 			<true/>

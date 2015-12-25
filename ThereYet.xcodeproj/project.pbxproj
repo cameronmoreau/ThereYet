@@ -20,6 +20,20 @@
 		4998129E1C2C88ED00346D27 /* SideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499812951C2C88ED00346D27 /* SideViewController.swift */; };
 		49E4F7A11C2BD43C00F7FFBA /* CoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E4F7A01C2BD43C00F7FFBA /* CoursesViewController.swift */; };
 		7E57E6AC1C2CA05800AC907D /* RewardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E57E6AB1C2CA05800AC907D /* RewardsViewController.swift */; };
+		7E57E6AF1C2CC62D00AC907D /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E57E6AD1C2CC62D00AC907D /* Bolts.framework */; };
+		7E57E6B01C2CC62D00AC907D /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E57E6AE1C2CC62D00AC907D /* Parse.framework */; };
+		7E57E6B21C2CC66D00AC907D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E57E6B11C2CC66D00AC907D /* AudioToolbox.framework */; };
+		7E57E6B41C2CC67400AC907D /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E57E6B31C2CC67400AC907D /* CFNetwork.framework */; };
+		7E57E6B61C2CC67C00AC907D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E57E6B51C2CC67C00AC907D /* CoreGraphics.framework */; };
+		7E57E6B81C2CC68500AC907D /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E57E6B71C2CC68500AC907D /* CoreLocation.framework */; };
+		7E57E6BA1C2CC68C00AC907D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E57E6B91C2CC68C00AC907D /* QuartzCore.framework */; };
+		7E57E6BC1C2CC69400AC907D /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E57E6BB1C2CC69400AC907D /* Security.framework */; };
+		7E57E6BE1C2CC69B00AC907D /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E57E6BD1C2CC69B00AC907D /* StoreKit.framework */; };
+		7E57E6C01C2CC6A600AC907D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E57E6BF1C2CC6A600AC907D /* SystemConfiguration.framework */; };
+		7E57E6C21C2CC6B100AC907D /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E57E6C11C2CC6B100AC907D /* libz.tbd */; };
+		7E57E6C41C2CC6B900AC907D /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E57E6C31C2CC6B900AC907D /* libsqlite3.tbd */; };
+		7E57E6C61C2CC93200AC907D /* Offer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E57E6C51C2CC93200AC907D /* Offer.swift */; };
+		7E57E6C91C2CECF700AC907D /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E57E6C81C2CECF700AC907D /* UIColor.swift */; };
 		7E9BBF4D1C263A5200ECA0B7 /* PearsonAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9BBF4C1C263A5200ECA0B7 /* PearsonAPI.swift */; };
 		7E9BBF4F1C26880700ECA0B7 /* AuthData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9BBF4E1C26880700ECA0B7 /* AuthData.swift */; };
 		7EA24C471C2BA8A5005705C5 /* ThereYet.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7EA24C451C2BA8A5005705C5 /* ThereYet.xcdatamodeld */; };
@@ -49,6 +63,20 @@
 		49E4F7A01C2BD43C00F7FFBA /* CoursesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursesViewController.swift; sourceTree = "<group>"; };
 		6A2E4613E4D867E1E294C6C4 /* Pods_ThereYet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ThereYet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E57E6AB1C2CA05800AC907D /* RewardsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RewardsViewController.swift; sourceTree = "<group>"; };
+		7E57E6AD1C2CC62D00AC907D /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		7E57E6AE1C2CC62D00AC907D /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		7E57E6B11C2CC66D00AC907D /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		7E57E6B31C2CC67400AC907D /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		7E57E6B51C2CC67C00AC907D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		7E57E6B71C2CC68500AC907D /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		7E57E6B91C2CC68C00AC907D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		7E57E6BB1C2CC69400AC907D /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		7E57E6BD1C2CC69B00AC907D /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		7E57E6BF1C2CC6A600AC907D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		7E57E6C11C2CC6B100AC907D /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		7E57E6C31C2CC6B900AC907D /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		7E57E6C51C2CC93200AC907D /* Offer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Offer.swift; sourceTree = "<group>"; };
+		7E57E6C81C2CECF700AC907D /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		7E9BBF4C1C263A5200ECA0B7 /* PearsonAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PearsonAPI.swift; sourceTree = "<group>"; };
 		7E9BBF4E1C26880700ECA0B7 /* AuthData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthData.swift; sourceTree = "<group>"; };
 		7EA24C461C2BA8A5005705C5 /* ThereYet.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ThereYet.xcdatamodel; sourceTree = "<group>"; };
@@ -69,7 +97,19 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E57E6C41C2CC6B900AC907D /* libsqlite3.tbd in Frameworks */,
+				7E57E6C21C2CC6B100AC907D /* libz.tbd in Frameworks */,
+				7E57E6C01C2CC6A600AC907D /* SystemConfiguration.framework in Frameworks */,
+				7E57E6BE1C2CC69B00AC907D /* StoreKit.framework in Frameworks */,
+				7E57E6BC1C2CC69400AC907D /* Security.framework in Frameworks */,
+				7E57E6BA1C2CC68C00AC907D /* QuartzCore.framework in Frameworks */,
+				7E57E6B81C2CC68500AC907D /* CoreLocation.framework in Frameworks */,
+				7E57E6B61C2CC67C00AC907D /* CoreGraphics.framework in Frameworks */,
+				7E57E6B41C2CC67400AC907D /* CFNetwork.framework in Frameworks */,
+				7E57E6B21C2CC66D00AC907D /* AudioToolbox.framework in Frameworks */,
 				D28B8E7252BF7C2847AFF489 /* Pods_ThereYet.framework in Frameworks */,
+				7E57E6B01C2CC62D00AC907D /* Parse.framework in Frameworks */,
+				7E57E6AF1C2CC62D00AC907D /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,6 +119,18 @@
 		2BE2A0D28FC1086A7B9FAA70 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7E57E6C31C2CC6B900AC907D /* libsqlite3.tbd */,
+				7E57E6C11C2CC6B100AC907D /* libz.tbd */,
+				7E57E6BF1C2CC6A600AC907D /* SystemConfiguration.framework */,
+				7E57E6BD1C2CC69B00AC907D /* StoreKit.framework */,
+				7E57E6BB1C2CC69400AC907D /* Security.framework */,
+				7E57E6B91C2CC68C00AC907D /* QuartzCore.framework */,
+				7E57E6B71C2CC68500AC907D /* CoreLocation.framework */,
+				7E57E6B51C2CC67C00AC907D /* CoreGraphics.framework */,
+				7E57E6B31C2CC67400AC907D /* CFNetwork.framework */,
+				7E57E6B11C2CC66D00AC907D /* AudioToolbox.framework */,
+				7E57E6AD1C2CC62D00AC907D /* Bolts.framework */,
+				7E57E6AE1C2CC62D00AC907D /* Parse.framework */,
 				6A2E4613E4D867E1E294C6C4 /* Pods_ThereYet.framework */,
 			);
 			name = Frameworks;
@@ -99,6 +151,14 @@
 				499812941C2C88ED00346D27 /* SideViewController.storyboard */,
 			);
 			name = AWSideBar;
+			sourceTree = "<group>";
+		};
+		7E57E6C71C2CECE600AC907D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				7E57E6C81C2CECF700AC907D /* UIColor.swift */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 		7E9BBF491C263A1300ECA0B7 /* Helpers */ = {
@@ -130,6 +190,7 @@
 		7ED52CB41C23E8A40028172D /* ThereYet */ = {
 			isa = PBXGroup;
 			children = (
+				7E57E6C71C2CECE600AC907D /* Extensions */,
 				7E9BBF491C263A1300ECA0B7 /* Helpers */,
 				7ED52CCA1C23E8F10028172D /* Resources */,
 				7ED52CC91C23E8E50028172D /* SupportingFiles */,
@@ -157,6 +218,7 @@
 				7ED52CCD1C23E9120028172D /* User.swift */,
 				7E9BBF4E1C26880700ECA0B7 /* AuthData.swift */,
 				7EA24C6A1C2BB748005705C5 /* Course.swift */,
+				7E57E6C51C2CC93200AC907D /* Offer.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -319,6 +381,7 @@
 				7E57E6AC1C2CA05800AC907D /* RewardsViewController.swift in Sources */,
 				499812981C2C88ED00346D27 /* CUSTOMIZE.swift in Sources */,
 				7EA24C471C2BA8A5005705C5 /* ThereYet.xcdatamodeld in Sources */,
+				7E57E6C61C2CC93200AC907D /* Offer.swift in Sources */,
 				7E9BBF4F1C26880700ECA0B7 /* AuthData.swift in Sources */,
 				491A3C141C2CA4040093EB6D /* UIImageView+RenderingMode.swift in Sources */,
 				7ED52CCC1C23E90A0028172D /* LoginViewController.swift in Sources */,
@@ -328,6 +391,7 @@
 				4998129C1C2C88ED00346D27 /* MenuItem.swift in Sources */,
 				7ED52CCE1C23E9120028172D /* User.swift in Sources */,
 				7EA24C6C1C2BB748005705C5 /* Course.swift in Sources */,
+				7E57E6C91C2CECF700AC907D /* UIColor.swift in Sources */,
 				499812961C2C88ED00346D27 /* CenterViewController.swift in Sources */,
 				4990FA351C28DE5F00164F6F /* HomeViewController.swift in Sources */,
 				499812971C2C88ED00346D27 /* ContainerViewController.swift in Sources */,
@@ -445,6 +509,10 @@
 			baseConfigurationReference = 977DCC34FFB2384614B29273 /* Pods-ThereYet.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = ThereYet/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = idappthat.mobi.ThereYet;
@@ -457,6 +525,10 @@
 			baseConfigurationReference = 325B89EAD6597DCF406FC5DB /* Pods-ThereYet.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = ThereYet/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = idappthat.mobi.ThereYet;

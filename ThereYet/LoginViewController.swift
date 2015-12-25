@@ -26,7 +26,6 @@ class LoginViewController: CenterViewController {
         if formIsValid() {
             let loadingHUD = JGProgressHUD(style: .Dark)
             loadingHUD.textLabel.text = "Loading"
-            
             loadingHUD.showInView(self.view, animated: true)
             
             //Login with pearson api

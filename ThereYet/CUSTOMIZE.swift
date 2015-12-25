@@ -40,7 +40,7 @@ class MenuItems {
     }
     
     static func menuItems(section: Int) -> Array<MenuItem> {
-        let mainColor = UIColor(red: 30/255.0, green: 170/255.0, blue: 241/255.0, alpha: 1.0)
+        let mainColor = UIColor.mainBlueColor()
         
         if section == 0 {
             return [

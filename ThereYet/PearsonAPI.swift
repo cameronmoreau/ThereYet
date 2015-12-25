@@ -16,8 +16,10 @@ class PearsonAPI {
     private static let url = "http://api.learningstudio.com/"
     private static let clientId = "99af8915-a27e-47d1-8b15-8e126e38c610"
     
-    private static let TYPE_LOGIN = 0
-    private static let TYPE_REFRESH = 0
+    private enum AuthType {
+        case Login
+        case Refresh
+    }
     
     static func login(username: String, password: String, completion: ((user: User?, error: NSError?) -> ())) {
         let params = [
@@ -27,7 +29,7 @@ class PearsonAPI {
             "password": password
         ]
 
-        authRequest(TYPE_REFRESH, params: params, completion: {
+        authRequest(.Login, params: params, completion: {
             (auth, error) in
             
             if auth != nil {
@@ -62,7 +64,9 @@ class PearsonAPI {
             "refresh_token": auth.refreshToken!
         ]
         
-        authRequest(TYPE_REFRESH, params: params, completion: {
+        print(params["refresh_token"])
+        
+        authRequest(.Refresh, params: params, completion: {
             (auth, error) in
             
             return completion(success: auth != nil, error: error)
@@ -122,7 +126,7 @@ class PearsonAPI {
         })
     }
     
-    private static func authRequest(type: Int, params: [String: AnyObject]?,
+    private static func authRequest(type: AuthType, params: [String: AnyObject]?,
         completion: ((auth: AuthData?, error: NSError?) -> ())) {
             
             Alamofire.request(.POST, "\(self.url)token", parameters: params)
@@ -147,7 +151,7 @@ class PearsonAPI {
                         }
                     }
                     
-                    if type == TYPE_LOGIN {
+                    if type == .Login {
                         completion(auth: nil, error: NSError(domain: "UserAuth", code: 0, userInfo: ["error": "Invalid username/password"]))
                     } else {
                         completion(auth: nil, error: NSError(domain: "UserAuth", code: 0, userInfo: ["error": "Could not validate a key"]))
