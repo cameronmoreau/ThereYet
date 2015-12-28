@@ -35,4 +35,12 @@ class CoursesViewController: CenterViewController, UITableViewDataSource, UITabl
         return cell
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "addClassTapped" {
+            let navController = segue.destinationViewController as! UINavigationController
+            let vc = navController.viewControllers.first as! AddCourseViewController
+            vc.color = self.color
+        }
+    }
+    
 }

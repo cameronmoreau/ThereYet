@@ -7,4 +7,5 @@ target 'ThereYet' do
   pod 'Alamofire', '~> 3.1.4'
   pod 'SwiftyJSON', '~> 2.3.2'
   pod 'Charts', '~>2.1.6'
+  pod 'THSegmentedControl', :git => 'https://github.com/tayhalla/THSegmentedControl.git', :tag => '0.1.7'
 end

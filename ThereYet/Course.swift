@@ -18,5 +18,8 @@ class Course: NSManagedObject {
     @NSManaged var createdAt: NSDate?
     @NSManaged var locationLat: NSNumber?
     @NSManaged var locationLng: NSNumber?
+    @NSManaged var startsAt: NSDate?
+    @NSManaged var endsAt: NSDate?
+    @NSManaged var classDays: AnyObject?
 
 }
