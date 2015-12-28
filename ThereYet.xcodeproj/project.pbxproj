@@ -19,6 +19,7 @@
 		4998129D1C2C88ED00346D27 /* SideViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 499812941C2C88ED00346D27 /* SideViewController.storyboard */; };
 		4998129E1C2C88ED00346D27 /* SideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499812951C2C88ED00346D27 /* SideViewController.swift */; };
 		49E4F7A11C2BD43C00F7FFBA /* CoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E4F7A01C2BD43C00F7FFBA /* CoursesViewController.swift */; };
+		7E4BC3881C2D84E100D818BD /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4BC3871C2D84E100D818BD /* UIView.swift */; };
 		7E57E6AC1C2CA05800AC907D /* RewardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E57E6AB1C2CA05800AC907D /* RewardsViewController.swift */; };
 		7E57E6AF1C2CC62D00AC907D /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E57E6AD1C2CC62D00AC907D /* Bolts.framework */; };
 		7E57E6B01C2CC62D00AC907D /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E57E6AE1C2CC62D00AC907D /* Parse.framework */; };
@@ -34,6 +35,8 @@
 		7E57E6C41C2CC6B900AC907D /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E57E6C31C2CC6B900AC907D /* libsqlite3.tbd */; };
 		7E57E6C61C2CC93200AC907D /* Offer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E57E6C51C2CC93200AC907D /* Offer.swift */; };
 		7E57E6C91C2CECF700AC907D /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E57E6C81C2CECF700AC907D /* UIColor.swift */; };
+		7E57E6D11C2D06CC00AC907D /* BLKFlexibleHeightBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E57E6D01C2D06CC00AC907D /* BLKFlexibleHeightBar.swift */; };
+		7E7EE9611C2E43AC00553179 /* TodaysCourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7EE9601C2E43AC00553179 /* TodaysCourseTableViewCell.swift */; };
 		7E9BBF4D1C263A5200ECA0B7 /* PearsonAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9BBF4C1C263A5200ECA0B7 /* PearsonAPI.swift */; };
 		7E9BBF4F1C26880700ECA0B7 /* AuthData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9BBF4E1C26880700ECA0B7 /* AuthData.swift */; };
 		7EA24C471C2BA8A5005705C5 /* ThereYet.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7EA24C451C2BA8A5005705C5 /* ThereYet.xcdatamodeld */; };
@@ -62,6 +65,7 @@
 		499812951C2C88ED00346D27 /* SideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideViewController.swift; sourceTree = "<group>"; };
 		49E4F7A01C2BD43C00F7FFBA /* CoursesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursesViewController.swift; sourceTree = "<group>"; };
 		6A2E4613E4D867E1E294C6C4 /* Pods_ThereYet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ThereYet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7E4BC3871C2D84E100D818BD /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		7E57E6AB1C2CA05800AC907D /* RewardsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RewardsViewController.swift; sourceTree = "<group>"; };
 		7E57E6AD1C2CC62D00AC907D /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		7E57E6AE1C2CC62D00AC907D /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
@@ -77,6 +81,9 @@
 		7E57E6C31C2CC6B900AC907D /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		7E57E6C51C2CC93200AC907D /* Offer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Offer.swift; sourceTree = "<group>"; };
 		7E57E6C81C2CECF700AC907D /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		7E57E6CA1C2CF9E700AC907D /* ThereYet-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ThereYet-Bridging-Header.h"; sourceTree = "<group>"; };
+		7E57E6D01C2D06CC00AC907D /* BLKFlexibleHeightBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLKFlexibleHeightBar.swift; sourceTree = "<group>"; };
+		7E7EE9601C2E43AC00553179 /* TodaysCourseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodaysCourseTableViewCell.swift; sourceTree = "<group>"; };
 		7E9BBF4C1C263A5200ECA0B7 /* PearsonAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PearsonAPI.swift; sourceTree = "<group>"; };
 		7E9BBF4E1C26880700ECA0B7 /* AuthData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthData.swift; sourceTree = "<group>"; };
 		7EA24C461C2BA8A5005705C5 /* ThereYet.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ThereYet.xcdatamodel; sourceTree = "<group>"; };
@@ -157,6 +164,8 @@
 			isa = PBXGroup;
 			children = (
 				7E57E6C81C2CECF700AC907D /* UIColor.swift */,
+				7E57E6D01C2D06CC00AC907D /* BLKFlexibleHeightBar.swift */,
+				7E4BC3871C2D84E100D818BD /* UIView.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -208,6 +217,7 @@
 				4990FA341C28DE5F00164F6F /* HomeViewController.swift */,
 				49E4F7A01C2BD43C00F7FFBA /* CoursesViewController.swift */,
 				7E57E6AB1C2CA05800AC907D /* RewardsViewController.swift */,
+				7E7EE9601C2E43AC00553179 /* TodaysCourseTableViewCell.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -228,6 +238,7 @@
 			children = (
 				7ED52CB51C23E8A40028172D /* AppDelegate.swift */,
 				7ED52CC11C23E8A40028172D /* Info.plist */,
+				7E57E6CA1C2CF9E700AC907D /* ThereYet-Bridging-Header.h */,
 			);
 			name = SupportingFiles;
 			sourceTree = "<group>";
@@ -378,6 +389,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E4BC3881C2D84E100D818BD /* UIView.swift in Sources */,
 				7E57E6AC1C2CA05800AC907D /* RewardsViewController.swift in Sources */,
 				499812981C2C88ED00346D27 /* CUSTOMIZE.swift in Sources */,
 				7EA24C471C2BA8A5005705C5 /* ThereYet.xcdatamodeld in Sources */,
@@ -387,6 +399,7 @@
 				7ED52CCC1C23E90A0028172D /* LoginViewController.swift in Sources */,
 				4998129E1C2C88ED00346D27 /* SideViewController.swift in Sources */,
 				7E9BBF4D1C263A5200ECA0B7 /* PearsonAPI.swift in Sources */,
+				7E7EE9611C2E43AC00553179 /* TodaysCourseTableViewCell.swift in Sources */,
 				7ED52CB61C23E8A40028172D /* AppDelegate.swift in Sources */,
 				4998129C1C2C88ED00346D27 /* MenuItem.swift in Sources */,
 				7ED52CCE1C23E9120028172D /* User.swift in Sources */,
@@ -396,6 +409,7 @@
 				4990FA351C28DE5F00164F6F /* HomeViewController.swift in Sources */,
 				499812971C2C88ED00346D27 /* ContainerViewController.swift in Sources */,
 				49E4F7A11C2BD43C00F7FFBA /* CoursesViewController.swift in Sources */,
+				7E57E6D11C2D06CC00AC907D /* BLKFlexibleHeightBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -509,6 +523,7 @@
 			baseConfigurationReference = 977DCC34FFB2384614B29273 /* Pods-ThereYet.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -517,6 +532,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = idappthat.mobi.ThereYet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ThereYet/ThereYet-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -525,6 +542,7 @@
 			baseConfigurationReference = 325B89EAD6597DCF406FC5DB /* Pods-ThereYet.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -533,6 +551,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = idappthat.mobi.ThereYet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ThereYet/ThereYet-Bridging-Header.h";
 			};
 			name = Release;
 		};
