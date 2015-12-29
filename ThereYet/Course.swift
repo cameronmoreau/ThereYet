@@ -20,7 +20,7 @@ class Course: NSManagedObject {
     @NSManaged var locationLng: NSNumber?
     @NSManaged var startsAt: NSDate?
     @NSManaged var endsAt: NSDate?
-    @NSManaged var classDays: AnyObject?
+    @NSManaged var classDays: String?
 
 }
 
@@ -34,7 +34,7 @@ class Course_RegularObject {
     var locationLng: NSNumber?
     var startsAt: NSDate?
     var endsAt: NSDate?
-    var classDays: AnyObject?
+    var classDays: String?
     
     func saveAsNSManagedObject() {
         let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
@@ -50,7 +50,7 @@ class Course_RegularObject {
         course?.startsAt = self.startsAt
         course?.endsAt = self.endsAt
         course?.classDays = self.classDays
-        
+
         do {
             try context.save()
         } catch {

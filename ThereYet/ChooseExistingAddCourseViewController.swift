@@ -32,6 +32,7 @@ class ChooseExistingAddCourseViewController: UIViewController, UITableViewDataSo
         
         courses  = [Course]()
         let fetchRequest = NSFetchRequest(entityName: "Course")
+        fetchRequest.predicate = NSPredicate(format: "pearson_id != nil")
         let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
         
         do {
@@ -68,7 +69,7 @@ class ChooseExistingAddCourseViewController: UIViewController, UITableViewDataSo
                 cell.textLabel?.text = course.title
                 break
             case 1:
-                cell.textLabel?.text = "Create a new course"
+                cell.textLabel?.text = "New Course"
                 break
             default:
                 break
@@ -90,6 +91,14 @@ class ChooseExistingAddCourseViewController: UIViewController, UITableViewDataSo
         continueButton.enabled = true
     }
     
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return "Pearson Courses"
+        } else {
+            return nil
+        }
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "addClassTapped2" {
             let vc = segue.destinationViewController as! AddCourseViewController
@@ -109,9 +118,6 @@ class ChooseExistingAddCourseViewController: UIViewController, UITableViewDataSo
                     course.classDays = tempCourse.classDays
                     
                     vc.course = course
-                    if vc.course == nil {
-                        vc.course = Course_RegularObject()
-                    }
                 }
             }
         }

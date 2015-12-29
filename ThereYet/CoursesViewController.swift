@@ -7,30 +7,50 @@
 //
 
 import UIKit
+import CoreData
 
 class CoursesViewController: CenterViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var tableView: UITableView!
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    var courses: [Course]!
+    
+    override func viewWillAppear(animated: Bool) {
+        courses  = [Course]()
+        let fetchRequest = NSFetchRequest(entityName: "Course")
+        fetchRequest.predicate = NSPredicate(format: "pearson_id == nil")
+        let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
         
+        do {
+            try courses = context.executeFetchRequest(fetchRequest) as! [Course]
+        } catch let error as NSError {
+            print(error)
+        }
+        
+        tableView.reloadData()
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        //FIXME: incomplete
-        return 0
+        return 1
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //FIXME: incomplete
-        return 0
+        return courses.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! TodaysCourseTableViewCell
         
-        //TODO: configure cell
+        let course = courses[indexPath.row]
+
+        cell.titleLabel.text = course.title
+        
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "h:mm a"
+        cell.timeLabel.text = "\(dateFormatter.stringFromDate(course.startsAt!)) - \(dateFormatter.stringFromDate(course.endsAt!))"
+        
+        cell.colorViewBGColor = UIColor(rgba: course.hexColor!)
+        cell.colorView.backgroundColor = UIColor(rgba: course.hexColor!)
         
         return cell
     }

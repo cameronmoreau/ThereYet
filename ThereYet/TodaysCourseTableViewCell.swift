@@ -9,7 +9,14 @@
 import UIKit
 
 class TodaysCourseTableViewCell: UITableViewCell {
+    
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
+    
+    @IBOutlet weak var colorView: UIView!
 
+    var colorViewBGColor: UIColor!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -18,7 +25,13 @@ class TodaysCourseTableViewCell: UITableViewCell {
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
+        colorView.backgroundColor = colorViewBGColor
+    }
+    
+    override func setHighlighted(highlighted: Bool, animated: Bool) {
+        super.setHighlighted(highlighted, animated: animated)
+        
+        colorView.backgroundColor = colorViewBGColor
     }
 
 }
