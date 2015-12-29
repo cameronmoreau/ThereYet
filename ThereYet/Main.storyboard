@@ -182,7 +182,7 @@
                                         <rect key="frame" x="0.0" y="28" width="600" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uQE-wn-qH4" id="WDU-Rf-OyA">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="60"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="59.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calculus" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oWK-2X-hNk">
@@ -710,6 +710,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="0lF-Wu-W01" kind="presentation" identifier="selectLocationSegue" id="J6j-Xn-IGT"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -731,6 +734,60 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o1n-qo-diu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3676" y="1073"/>
+        </scene>
+        <!--Course Location-->
+        <scene sceneID="zkQ-P8-zdk">
+            <objects>
+                <viewController id="wYU-Hj-kDR" customClass="SelectLocationViewController" customModule="ThereYet" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="KWq-eW-XS6"/>
+                        <viewControllerLayoutGuide type="bottom" id="47h-1L-SpQ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8Ej-gm-9Do">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="R4H-H4-Xkc">
+                                <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y5R-n2-svm" customClass="MGLMapView">
+                                <rect key="frame" x="0.0" y="108" width="600" height="492"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="R4H-H4-Xkc" firstAttribute="leading" secondItem="y5R-n2-svm" secondAttribute="leading" id="6uS-55-rLG"/>
+                            <constraint firstItem="y5R-n2-svm" firstAttribute="top" secondItem="R4H-H4-Xkc" secondAttribute="bottom" id="ZZf-xN-750"/>
+                            <constraint firstItem="R4H-H4-Xkc" firstAttribute="trailing" secondItem="y5R-n2-svm" secondAttribute="trailing" id="cNE-wa-orV"/>
+                            <constraint firstAttribute="trailing" secondItem="R4H-H4-Xkc" secondAttribute="trailing" id="gKt-BD-ntp"/>
+                            <constraint firstItem="R4H-H4-Xkc" firstAttribute="top" secondItem="KWq-eW-XS6" secondAttribute="bottom" id="rCn-ey-Yc2"/>
+                            <constraint firstItem="y5R-n2-svm" firstAttribute="bottom" secondItem="47h-1L-SpQ" secondAttribute="top" id="ulF-Pi-baC"/>
+                            <constraint firstItem="y5R-n2-svm" firstAttribute="leading" secondItem="8Ej-gm-9Do" secondAttribute="leading" id="y3s-x8-jL8"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Course Location" id="i9c-gz-rzi">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="0oS-bx-zzf">
+                            <connections>
+                                <action selector="cancelAction:" destination="wYU-Hj-kDR" id="tzD-Hg-GHf"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="ROI-ne-JSQ">
+                            <connections>
+                                <action selector="doneAction:" destination="wYU-Hj-kDR" id="xZK-P4-yU2"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="buttonDone" destination="ROI-ne-JSQ" id="3Rt-rc-YNd"/>
+                        <outlet property="mapView" destination="y5R-n2-svm" id="SXp-xm-zj7"/>
+                        <outlet property="searchBar" destination="R4H-H4-Xkc" id="JMZ-yw-RUT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tCZ-Yg-wDF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4342" y="1867"/>
         </scene>
         <!--Select Color-->
         <scene sceneID="bEg-T0-dwi">
@@ -785,6 +842,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UoL-ge-WdR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4342" y="1073"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="RB7-J4-KOQ">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="0lF-Wu-W01" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="NOb-mf-FkO">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="wYU-Hj-kDR" kind="relationship" relationship="rootViewController" id="pvU-1P-394"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KlS-md-3cI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3676" y="1867"/>
         </scene>
     </scenes>
     <resources>

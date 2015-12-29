@@ -107,5 +107,24 @@ class AddCourse2ViewController: UITableViewController {
     func continueToNextStep() {
         
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "selectLocationSegue" {
+            let mapVC = (segue.destinationViewController as! UINavigationController).topViewController as! SelectLocationViewController
+            mapVC.delegate = self
+            //Do location stuff
+            //mapVC.markerPoint = selectedEvent.getLocationGPS()
+            //mapVC.markerTitle = selectedEvent.title
+        }
+    }
 
+}
+
+extension AddCourse2ViewController : SelectLocationDelegate {
+    func locationSelected() {
+    }
+    
+    func locationCanceled() {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
 }

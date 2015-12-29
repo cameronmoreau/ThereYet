@@ -3,6 +3,7 @@ use_frameworks!
 
 target 'ThereYet' do
   #pod 'BLKFlexibleHeightBar', '~> 1.0.2'
+  pod 'Mapbox-iOS-SDK', '~> 3.0.1'
   pod 'MBCircularProgressBar', '~> 0.3.4'
   pod 'JGProgressHUD', '~> 1.3.1'
   pod 'Alamofire', '~> 3.1.4'

@@ -50,6 +50,7 @@
 		7ED52CC01C23E8A40028172D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7ED52CBE1C23E8A40028172D /* LaunchScreen.storyboard */; };
 		7ED52CCC1C23E90A0028172D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED52CCB1C23E90A0028172D /* LoginViewController.swift */; };
 		7ED52CCE1C23E9120028172D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED52CCD1C23E9120028172D /* User.swift */; };
+		7ED5DBE31C3242B30003329D /* SelectLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED5DBE21C3242B30003329D /* SelectLocationViewController.swift */; };
 		D28B8E7252BF7C2847AFF489 /* Pods_ThereYet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A2E4613E4D867E1E294C6C4 /* Pods_ThereYet.framework */; };
 /* End PBXBuildFile section */
 
@@ -102,6 +103,7 @@
 		7ED52CC11C23E8A40028172D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7ED52CCB1C23E90A0028172D /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		7ED52CCD1C23E9120028172D /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		7ED5DBE21C3242B30003329D /* SelectLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectLocationViewController.swift; sourceTree = "<group>"; };
 		977DCC34FFB2384614B29273 /* Pods-ThereYet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThereYet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ThereYet/Pods-ThereYet.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -227,6 +229,7 @@
 				492362161C31CB6200460284 /* SelectColorViewController.swift */,
 				7E57E6AB1C2CA05800AC907D /* RewardsViewController.swift */,
 				7E7EE9601C2E43AC00553179 /* TodaysCourseTableViewCell.swift */,
+				7ED5DBE21C3242B30003329D /* SelectLocationViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -411,6 +414,7 @@
 				7E9BBF4D1C263A5200ECA0B7 /* PearsonAPI.swift in Sources */,
 				7E7EE9611C2E43AC00553179 /* TodaysCourseTableViewCell.swift in Sources */,
 				7ED52CB61C23E8A40028172D /* AppDelegate.swift in Sources */,
+				7ED5DBE31C3242B30003329D /* SelectLocationViewController.swift in Sources */,
 				492362171C31CB6200460284 /* AddCourse2ViewController.swift in Sources */,
 				4998129C1C2C88ED00346D27 /* MenuItem.swift in Sources */,
 				7ED52CCE1C23E9120028172D /* User.swift in Sources */,
