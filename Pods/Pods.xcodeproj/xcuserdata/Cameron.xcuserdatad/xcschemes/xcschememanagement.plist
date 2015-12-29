@@ -19,6 +19,16 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>MBCircularProgressBar-MBCircularProgressBar.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>MBCircularProgressBar.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-ThereYet.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -29,55 +39,50 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>THSegmentedControl.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>04DD00BB24C97C3B545E460B55249579</key>
+		<key>13F740FAE516DDB8034B878488887282</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2AD5ECF6AEE157F37E9F4471703478FF</key>
+		<key>1B8D8D53663BEF2ADC234112367A5FF7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5E6D5E0550FE2686F22B0E2EDB16731C</key>
+		<key>322F1BB86DA27605A9F24FDDFC26ECC5</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A36848BBB2842E1CB675C125972D8ECC</key>
+		<key>A431C00D63789F601AEF7ECD61854E6B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A480A53C298524B2AB8DD87EC25F1AE2</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>ABB553C714753B110353FBC6AE2E6C8E</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>AC107524F968B2DD2DF8F89AC5791A5D</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>ADFFC71DCC03113F0469B49FBA3E5DF0</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>B4539F9C51A2D866B34E3E9A3D98B6C7</key>
+		<key>B785598482A303F8D0653EC862A7F889</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>B9A04D3C9B208813656510FDA8ADAE02</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>BD7FC57EABF9A788777D8260C1ED52CD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EC181E93238C1601CF7DA76698B189B9</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -10,12 +10,17 @@ import UIKit
 import CoreData
 //import BLKFlexibleHeightBar
 import Charts
+import MBCircularProgressBar
 
 class HomeViewController: CenterViewController, UITableViewDataSource, UITableViewDelegate {
     
+    @IBOutlet weak var progressImage: UIImageView!
     @IBOutlet weak var tableView: UITableView!
     
     var user: User!
+    
+    @IBOutlet weak var progressBar: MBCircularProgressBarView!
+    let tempCoursesCount = 2
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +29,33 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        
+        if tempCoursesCount == 0 {
+            self.tableView.hidden = true
+        } else {
+//            self.tableView.translatesAutoresizingMaskIntoConstraints = true
+//            let height = self.tableView.rowHeight * CGFloat(tempCoursesCount)
+//            let y = self.view.bounds.height - height
+//            self.tableView.frame = CGRectMake(0, y, self.tableView.bounds.width, height)
+        }
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        let time: NSTimeInterval = 1
+        self.progressBar.setValue(100, animateWithDuration: time)
+        
+        let delay = time * Double(NSEC_PER_SEC)
+        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+        dispatch_after(delayTime, dispatch_get_main_queue()) {
+            self.progressImage.image = UIImage(named: "ic_check.png")
+            
+            let transition = CATransition()
+            transition.duration = 1
+            transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+            transition.type = kCATransitionFade
+            
+            self.progressImage.layer.addAnimation(transition, forKey: nil)
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -39,13 +71,11 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
     
     // MARK: - Table View
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        //FIXME: incomplete
         return 1
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //FIXME: incomplete
-        return 2
+        return tempCoursesCount
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
