@@ -14,9 +14,9 @@ class SelectColorViewController: UIViewController, UICollectionViewDelegate, UIC
     
     var selectedIndex: NSIndexPath?
     
-    var addCourseViewController: AddCourse2ViewController!
+    var addCourseViewController: AddCourseViewController!
     
-    let colors = ["#D3D3D3", "#F44336", "#E91E63", "#9C27B0", "#673AB7", "#3F51B5", "#2196F3", "#03A9F4", "#00BCD4", "#009688", "#4CAF50", "#8BC34A", "#CDDC39", "#FFEB3B", "#FFC107", "#FF9800", "#FF5722", "#795548"]
+    let colors: [String] = ["#D3D3D3", "#F44336", "#E91E63", "#9C27B0", "#673AB7", "#3F51B5", "#2196F3", "#03A9F4", "#00BCD4", "#009688", "#4CAF50", "#8BC34A", "#CDDC39", "#FFEB3B", "#FFC107", "#FF9800", "#FF5722", "#795548"]
     
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)

@@ -490,7 +490,7 @@
         <!--Add Course-->
         <scene sceneID="BZx-gn-nYQ">
             <objects>
-                <viewController id="C7w-Ox-726" customClass="AddCourseViewController" customModule="ThereYet" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="C7w-Ox-726" customClass="ChooseExistingAddCourseViewController" customModule="ThereYet" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="588-Xk-3op"/>
                         <viewControllerLayoutGuide type="bottom" id="oPt-XJ-xml"/>
@@ -568,7 +568,7 @@
         <!--Add Course-->
         <scene sceneID="g7b-B1-cj3">
             <objects>
-                <tableViewController title="Add Course" id="eyl-uO-Gtd" customClass="AddCourse2ViewController" customModule="ThereYet" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Add Course" id="eyl-uO-Gtd" customClass="AddCourseViewController" customModule="ThereYet" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="6t2-dY-rtT">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
