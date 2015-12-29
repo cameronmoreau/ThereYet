@@ -12,7 +12,7 @@ import CoreLocation
 
 import THSegmentedControl
 
-class AddCourseViewController: UITableViewController {
+class AddCourseViewController: UITableViewController, UITextFieldDelegate {
     
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var colorCell: UITableViewCell!
@@ -99,6 +99,11 @@ class AddCourseViewController: UITableViewController {
         }
     }
     
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
     func updateTableView() {
         if course != nil {
             if course!.hexColor != nil {
@@ -110,7 +115,7 @@ class AddCourseViewController: UITableViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "selectLocationSegue" {
-            let mapVC = (segue.destinationViewController as! UINavigationController).topViewController as! SelectLocationViewController
+            let mapVC = segue.destinationViewController as! SelectLocationViewController
             mapVC.delegate = self
             //Do location stuff
             //mapVC.markerPoint = selectedEvent.getLocationGPS()
@@ -133,10 +138,6 @@ class AddCourseViewController: UITableViewController {
 extension AddCourseViewController : SelectLocationDelegate {
     func locationSelected(location: CLLocationCoordinate2D) {
         locationCell.detailTextLabel?.text = "\(location.latitude), \(location.longitude)"
-        self.dismissViewControllerAnimated(true, completion: nil)
-    }
-    
-    func locationCanceled() {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        //self.navigationController?.popViewControllerAnimated(true)
     }
 }

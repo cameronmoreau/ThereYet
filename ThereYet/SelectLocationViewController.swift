@@ -11,7 +11,6 @@ import Mapbox
 
 protocol SelectLocationDelegate {
     func locationSelected(location: CLLocationCoordinate2D)
-    func locationCanceled()
 }
 
 class SelectLocationViewController: UIViewController, MGLMapViewDelegate {
@@ -23,10 +22,6 @@ class SelectLocationViewController: UIViewController, MGLMapViewDelegate {
     var selectedLocation: CLLocationCoordinate2D!
     var delegate: SelectLocationDelegate?
     let locationStorage = LocationStorage()
-    
-    @IBAction func cancelAction(sender: AnyObject) {
-        delegate?.locationCanceled()
-    }
     
     @IBAction func doneAction(sender: AnyObject) {
         delegate?.locationSelected(selectedLocation)
@@ -44,6 +39,14 @@ class SelectLocationViewController: UIViewController, MGLMapViewDelegate {
         
         self.mapView.setCenterCoordinate(selectedLocation, zoomLevel: 18, animated: true)
         self.view.addSubview(generateFrameMarker())
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+    
+        if selectedLocation != nil {
+            delegate?.locationSelected(selectedLocation)
+        }
     }
     
     private func generateFrameMarker() -> UIImageView {

@@ -586,7 +586,10 @@
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Untitled Course" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="16l-LS-I43">
                                                     <rect key="frame" x="15" y="0.0" width="570" height="43.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="eyl-uO-Gtd" id="EUx-h9-3hu"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -711,7 +714,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="0lF-Wu-W01" kind="presentation" identifier="selectLocationSegue" id="J6j-Xn-IGT"/>
+                                            <segue destination="wYU-Hj-kDR" kind="show" identifier="selectLocationSegue" id="khV-sz-1nx"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -722,6 +725,7 @@
                             <outlet property="delegate" destination="eyl-uO-Gtd" id="OcJ-nL-gjZ"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Add Course" id="RjP-cc-3T8"/>
                     <connections>
                         <outlet property="classDaysCell" destination="4tX-bs-IZ5" id="Txf-Dq-Sqh"/>
                         <outlet property="colorCell" destination="htt-oP-5e6" id="iUR-Li-kQ7"/>
@@ -735,7 +739,7 @@
             </objects>
             <point key="canvasLocation" x="3676" y="1073"/>
         </scene>
-        <!--Course Location-->
+        <!--Select Location-->
         <scene sceneID="zkQ-P8-zdk">
             <objects>
                 <viewController id="wYU-Hj-kDR" customClass="SelectLocationViewController" customModule="ThereYet" customModuleProvider="target" sceneMemberID="viewController">
@@ -767,27 +771,15 @@
                             <constraint firstItem="y5R-n2-svm" firstAttribute="leading" secondItem="8Ej-gm-9Do" secondAttribute="leading" id="y3s-x8-jL8"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Course Location" id="i9c-gz-rzi">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="0oS-bx-zzf">
-                            <connections>
-                                <action selector="cancelAction:" destination="wYU-Hj-kDR" id="tzD-Hg-GHf"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="ROI-ne-JSQ">
-                            <connections>
-                                <action selector="doneAction:" destination="wYU-Hj-kDR" id="xZK-P4-yU2"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Select Location" id="i9c-gz-rzi"/>
                     <connections>
-                        <outlet property="buttonDone" destination="ROI-ne-JSQ" id="3Rt-rc-YNd"/>
                         <outlet property="mapView" destination="y5R-n2-svm" id="SXp-xm-zj7"/>
                         <outlet property="searchBar" destination="R4H-H4-Xkc" id="JMZ-yw-RUT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tCZ-Yg-wDF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4342" y="1867"/>
+            <point key="canvasLocation" x="3676" y="1802"/>
         </scene>
         <!--Select Color-->
         <scene sceneID="bEg-T0-dwi">
@@ -853,6 +845,7 @@
                             <constraint firstItem="B2U-xd-OQT" firstAttribute="leading" secondItem="O11-kn-9Ij" secondAttribute="leading" id="vdJ-5e-LSS"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Select Color" id="dtN-xq-MGY"/>
                     <connections>
                         <outlet property="collectionView" destination="B2U-xd-OQT" id="cQz-5X-t4q"/>
                     </connections>
@@ -860,24 +853,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UoL-ge-WdR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4342" y="1073"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="RB7-J4-KOQ">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="0lF-Wu-W01" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="NOb-mf-FkO">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="wYU-Hj-kDR" kind="relationship" relationship="rootViewController" id="pvU-1P-394"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="KlS-md-3cI" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3676" y="1867"/>
         </scene>
     </scenes>
     <resources>

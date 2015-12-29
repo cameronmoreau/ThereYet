@@ -229,9 +229,9 @@
 				492362151C31CB6200460284 /* ChooseExistingAddCourseViewController.swift */,
 				492362141C31CB6200460284 /* AddCourseViewController.swift */,
 				492362161C31CB6200460284 /* SelectColorViewController.swift */,
+				7ED5DBE21C3242B30003329D /* SelectLocationViewController.swift */,
 				7E57E6AB1C2CA05800AC907D /* RewardsViewController.swift */,
 				7E7EE9601C2E43AC00553179 /* TodaysCourseTableViewCell.swift */,
-				7ED5DBE21C3242B30003329D /* SelectLocationViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
