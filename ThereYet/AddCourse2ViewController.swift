@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import CoreLocation
 import THSegmentedControl
 
 class AddCourse2ViewController: UITableViewController {
@@ -123,9 +123,6 @@ class AddCourse2ViewController: UITableViewController {
         if segue.identifier == "selectLocationSegue" {
             let mapVC = (segue.destinationViewController as! UINavigationController).topViewController as! SelectLocationViewController
             mapVC.delegate = self
-            //Do location stuff
-            //mapVC.markerPoint = selectedEvent.getLocationGPS()
-            //mapVC.markerTitle = selectedEvent.title
         }
         
         if segue.identifier == "selectColor" {
@@ -137,7 +134,9 @@ class AddCourse2ViewController: UITableViewController {
 }
 
 extension AddCourse2ViewController : SelectLocationDelegate {
-    func locationSelected() {
+    func locationSelected(location: CLLocationCoordinate2D) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+        locationCell.detailTextLabel?.text = "\(location.longitude), \(location.longitude)"
     }
     
     func locationCanceled() {
