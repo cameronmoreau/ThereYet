@@ -41,15 +41,21 @@ class AddCourse2ViewController: UITableViewController {
         self.navigationItem.rightBarButtonItem = continueButton
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        updateTableView()
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         
         if (course != nil && !alreadySetUp){
-            let kClassDaysSegmentedControlPadding: CGFloat = 10
+            let kClassDaysSegmentedControlPadding: CGFloat = 8
             classDaysSegmentedControl = THSegmentedControl(segments: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"])
-            classDaysSegmentedControl.frame = CGRectMake(kClassDaysSegmentedControlPadding, classDaysCell.frame.size.height/2-34/2, classDaysCell.frame.size.width-(kClassDaysSegmentedControlPadding*2), 34)
+            classDaysSegmentedControl.frame = CGRectMake(kClassDaysSegmentedControlPadding, classDaysCell.frame.size.height/2-36/2, classDaysCell.frame.size.width-(kClassDaysSegmentedControlPadding*2), 36)
             classDaysSegmentedControl.tintColor = self.navigationController?.navigationBar.barTintColor
             classDaysCell.addSubview(classDaysSegmentedControl)
             
@@ -104,8 +110,13 @@ class AddCourse2ViewController: UITableViewController {
         }
     }
     
-    func continueToNextStep() {
-        
+    func updateTableView() {
+        if course != nil {
+            if course!.hexColor != nil {
+                colorCell.textLabel?.text = ""
+                colorCell.backgroundColor = UIColor(rgba: course!.hexColor!)
+            }
+        }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -115,6 +126,11 @@ class AddCourse2ViewController: UITableViewController {
             //Do location stuff
             //mapVC.markerPoint = selectedEvent.getLocationGPS()
             //mapVC.markerTitle = selectedEvent.title
+        }
+        
+        if segue.identifier == "selectColor" {
+            let vc = segue.destinationViewController as! SelectColorViewController
+            vc.addCourseViewController = self
         }
     }
 

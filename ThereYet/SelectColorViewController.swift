@@ -12,7 +12,21 @@ class SelectColorViewController: UIViewController, UICollectionViewDelegate, UIC
     
     @IBOutlet weak var collectionView: UICollectionView!
     
-    let colors = [UIColor.lightGrayColor(), UIColor(rgba: "#F44336"), UIColor(rgba: "#E91E63"), UIColor(rgba: "#9C27B0"), UIColor(rgba: "#673AB7"), UIColor(rgba: "#3F51B5"), UIColor(rgba: "#2196F3"), UIColor(rgba: "#03A9F4"), UIColor(rgba: "#00BCD4"), UIColor(rgba: "#009688"), UIColor(rgba: "#4CAF50"), UIColor(rgba: "#8BC34A"), UIColor(rgba: "#CDDC39"), UIColor(rgba: "#FFEB3B"), UIColor(rgba: "#FFC107"), UIColor(rgba: "#FF9800"), UIColor(rgba: "#FF5722"), UIColor(rgba: "#795548")]
+    var selectedIndex: NSIndexPath?
+    
+    var addCourseViewController: AddCourse2ViewController!
+    
+    let colors = ["#D3D3D3", "#F44336", "#E91E63", "#9C27B0", "#673AB7", "#3F51B5", "#2196F3", "#03A9F4", "#00BCD4", "#009688", "#4CAF50", "#8BC34A", "#CDDC39", "#FFEB3B", "#FFC107", "#FF9800", "#FF5722", "#795548"]
+    
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        if selectedIndex != nil {
+            addCourseViewController.course?.hexColor = colors[selectedIndex!.row]
+            addCourseViewController.colorCell.backgroundColor = UIColor(rgba: colors[selectedIndex!.row])
+            addCourseViewController.colorCell.textLabel?.text = ""
+        }
+    }
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
@@ -23,24 +37,15 @@ class SelectColorViewController: UIViewController, UICollectionViewDelegate, UIC
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath) //as! CellWithCheckmark
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath) as! CellWithCheckmark
         
-        cell.backgroundColor = colors[indexPath.row]
+        cell.backgroundColor = UIColor(rgba: colors[indexPath.row])
         
-        /*if indexPath.isEqual(selectedIndex) {
+        if indexPath.isEqual(selectedIndex) {
             cell.checkmark.hidden = false
         } else {
             cell.checkmark.hidden = true
         }
-        
-        if colorsInUse.count != 0 {
-            let color = colors[indexPath.row]
-            if colorsInUse.contains(color) {
-                cell.inUseLabel.hidden = false
-            } else {
-                cell.inUseLabel.hidden = true
-            }
-        }*/
         
         return cell
     }
@@ -57,13 +62,16 @@ class SelectColorViewController: UIViewController, UICollectionViewDelegate, UIC
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        /*let oldCell = collectionView.cellForItemAtIndexPath(selectedIndex) as? CellWithCheckmark
+        var oldCell: CellWithCheckmark?
+        if selectedIndex != nil {
+            oldCell = collectionView.cellForItemAtIndexPath(selectedIndex!) as? CellWithCheckmark
+        }
         let newCell = collectionView.cellForItemAtIndexPath(indexPath) as! CellWithCheckmark
         
         oldCell?.checkmark.hidden = true
         newCell.checkmark.hidden = false
         
-        selectedIndex = indexPath*/
+        selectedIndex = indexPath
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
@@ -73,4 +81,10 @@ class SelectColorViewController: UIViewController, UICollectionViewDelegate, UIC
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
         return 0
     }
+}
+
+class CellWithCheckmark: UICollectionViewCell {
+
+    @IBOutlet var checkmark: UIImageView!
+    
 }
