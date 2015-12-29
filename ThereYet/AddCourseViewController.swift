@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 import THSegmentedControl
 
@@ -26,7 +27,7 @@ class AddCourseViewController: UITableViewController {
     
     var continueButton: UIBarButtonItem!
     
-    var course: Course?
+    var course: Course_RegularObject?
     
     var alreadySetUp = false
     
@@ -52,35 +53,31 @@ class AddCourseViewController: UITableViewController {
         
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         
-        if (course != nil && !alreadySetUp){
+        if !alreadySetUp {
             let kClassDaysSegmentedControlPadding: CGFloat = 8
             classDaysSegmentedControl = THSegmentedControl(segments: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"])
             classDaysSegmentedControl.frame = CGRectMake(kClassDaysSegmentedControlPadding, classDaysCell.frame.size.height/2-36/2, classDaysCell.frame.size.width-(kClassDaysSegmentedControlPadding*2), 36)
             classDaysSegmentedControl.tintColor = self.navigationController?.navigationBar.barTintColor
             classDaysCell.addSubview(classDaysSegmentedControl)
             
-            setUpViewController(course!)
+            if course != nil {
+                setUpViewController(course!)
+            }
             
             alreadySetUp = true
         }
     }
     
-    func setUpViewController(course: Course) {
+    func setUpViewController(course: Course_RegularObject) {
         //title set up
         titleTextField.text = course.title
         
         //color set up
         if (course.hexColor != nil) {
             if course.hexColor!.characters.count != 0 {
+                colorCell.textLabel?.text = ""
                 colorCell.backgroundColor = UIColor(rgba: "#\(course.hexColor!)")
-            } else {
-                colorCell.backgroundColor = UIColor.whiteColor()
-                colorCell.textLabel?.text = "No color"
             }
-        } else {
-            colorCell.backgroundColor = UIColor.whiteColor()
-            colorCell.textLabel?.text = "No Color"
-            colorCell.textLabel?.textColor = UIColor.redColor()
         }
         
         //TODO: class days set up
@@ -90,23 +87,14 @@ class AddCourseViewController: UITableViewController {
         dateFormatter.dateFormat = "MMMM d, yyyy at hh:mm z"
         if course.startsAt != nil {
             startsAtCell.detailTextLabel?.text = dateFormatter.stringFromDate(course.startsAt!)
-        } else {
-            startsAtCell.detailTextLabel?.text = "None"
-            startsAtCell.detailTextLabel?.textColor = UIColor.redColor()
         }
         if course.endsAt != nil {
             endsAtCell.detailTextLabel?.text = dateFormatter.stringFromDate(course.endsAt!)
-        } else {
-            endsAtCell.detailTextLabel?.text = "None"
-            endsAtCell.detailTextLabel?.textColor = UIColor.redColor()
         }
         
         //location set up
         if (course.locationLat != 0 && course.locationLng != 0) {
             locationCell.detailTextLabel?.text = "\(course.locationLat!), \(course.locationLng!)"
-        } else {
-            locationCell.detailTextLabel?.text = "None"
-            locationCell.detailTextLabel?.textColor = UIColor.redColor()
         }
     }
     

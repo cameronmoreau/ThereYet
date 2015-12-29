@@ -97,19 +97,21 @@ class ChooseExistingAddCourseViewController: UIViewController, UITableViewDataSo
                 if (indexPath.section != 1 && indexPath.row < courses.count) {
                     let tempCourse = courses[indexPath.row]
                     
-                    let entity = NSEntityDescription.entityForName("Course", inManagedObjectContext: (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext)
-                    let course = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: nil) as? Course
-                    course?.pearson_id = tempCourse.pearson_id
-                    course?.hexColor = tempCourse.hexColor
-                    course?.title = tempCourse.title
-                    course?.createdAt = tempCourse.createdAt
-                    course?.locationLat = tempCourse.locationLat
-                    course?.locationLng = tempCourse.locationLng
-                    course?.startsAt = tempCourse.startsAt
-                    course?.endsAt = tempCourse.endsAt
-                    course?.classDays = tempCourse.classDays
+                    let course = Course_RegularObject()
+                    course.pearson_id = tempCourse.pearson_id
+                    course.hexColor = tempCourse.hexColor
+                    course.title = tempCourse.title
+                    course.createdAt = tempCourse.createdAt
+                    course.locationLat = tempCourse.locationLat
+                    course.locationLng = tempCourse.locationLng
+                    course.startsAt = tempCourse.startsAt
+                    course.endsAt = tempCourse.endsAt
+                    course.classDays = tempCourse.classDays
+                    
                     vc.course = course
-                    //vc.course = courses[indexPath.row]
+                    if vc.course == nil {
+                        vc.course = Course_RegularObject()
+                    }
                 }
             }
         }
