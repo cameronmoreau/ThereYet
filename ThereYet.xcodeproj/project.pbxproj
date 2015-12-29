@@ -11,8 +11,8 @@
 		492362101C31CAE200460284 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4923620E1C31CAE200460284 /* Bolts.framework */; };
 		492362111C31CAE200460284 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4923620F1C31CAE200460284 /* Parse.framework */; };
 		492362131C31CB4700460284 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 492362121C31CB4700460284 /* Main.storyboard */; };
-		492362171C31CB6200460284 /* AddCourse2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492362141C31CB6200460284 /* AddCourse2ViewController.swift */; };
-		492362181C31CB6200460284 /* AddCourseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492362151C31CB6200460284 /* AddCourseViewController.swift */; };
+		492362171C31CB6200460284 /* AddCourseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492362141C31CB6200460284 /* AddCourseViewController.swift */; };
+		492362181C31CB6200460284 /* ChooseExistingAddCourseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492362151C31CB6200460284 /* ChooseExistingAddCourseViewController.swift */; };
 		492362191C31CB6200460284 /* SelectColorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492362161C31CB6200460284 /* SelectColorViewController.swift */; };
 		4990FA351C28DE5F00164F6F /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4990FA341C28DE5F00164F6F /* HomeViewController.swift */; };
 		499812961C2C88ED00346D27 /* CenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4998128D1C2C88ED00346D27 /* CenterViewController.swift */; };
@@ -60,8 +60,8 @@
 		4923620E1C31CAE200460284 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		4923620F1C31CAE200460284 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		492362121C31CB4700460284 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		492362141C31CB6200460284 /* AddCourse2ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCourse2ViewController.swift; sourceTree = "<group>"; };
-		492362151C31CB6200460284 /* AddCourseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCourseViewController.swift; sourceTree = "<group>"; };
+		492362141C31CB6200460284 /* AddCourseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCourseViewController.swift; sourceTree = "<group>"; };
+		492362151C31CB6200460284 /* ChooseExistingAddCourseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseExistingAddCourseViewController.swift; sourceTree = "<group>"; };
 		492362161C31CB6200460284 /* SelectColorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectColorViewController.swift; sourceTree = "<group>"; };
 		4990FA341C28DE5F00164F6F /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		4998128D1C2C88ED00346D27 /* CenterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CenterViewController.swift; sourceTree = "<group>"; };
@@ -224,8 +224,8 @@
 				7ED52CCB1C23E90A0028172D /* LoginViewController.swift */,
 				4990FA341C28DE5F00164F6F /* HomeViewController.swift */,
 				49E4F7A01C2BD43C00F7FFBA /* CoursesViewController.swift */,
-				492362151C31CB6200460284 /* AddCourseViewController.swift */,
-				492362141C31CB6200460284 /* AddCourse2ViewController.swift */,
+				492362151C31CB6200460284 /* ChooseExistingAddCourseViewController.swift */,
+				492362141C31CB6200460284 /* AddCourseViewController.swift */,
 				492362161C31CB6200460284 /* SelectColorViewController.swift */,
 				7E57E6AB1C2CA05800AC907D /* RewardsViewController.swift */,
 				7E7EE9601C2E43AC00553179 /* TodaysCourseTableViewCell.swift */,
@@ -402,7 +402,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E4BC3881C2D84E100D818BD /* UIView.swift in Sources */,
-				492362181C31CB6200460284 /* AddCourseViewController.swift in Sources */,
+				492362181C31CB6200460284 /* ChooseExistingAddCourseViewController.swift in Sources */,
 				7E57E6AC1C2CA05800AC907D /* RewardsViewController.swift in Sources */,
 				499812981C2C88ED00346D27 /* CUSTOMIZE.swift in Sources */,
 				7EA24C471C2BA8A5005705C5 /* ThereYet.xcdatamodeld in Sources */,
@@ -415,7 +415,7 @@
 				7E7EE9611C2E43AC00553179 /* TodaysCourseTableViewCell.swift in Sources */,
 				7ED52CB61C23E8A40028172D /* AppDelegate.swift in Sources */,
 				7ED5DBE31C3242B30003329D /* SelectLocationViewController.swift in Sources */,
-				492362171C31CB6200460284 /* AddCourse2ViewController.swift in Sources */,
+				492362171C31CB6200460284 /* AddCourseViewController.swift in Sources */,
 				4998129C1C2C88ED00346D27 /* MenuItem.swift in Sources */,
 				7ED52CCE1C23E9120028172D /* User.swift in Sources */,
 				492362191C31CB6200460284 /* SelectColorViewController.swift in Sources */,
