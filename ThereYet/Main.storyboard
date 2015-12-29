@@ -224,8 +224,33 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IXo-a0-8ny" customClass="MBCircularProgressBarView">
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IXo-a0-8ny" customClass="MBCircularProgressBarView">
                                 <rect key="frame" x="232" y="92" width="136" height="136"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qf0-SW-oJA">
+                                        <rect key="frame" x="8" y="8" width="120" height="120"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="ic_courses" translatesAutoresizingMaskIntoConstraints="NO" id="pC8-My-ogT">
+                                                <rect key="frame" x="30" y="30" width="60" height="60"/>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.086274509803921567" green="0.52941176470588236" blue="0.74117647058823533" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="pC8-My-ogT" firstAttribute="centerX" secondItem="Qf0-SW-oJA" secondAttribute="centerX" id="CcO-jb-lDv"/>
+                                            <constraint firstItem="pC8-My-ogT" firstAttribute="centerY" secondItem="Qf0-SW-oJA" secondAttribute="centerY" id="Cr2-cv-CSQ"/>
+                                            <constraint firstAttribute="height" constant="120" id="G7N-S7-7R9"/>
+                                            <constraint firstAttribute="width" constant="120" id="q6I-Fo-qqu"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="60"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                </subviews>
                                 <color key="backgroundColor" red="0.1176470588" green="0.68627450980000004" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="136" id="Kwx-as-xqf"/>
@@ -261,30 +286,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qf0-SW-oJA">
-                                <rect key="frame" x="240" y="100" width="120" height="120"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_courses" translatesAutoresizingMaskIntoConstraints="NO" id="pC8-My-ogT">
-                                        <rect key="frame" x="30" y="30" width="60" height="60"/>
-                                    </imageView>
-                                </subviews>
-                                <color key="backgroundColor" red="0.086031064256806372" green="0.52799212896182857" blue="0.73982018291025642" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstItem="pC8-My-ogT" firstAttribute="centerX" secondItem="Qf0-SW-oJA" secondAttribute="centerX" id="CcO-jb-lDv"/>
-                                    <constraint firstItem="pC8-My-ogT" firstAttribute="centerY" secondItem="Qf0-SW-oJA" secondAttribute="centerY" id="Cr2-cv-CSQ"/>
-                                    <constraint firstAttribute="height" constant="120" id="G7N-S7-7R9"/>
-                                    <constraint firstAttribute="width" constant="120" id="q6I-Fo-qqu"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                        <real key="value" value="0.0"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="60"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="45 minutes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vWc-QZ-kRT">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="45 minutes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vWc-QZ-kRT">
                                 <rect key="frame" x="257" y="275" width="86" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="7Nf-7n-wyb"/>
@@ -293,7 +295,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Next class in" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XbU-LJ-A37">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Next class in" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XbU-LJ-A37">
                                 <rect key="frame" x="212" y="246" width="176" height="28"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="BpJ-0z-XqN"/>
@@ -316,14 +318,11 @@
                         <color key="backgroundColor" red="0.11764705882352941" green="0.68627450980392157" blue="0.95294117647058818" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="IXo-a0-8ny" firstAttribute="centerX" secondItem="wky-YO-cEc" secondAttribute="centerX" id="5cx-XG-9zd"/>
-                            <constraint firstItem="Qf0-SW-oJA" firstAttribute="centerX" secondItem="wky-YO-cEc" secondAttribute="centerX" id="El5-Pe-bLa"/>
                             <constraint firstItem="XbU-LJ-A37" firstAttribute="centerX" secondItem="wky-YO-cEc" secondAttribute="centerX" id="IOl-Hk-aP0"/>
-                            <constraint firstItem="Qf0-SW-oJA" firstAttribute="top" secondItem="36g-pp-zJu" secondAttribute="bottom" constant="36" id="MWn-XA-URI"/>
                             <constraint firstItem="vWc-QZ-kRT" firstAttribute="centerX" secondItem="wky-YO-cEc" secondAttribute="centerX" id="OXk-aW-wzY"/>
                             <constraint firstItem="XbU-LJ-A37" firstAttribute="top" secondItem="IXo-a0-8ny" secondAttribute="bottom" constant="18" id="SIZ-a4-Vmq"/>
                             <constraint firstItem="bkz-PG-WUg" firstAttribute="leading" secondItem="wky-YO-cEc" secondAttribute="leadingMargin" constant="-12" id="ST8-xC-w3O"/>
                             <constraint firstItem="JRh-9F-ZBJ" firstAttribute="centerX" secondItem="vWc-QZ-kRT" secondAttribute="centerX" id="TV7-DB-GH5"/>
-                            <constraint firstItem="IXo-a0-8ny" firstAttribute="centerY" secondItem="Qf0-SW-oJA" secondAttribute="centerY" id="Zyg-xI-FlK"/>
                             <constraint firstItem="JRh-9F-ZBJ" firstAttribute="bottom" secondItem="883-1b-UkI" secondAttribute="top" id="euu-46-j0b"/>
                             <constraint firstItem="JRh-9F-ZBJ" firstAttribute="leading" secondItem="wky-YO-cEc" secondAttribute="leading" id="uh7-8j-vRy"/>
                             <constraint firstItem="JRh-9F-ZBJ" firstAttribute="top" secondItem="bkz-PG-WUg" secondAttribute="bottom" constant="8" id="w00-3h-H4Z"/>

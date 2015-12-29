@@ -7,12 +7,10 @@
 //
 
 import UIKit
-import CoreData
 import CoreLocation
-
 import THSegmentedControl
 
-class AddCourseViewController: UITableViewController {
+class AddCourse2ViewController: UITableViewController {
     
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var colorCell: UITableViewCell!
@@ -28,7 +26,7 @@ class AddCourseViewController: UITableViewController {
     
     var continueButton: UIBarButtonItem!
     
-    var course: Course_RegularObject?
+    var course: Course?
     
     var alreadySetUp = false
     
@@ -54,31 +52,35 @@ class AddCourseViewController: UITableViewController {
         
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         
-        if !alreadySetUp {
+        if (course != nil && !alreadySetUp){
             let kClassDaysSegmentedControlPadding: CGFloat = 8
             classDaysSegmentedControl = THSegmentedControl(segments: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"])
             classDaysSegmentedControl.frame = CGRectMake(kClassDaysSegmentedControlPadding, classDaysCell.frame.size.height/2-36/2, classDaysCell.frame.size.width-(kClassDaysSegmentedControlPadding*2), 36)
             classDaysSegmentedControl.tintColor = self.navigationController?.navigationBar.barTintColor
             classDaysCell.addSubview(classDaysSegmentedControl)
             
-            if course != nil {
-                setUpViewController(course!)
-            }
+            setUpViewController(course!)
             
             alreadySetUp = true
         }
     }
     
-    func setUpViewController(course: Course_RegularObject) {
+    func setUpViewController(course: Course) {
         //title set up
         titleTextField.text = course.title
         
         //color set up
         if (course.hexColor != nil) {
             if course.hexColor!.characters.count != 0 {
-                colorCell.textLabel?.text = ""
                 colorCell.backgroundColor = UIColor(rgba: "#\(course.hexColor!)")
+            } else {
+                colorCell.backgroundColor = UIColor.whiteColor()
+                colorCell.textLabel?.text = "No color"
             }
+        } else {
+            colorCell.backgroundColor = UIColor.whiteColor()
+            colorCell.textLabel?.text = "No Color"
+            colorCell.textLabel?.textColor = UIColor.redColor()
         }
         
         //TODO: class days set up
@@ -88,14 +90,23 @@ class AddCourseViewController: UITableViewController {
         dateFormatter.dateFormat = "MMMM d, yyyy at hh:mm z"
         if course.startsAt != nil {
             startsAtCell.detailTextLabel?.text = dateFormatter.stringFromDate(course.startsAt!)
+        } else {
+            startsAtCell.detailTextLabel?.text = "None"
+            startsAtCell.detailTextLabel?.textColor = UIColor.redColor()
         }
         if course.endsAt != nil {
             endsAtCell.detailTextLabel?.text = dateFormatter.stringFromDate(course.endsAt!)
+        } else {
+            endsAtCell.detailTextLabel?.text = "None"
+            endsAtCell.detailTextLabel?.textColor = UIColor.redColor()
         }
         
         //location set up
         if (course.locationLat != 0 && course.locationLng != 0) {
             locationCell.detailTextLabel?.text = "\(course.locationLat!), \(course.locationLng!)"
+        } else {
+            locationCell.detailTextLabel?.text = "None"
+            locationCell.detailTextLabel?.textColor = UIColor.redColor()
         }
     }
     
@@ -112,28 +123,20 @@ class AddCourseViewController: UITableViewController {
         if segue.identifier == "selectLocationSegue" {
             let mapVC = (segue.destinationViewController as! UINavigationController).topViewController as! SelectLocationViewController
             mapVC.delegate = self
-            //Do location stuff
-            //mapVC.markerPoint = selectedEvent.getLocationGPS()
-            //mapVC.markerTitle = selectedEvent.title
         }
         
         if segue.identifier == "selectColor" {
             let vc = segue.destinationViewController as! SelectColorViewController
             vc.addCourseViewController = self
-            if (course?.hexColor != nil && course != nil) {
-                if let indexRow = vc.colors.indexOf(course!.hexColor!) {
-                    vc.selectedIndex = NSIndexPath(forRow: indexRow, inSection: 0)
-                }
-            }
         }
     }
 
 }
 
-extension AddCourseViewController : SelectLocationDelegate {
+extension AddCourse2ViewController : SelectLocationDelegate {
     func locationSelected(location: CLLocationCoordinate2D) {
-        locationCell.detailTextLabel?.text = "\(location.latitude), \(location.longitude)"
         self.dismissViewControllerAnimated(true, completion: nil)
+        locationCell.detailTextLabel?.text = "\(location.longitude), \(location.longitude)"
     }
     
     func locationCanceled() {

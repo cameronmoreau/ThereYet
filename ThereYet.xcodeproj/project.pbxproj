@@ -41,6 +41,7 @@
 		7E57E6C91C2CECF700AC907D /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E57E6C81C2CECF700AC907D /* UIColor.swift */; };
 		7E57E6D11C2D06CC00AC907D /* BLKFlexibleHeightBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E57E6D01C2D06CC00AC907D /* BLKFlexibleHeightBar.swift */; };
 		7E7EE9611C2E43AC00553179 /* TodaysCourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7EE9601C2E43AC00553179 /* TodaysCourseTableViewCell.swift */; };
+		7E9B19AD1C3311F2003EFFF4 /* LocationStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9B19AC1C3311F2003EFFF4 /* LocationStorage.swift */; };
 		7E9BBF4D1C263A5200ECA0B7 /* PearsonAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9BBF4C1C263A5200ECA0B7 /* PearsonAPI.swift */; };
 		7E9BBF4F1C26880700ECA0B7 /* AuthData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9BBF4E1C26880700ECA0B7 /* AuthData.swift */; };
 		7EA24C471C2BA8A5005705C5 /* ThereYet.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7EA24C451C2BA8A5005705C5 /* ThereYet.xcdatamodeld */; };
@@ -92,6 +93,7 @@
 		7E57E6CA1C2CF9E700AC907D /* ThereYet-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ThereYet-Bridging-Header.h"; sourceTree = "<group>"; };
 		7E57E6D01C2D06CC00AC907D /* BLKFlexibleHeightBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLKFlexibleHeightBar.swift; sourceTree = "<group>"; };
 		7E7EE9601C2E43AC00553179 /* TodaysCourseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodaysCourseTableViewCell.swift; sourceTree = "<group>"; };
+		7E9B19AC1C3311F2003EFFF4 /* LocationStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationStorage.swift; sourceTree = "<group>"; };
 		7E9BBF4C1C263A5200ECA0B7 /* PearsonAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PearsonAPI.swift; sourceTree = "<group>"; };
 		7E9BBF4E1C26880700ECA0B7 /* AuthData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthData.swift; sourceTree = "<group>"; };
 		7EA24C461C2BA8A5005705C5 /* ThereYet.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ThereYet.xcdatamodel; sourceTree = "<group>"; };
@@ -241,6 +243,7 @@
 				7E9BBF4E1C26880700ECA0B7 /* AuthData.swift */,
 				7EA24C6A1C2BB748005705C5 /* Course.swift */,
 				7E57E6C51C2CC93200AC907D /* Offer.swift */,
+				7E9B19AC1C3311F2003EFFF4 /* LocationStorage.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -425,6 +428,7 @@
 				4990FA351C28DE5F00164F6F /* HomeViewController.swift in Sources */,
 				499812971C2C88ED00346D27 /* ContainerViewController.swift in Sources */,
 				49E4F7A11C2BD43C00F7FFBA /* CoursesViewController.swift in Sources */,
+				7E9B19AD1C3311F2003EFFF4 /* LocationStorage.swift in Sources */,
 				7E57E6D11C2D06CC00AC907D /* BLKFlexibleHeightBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

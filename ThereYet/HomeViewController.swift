@@ -8,16 +8,19 @@
 
 import UIKit
 import CoreData
+import CoreLocation
 //import BLKFlexibleHeightBar
 import Charts
 import MBCircularProgressBar
 
-class HomeViewController: CenterViewController, UITableViewDataSource, UITableViewDelegate {
+class HomeViewController: CenterViewController, UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate {
     
     @IBOutlet weak var progressImage: UIImageView!
     @IBOutlet weak var tableView: UITableView!
     
     var user: User!
+    let locationManager = CLLocationManager()
+    let locationStorage = LocationStorage()
     
     @IBOutlet weak var progressBar: MBCircularProgressBarView!
     let tempCoursesCount = 2
@@ -25,18 +28,31 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        user = User()
+        self.user = User()
         
+        self.locationManager.delegate = self
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        self.locationManager.requestWhenInUseAuthorization()
+        self.locationManager.startUpdatingLocation()
+        
+        //Location data
+//        print(CLLocationManager.locationServicesEnabled())
+//        
+//        if !CLLocationManager.locationServicesEnabled() {
+//            locationManager.requestWhenInUseAuthorization()
+//        } else {
+//            self.locationManager.delegate = self
+//            self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+//            self.locationManager.startUpdatingLocation()
+//        }
+        
+        //Table
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
+        //Hide courses if done
         if tempCoursesCount == 0 {
             self.tableView.hidden = true
-        } else {
-//            self.tableView.translatesAutoresizingMaskIntoConstraints = true
-//            let height = self.tableView.rowHeight * CGFloat(tempCoursesCount)
-//            let y = self.view.bounds.height - height
-//            self.tableView.frame = CGRectMake(0, y, self.tableView.bounds.width, height)
         }
     }
     
@@ -157,6 +173,15 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
         }
     }
     
+    // MARK: - Location
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        //If a location was found, store it
+        if let location = manager.location {
+            manager.stopUpdatingLocation()
+            locationStorage.updateLocation(location.coordinate)
+        }
+    }
 
     /*
     // MARK: - Navigation
