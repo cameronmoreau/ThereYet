@@ -12,7 +12,7 @@ import SwiftyJSON
 class User {
     
     let authData: AuthData!
-     
+      
     var id: Int?
     var firstName: String?
     var lastName: String?
