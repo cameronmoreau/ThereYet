@@ -56,7 +56,7 @@ class LoginViewController: CenterViewController {
                         appDelegate?.window??.rootViewController = containerViewController
                     })
                 } else {
-                    self.showBasicError(error!.userInfo["error"] as! String)
+                    self.showBasicError("Login", message: error!.userInfo["error"] as! String)
                 }
             })
         }
@@ -81,16 +81,10 @@ class LoginViewController: CenterViewController {
     
     func formIsValid() -> Bool {
         if textFieldUsername.text!.isEmpty || textFieldPassword.text!.isEmpty {
-            showBasicError("Username and password is required")
+            self.showBasicError("Login", message: "Username and password is required")
             return false
         }
         
         return true
-    }
-    
-    func showBasicError(message: String) {
-        let errorController = UIAlertController(title: "Login Error", message: message, preferredStyle: UIAlertControllerStyle.Alert)
-        errorController.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.Default, handler: nil))
-        self.presentViewController(errorController, animated: true, completion: nil)
     }
 }

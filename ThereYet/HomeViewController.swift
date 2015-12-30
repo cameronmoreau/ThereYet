@@ -36,15 +36,15 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
         self.locationManager.startUpdatingLocation()
         
         //Location data
-//        print(CLLocationManager.locationServicesEnabled())
-//        
-//        if !CLLocationManager.locationServicesEnabled() {
-//            locationManager.requestWhenInUseAuthorization()
-//        } else {
+        print(CLLocationManager.locationServicesEnabled())
+        
+        if !CLLocationManager.locationServicesEnabled() {
+            locationManager.requestWhenInUseAuthorization()
+        } else {
 //            self.locationManager.delegate = self
 //            self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
 //            self.locationManager.startUpdatingLocation()
-//        }
+        }
         
         //Table
         self.tableView.delegate = self
@@ -175,10 +175,10 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
     
     // MARK: - Location
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
+
         //If a location was found, store it
         if let location = manager.location {
-            manager.stopUpdatingLocation()
+            manager.startMonitoringSignificantLocationChanges()
             locationStorage.updateLocation(location.coordinate)
         }
     }

@@ -13,9 +13,8 @@ protocol SelectLocationDelegate {
     func locationSelected(location: CLLocationCoordinate2D)
 }
 
-class SelectLocationViewController: UIViewController, MGLMapViewDelegate {
+class SelectLocationViewController: UIViewController, MGLMapViewDelegate, UISearchBarDelegate {
     
-    @IBOutlet weak var buttonDone: UIBarButtonItem!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var mapView: MGLMapView!
     
@@ -29,12 +28,15 @@ class SelectLocationViewController: UIViewController, MGLMapViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.searchBar.delegate = self
         self.mapView.delegate = self
         
-        if let currentLocation = locationStorage.location {
-            selectedLocation = currentLocation
-        } else {
-            selectedLocation = CLLocationCoordinate2DMake(0, 0)
+        if selectedLocation == nil {
+            if let currentLocation = locationStorage.location {
+                selectedLocation = currentLocation
+            } else {
+                selectedLocation = CLLocationCoordinate2DMake(0, 0)
+            }
         }
         
         self.mapView.setCenterCoordinate(selectedLocation, zoomLevel: 18, animated: true)
@@ -67,4 +69,24 @@ class SelectLocationViewController: UIViewController, MGLMapViewDelegate {
     func mapView(mapView: MGLMapView, regionDidChangeAnimated animated: Bool) {
         selectedLocation = mapView.centerCoordinate
     }
+    
+    //MARK: - Searchbar
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        if let search = searchBar.text {
+            MapboxAPI.geocodeLookup(search, completion: {
+                (location: LookupLocation?) in
+                
+                if let loc = location {
+                    self.mapView.setCenterCoordinate(loc.location!, zoomLevel: 16, animated: true)
+                    self.searchBar.text = loc.address
+                } else {
+                    self.showBasicError("Location", message: "Location not found")
+                    self.searchBar.text = ""
+                }
+            })
+        }
+        
+        self.searchBar.resignFirstResponder()
+    }
+
 }

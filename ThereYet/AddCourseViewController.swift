@@ -216,9 +216,12 @@ class AddCourseViewController: UITableViewController, UITextFieldDelegate {
         if segue.identifier == "selectLocationSegue" {
             let mapVC = segue.destinationViewController as! SelectLocationViewController
             mapVC.delegate = self
-            //Do location stuff
-            //mapVC.markerPoint = selectedEvent.getLocationGPS()
-            //mapVC.markerTitle = selectedEvent.title
+            
+            //Set previous location
+            print(course?.locationLat)
+            if course?.locationLat != 0 && course?.locationLng != 0 {
+                mapVC.selectedLocation = CLLocationCoordinate2DMake(course?.locationLat as! Double, course?.locationLng as! Double)
+            }
         }
         
         if segue.identifier == "selectColor" {

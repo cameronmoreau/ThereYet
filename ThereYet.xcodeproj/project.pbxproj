@@ -46,6 +46,9 @@
 		7E9BBF4F1C26880700ECA0B7 /* AuthData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9BBF4E1C26880700ECA0B7 /* AuthData.swift */; };
 		7EA24C471C2BA8A5005705C5 /* ThereYet.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7EA24C451C2BA8A5005705C5 /* ThereYet.xcdatamodeld */; };
 		7EA24C6C1C2BB748005705C5 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA24C6A1C2BB748005705C5 /* Course.swift */; };
+		7EB320A61C33570200AB26A8 /* MapboxAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB320A51C33570200AB26A8 /* MapboxAPI.swift */; };
+		7EB320A81C33597100AB26A8 /* LookupLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB320A71C33597100AB26A8 /* LookupLocation.swift */; };
+		7EB320AA1C33605F00AB26A8 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB320A91C33605F00AB26A8 /* UIViewController.swift */; };
 		7ED52CB61C23E8A40028172D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED52CB51C23E8A40028172D /* AppDelegate.swift */; };
 		7ED52CBD1C23E8A40028172D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7ED52CBC1C23E8A40028172D /* Assets.xcassets */; };
 		7ED52CC01C23E8A40028172D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7ED52CBE1C23E8A40028172D /* LaunchScreen.storyboard */; };
@@ -98,6 +101,9 @@
 		7E9BBF4E1C26880700ECA0B7 /* AuthData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthData.swift; sourceTree = "<group>"; };
 		7EA24C461C2BA8A5005705C5 /* ThereYet.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ThereYet.xcdatamodel; sourceTree = "<group>"; };
 		7EA24C6A1C2BB748005705C5 /* Course.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
+		7EB320A51C33570200AB26A8 /* MapboxAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapboxAPI.swift; sourceTree = "<group>"; };
+		7EB320A71C33597100AB26A8 /* LookupLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LookupLocation.swift; sourceTree = "<group>"; };
+		7EB320A91C33605F00AB26A8 /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		7ED52CB21C23E8A40028172D /* ThereYet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ThereYet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7ED52CB51C23E8A40028172D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7ED52CBC1C23E8A40028172D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -176,6 +182,7 @@
 				7E57E6C81C2CECF700AC907D /* UIColor.swift */,
 				7E57E6D01C2D06CC00AC907D /* BLKFlexibleHeightBar.swift */,
 				7E4BC3871C2D84E100D818BD /* UIView.swift */,
+				7EB320A91C33605F00AB26A8 /* UIViewController.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -184,6 +191,7 @@
 			isa = PBXGroup;
 			children = (
 				7E9BBF4C1C263A5200ECA0B7 /* PearsonAPI.swift */,
+				7EB320A51C33570200AB26A8 /* MapboxAPI.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -244,6 +252,7 @@
 				7EA24C6A1C2BB748005705C5 /* Course.swift */,
 				7E57E6C51C2CC93200AC907D /* Offer.swift */,
 				7E9B19AC1C3311F2003EFFF4 /* LocationStorage.swift */,
+				7EB320A71C33597100AB26A8 /* LookupLocation.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -404,6 +413,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7EB320AA1C33605F00AB26A8 /* UIViewController.swift in Sources */,
 				7E4BC3881C2D84E100D818BD /* UIView.swift in Sources */,
 				492362181C31CB6200460284 /* ChooseExistingAddCourseViewController.swift in Sources */,
 				7E57E6AC1C2CA05800AC907D /* RewardsViewController.swift in Sources */,
@@ -411,8 +421,10 @@
 				7EA24C471C2BA8A5005705C5 /* ThereYet.xcdatamodeld in Sources */,
 				7E57E6C61C2CC93200AC907D /* Offer.swift in Sources */,
 				7E9BBF4F1C26880700ECA0B7 /* AuthData.swift in Sources */,
+				7EB320A61C33570200AB26A8 /* MapboxAPI.swift in Sources */,
 				491A3C141C2CA4040093EB6D /* UIImageView+RenderingMode.swift in Sources */,
 				7ED52CCC1C23E90A0028172D /* LoginViewController.swift in Sources */,
+				7EB320A81C33597100AB26A8 /* LookupLocation.swift in Sources */,
 				4998129E1C2C88ED00346D27 /* SideViewController.swift in Sources */,
 				7E9BBF4D1C263A5200ECA0B7 /* PearsonAPI.swift in Sources */,
 				7E7EE9611C2E43AC00553179 /* TodaysCourseTableViewCell.swift in Sources */,

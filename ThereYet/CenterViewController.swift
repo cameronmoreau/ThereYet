@@ -86,6 +86,10 @@ class CenterViewController: UIViewController, SideViewControllerDelegate {
         newCenterViewController.color = menuItem.color //must put this after push because navigation bar isn't there before it's pushed
     }
     
+    override func showBasicError(type: String, message: String) {
+        super.showBasicError(type, message: message)
+    }
+    
     func performAction(menuItem: MenuItem) {
         switch menuItem.name {
             //TODO: override to make cases for each menu item selector type
