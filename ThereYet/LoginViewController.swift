@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 import JGProgressHUD
 
-class LoginViewController: CenterViewController {
+class LoginViewController: CenterViewController, UITextFieldDelegate {
     @IBOutlet weak var textFieldUsername: UITextField!
     @IBOutlet weak var textFieldPassword: UITextField!
     
@@ -20,7 +20,7 @@ class LoginViewController: CenterViewController {
         textFieldPassword.text = "edGS2Opq"
     }
     
-    @IBAction func btnLoginPressed(sender: UIButton) {
+    @IBAction func btnLoginPressed(sender: UIButton?) {
         
         //Attempt Login
         if formIsValid() {
@@ -56,6 +56,7 @@ class LoginViewController: CenterViewController {
                         appDelegate?.window??.rootViewController = containerViewController
                     })
                 } else {
+                    loadingHUD.dismiss()
                     self.showBasicError("Login", message: error!.userInfo["error"] as! String)
                 }
             })
@@ -70,9 +71,14 @@ class LoginViewController: CenterViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.draggable = false
-        
         self.navigationController?.navigationBar.hidden = true
+        self.draggable = false
+        self.textFieldUsername.delegate = self
+        self.textFieldPassword.delegate = self
+        
+        //Tap anywhere to dismiss keyboard
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        view.addGestureRecognizer(tap)
     }
     
     override func didReceiveMemoryWarning() {
@@ -86,5 +92,25 @@ class LoginViewController: CenterViewController {
         }
         
         return true
+    }
+    
+    //MARK: - Keyboard
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        switch(textField) {
+        case textFieldUsername:
+            textFieldPassword.becomeFirstResponder()
+            return true
+            
+        case textFieldPassword:
+            btnLoginPressed(nil)
+            return true
+            
+        default:
+            return true
+        }
+    }
+    
+    func dismissKeyboard() {
+        view.endEditing(true)
     }
 }

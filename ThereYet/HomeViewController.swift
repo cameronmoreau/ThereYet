@@ -9,7 +9,6 @@
 import UIKit
 import CoreData
 import CoreLocation
-//import BLKFlexibleHeightBar
 import Charts
 import MBCircularProgressBar
 
@@ -114,45 +113,6 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
         
         return [skip]
     }
-    
-//    func uhhh() -> BLKFlexibleHeightBar {
-//        
-//        //Top bar
-//        let headerBar = BLKFlexibleHeightBar(frame: CGRectMake(0, 0, self.view.frame.size.width, 100))
-//        headerBar.minimumBarHeight = 50
-//        headerBar.backgroundColor = UIColor.redColor()
-//        headerBar.setNeedsLayout()
-//        headerBar.layoutIfNeeded()
-//        
-//        
-//        //Behavior
-//        headerBar.behaviorDefiner = SquareCashStyleBehaviorDefiner()
-//        self.tableView.delegate = headerBar.behaviorDefiner as? protocol<UITableViewDelegate>
-//        
-//        //Sub View
-//        let label = UILabel()
-//        label.text = "Hello world"
-//        label.textColor = UIColor.whiteColor()
-//        label.font = UIFont.systemFontOfSize(25)
-//        label.sizeToFit()
-//        headerBar.addSubview(label)
-//        
-//        //layout attrs
-//        let initLayout = BLKFlexibleHeightBarSubviewLayoutAttributes()
-//        initLayout.size = label.frame.size
-//        initLayout.center = CGPointMake(CGRectGetMidX(headerBar.bounds), CGRectGetMidY(headerBar.bounds)+10.0)
-//        label.addLayoutAttributes(initLayout, forProgress: 0)
-//        
-//        let finalLayout = BLKFlexibleHeightBarSubviewLayoutAttributes(existingLayoutAttributes: initLayout)
-//        finalLayout.alpha = 0.0;
-//        let translation = CGAffineTransformMakeTranslation(0.0, -30.0);
-//        let scale = CGAffineTransformMakeScale(0.2, 0.2);
-//        finalLayout.transform = CGAffineTransformConcat(scale, translation);
-//        label.addLayoutAttributes(finalLayout, forProgress: 1.0)
-//        
-//        
-//        return headerBar
-//    }
     
     func deleteAllData(entity: String) {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
