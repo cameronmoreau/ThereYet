@@ -25,7 +25,9 @@ class AddCourseViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var endsAtTextField: UITextField!
     @IBOutlet weak var startsAtLabel: UILabel!
     @IBOutlet weak var endsAtLabel: UILabel!
+    
     let datePicker = UIDatePicker()
+    let dateFormatter = NSDateFormatter()
     
     @IBOutlet weak var locationCell: UITableViewCell!
     
@@ -44,6 +46,8 @@ class AddCourseViewController: UITableViewController, UITextFieldDelegate {
             course = Course_RegularObject()
             course!.title = ""
         }
+        
+        dateFormatter.dateFormat = "h:mm a"
         
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
         
@@ -101,9 +105,6 @@ class AddCourseViewController: UITableViewController, UITextFieldDelegate {
     }
     
     func datePickerDoneTap() {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "MMMM d, yyyy; h:mm a"
-        
         if startsAtTextField.isFirstResponder() {
             course?.startsAt = datePicker.date
             startsAtLabel.text = dateFormatter.stringFromDate(datePicker.date)
@@ -148,8 +149,6 @@ class AddCourseViewController: UITableViewController, UITextFieldDelegate {
         }
         
         //start/end date set up
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "MMMM d, yyyy; h:mm a"
         if course.startsAt != nil {
             startsAtLabel.text = dateFormatter.stringFromDate(course.startsAt!)
             startsAtLabel.textColor = UIColor.lightGrayColor()
