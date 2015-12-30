@@ -84,11 +84,11 @@ class AddCourseViewController: UITableViewController, UITextFieldDelegate {
             let doneButton = UIBarButtonItem(title: "Done", style: .Plain, target: self, action: "datePickerDoneTap")
             toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
             
-            datePicker.datePickerMode = .DateAndTime
+            datePicker.datePickerMode = .Time
+            
             startsAtTextField.inputView = datePicker
             startsAtTextField.inputAccessoryView = toolBar
             
-            datePicker.datePickerMode = .DateAndTime
             endsAtTextField.inputView = datePicker
             endsAtTextField.inputAccessoryView = toolBar
             
