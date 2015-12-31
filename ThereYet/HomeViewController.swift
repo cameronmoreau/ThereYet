@@ -32,6 +32,73 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        //Temp push notification
+//        let justInformAction = UIMutableUserNotificationAction()
+//        justInformAction.identifier = "justInform"
+//        justInformAction.title = "OK, got it"
+//        justInformAction.activationMode = UIUserNotificationActivationMode.Background
+//        justInformAction.destructive = false
+//        justInformAction.authenticationRequired = false
+//        
+//        let modifyListAction = UIMutableUserNotificationAction()
+//        modifyListAction.identifier = "editList"
+//        modifyListAction.title = "Edit list"
+//        modifyListAction.activationMode = UIUserNotificationActivationMode.Foreground
+//        modifyListAction.destructive = false
+//        modifyListAction.authenticationRequired = true
+//        
+//        let trashAction = UIMutableUserNotificationAction()
+//        trashAction.identifier = "trashAction"
+//        trashAction.title = "Delete list"
+//        trashAction.activationMode = UIUserNotificationActivationMode.Background
+//        trashAction.destructive = true
+//        trashAction.authenticationRequired = true
+//        
+//        let shoppingListReminderCategory = UIMutableUserNotificationCategory()
+//        shoppingListReminderCategory.identifier = "shoppingListReminderCategory"
+//        shoppingListReminderCategory.setActions([justInformAction, modifyListAction, trashAction], forContext: UIUserNotificationActionContext.Default)
+//        shoppingListReminderCategory.setActions([justInformAction], forContext: UIUserNotificationActionContext.Minimal)
+//        
+//        let categories = Set<UIUserNotificationCategory>(arrayLiteral: restartGameCategory)
+//        
+//        
+//        let newNotificationSettings = UIUserNotificationSettings(forTypes: [.Alert, .Sound], categories: (NSSet(array: [shoppingListReminderCategory])) as? Set<UIUserNotificationCategory>))
+        //UIApplication.sharedApplication().registerUserNotificationSettings(newNotificationSettings)
+        
+//        let endGameAction = UIMutableUserNotificationAction()
+//        endGameAction.identifier = "END_GAME"
+//        endGameAction.title = "End Game"
+//        endGameAction.activationMode = .Background
+//        endGameAction.authenticationRequired = false
+//        endGameAction.destructive = true
+//        
+//        let continueGameAction = UIMutableUserNotificationAction()
+//        continueGameAction.identifier = "CONTINUE_GAME"
+//        continueGameAction.title = "Continue"
+//        continueGameAction.activationMode = .Foreground
+//        continueGameAction.authenticationRequired = false
+//        continueGameAction.destructive = false
+//        
+//        let restartGameCategory = UIMutableUserNotificationCategory()
+//        restartGameCategory.identifier = "RESTART_CATEGORY"
+//        restartGameCategory.setActions([continueGameAction, endGameAction], forContext: .Default)
+//        restartGameCategory.setActions([endGameAction, continueGameAction], forContext: .Minimal)
+//        
+//        let categories = Set<UIUserNotificationCategory>(arrayLiteral: restartGameCategory)
+//        let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: categories)
+//        UIApplication.sharedApplication().registerUserNotificationSettings(settings)
+        
+        var localNotification = UILocalNotification()
+        localNotification.fireDate = NSDate(timeIntervalSinceNow: 5)
+        localNotification.alertBody = "new Blog Posted at iOScreator.com"
+        localNotification.timeZone = NSTimeZone.defaultTimeZone()
+        
+        UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
+        
+        
+        
+        
         self.locationManager.delegate = self
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
         self.locationManager.requestWhenInUseAuthorization()
