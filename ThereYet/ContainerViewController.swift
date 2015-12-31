@@ -40,6 +40,8 @@ class ContainerViewController: UIViewController, UIGestureRecognizerDelegate, Ce
     
     var initialMenuItem: MenuItem!
     
+    var panGestureRecognizer: UIPanGestureRecognizer!
+    
     required init(initialMenuItem: MenuItem) {
         super.init(nibName: nil, bundle: nil)
         
@@ -73,12 +75,22 @@ class ContainerViewController: UIViewController, UIGestureRecognizerDelegate, Ce
         
         centerViewController.color = initialMenuItem.color
         
-        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: "handlePanGesture:")
+        panGestureRecognizer = UIPanGestureRecognizer(target: self, action: "handlePanGesture:")
+        panGestureRecognizer.delegate = self
+        panGestureRecognizer.minimumNumberOfTouches = 2
         centerNavigationController.view.addGestureRecognizer(panGestureRecognizer)
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return .LightContent
+    }
+    
+    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        if gestureRecognizer.numberOfTouches() > 1 {
+            return false
+        } else {
+            return true
+        }
     }
     
     func handlePanGesture(recognizer: UIPanGestureRecognizer) {
