@@ -31,6 +31,12 @@ class ContainerViewController: UIViewController, UIGestureRecognizerDelegate, Ce
         didSet {
             let shouldShowShadow = currentState != .Collapsed
             showShadowForCenterViewController(shouldShowShadow)
+            
+            if currentState == .Collapsed {
+                centerViewController.view.userInteractionEnabled = true
+            } else {
+                centerViewController.view.userInteractionEnabled = false
+            }
         }
     }
     var sideViewController: SideViewController?
@@ -77,7 +83,7 @@ class ContainerViewController: UIViewController, UIGestureRecognizerDelegate, Ce
         
         panGestureRecognizer = UIPanGestureRecognizer(target: self, action: "handlePanGesture:")
         panGestureRecognizer.delegate = self
-        panGestureRecognizer.minimumNumberOfTouches = 2
+        panGestureRecognizer.minimumNumberOfTouches = 1
         centerNavigationController.view.addGestureRecognizer(panGestureRecognizer)
     }
     
@@ -86,7 +92,7 @@ class ContainerViewController: UIViewController, UIGestureRecognizerDelegate, Ce
     }
     
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        if gestureRecognizer.numberOfTouches() > 1 {
+        if otherGestureRecognizer.isKindOfClass(UISwipeGestureRecognizer) {
             return false
         } else {
             return true
@@ -128,7 +134,7 @@ class ContainerViewController: UIViewController, UIGestureRecognizerDelegate, Ce
             case .Expanded:
                 toggleSidePanel()
             default:
-                break
+            break
         }
     }
     
