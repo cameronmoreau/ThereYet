@@ -73,11 +73,8 @@ class PearsonAPI {
         })
     }
     
-    static func retreiveCourses(user: PearsonUser, completion: ((courses: [Course]) -> ())) {
-        var courses: [Course] = []
-        let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
-        let entity = NSEntityDescription.entityForName("Course", inManagedObjectContext: context)
-        
+    static func retreiveCourses(user: PearsonUser, completion: ((courses: [Course_RegularObject]) -> ())) {
+        var courses = [Course_RegularObject]()
         self.apiRequest(user.authData, path: "users/\(user.id!)/courses", completion: {
             json in
             
@@ -87,9 +84,10 @@ class PearsonAPI {
                 for dataItem in dataList {
                     let dataPath = dataItem["links"][0]["href"].stringValue
                     if !dataPath.isEmpty {
-                        let course = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: context) as! Course
+                        let course = Course_RegularObject()
                         course.pearson_id = Int(NSURL(string: "\(dataPath)")!.pathComponents![2])
                         course.createdAt = NSDate()
+                        course.updatedAt = NSDate()
                         courses.append(course)
                     }
                 }

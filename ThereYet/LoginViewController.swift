@@ -36,21 +36,58 @@ class LoginViewController: CenterViewController, UITextFieldDelegate {
             PFUser.logInWithUsernameInBackground(email, password: password, block: {
                 (parseUser: PFUser?, error: NSError?) in
                 
-                //var hasAuth = false
-                
-                //User was found, continue login as normal
+                //User was found, check if associated to parse
                 if parseUser != nil {
-                    loadingHUD.dismiss()
-                    self.continueToHome()
-                }
                     
-                    //Check for Pearson account
-                else {
-                    PearsonAPI.login(email, password: password, completion: {
-                        (pearsonUser: PearsonUser?, error: NSError?) in
+                    //User does not have a Pearson account
+                    if parseUser!["pearsonAuthData"] == nil {
+                        loadingHUD.dismiss()
+                        self.continueToHome()
+                    }
+                }
+                
+                //Check for Pearson account
+                PearsonAPI.login(email, password: password, completion: {
+                    (pearsonUser: PearsonUser?, error: NSError?) in
+                    
+                    //Pearson account was found
+                    if pearsonUser != nil {
+                        loadingHUD.textLabel.text = "Getting details from Pearson"
                         
-                        //Pearson account was found
-                        if pearsonUser != nil {
+                        //Parse AND pearson account - do update
+                        if parseUser != nil {
+                            PearsonAPI.retreiveCourses(pearsonUser!, completion: {
+                                courses in
+                                
+                                SyncManager.runInitalSync(courses, completion: {
+                                    (courses: [Course_RegularObject]) in
+                                    
+                                    //Save each new course
+                                    for c in courses {
+                                        print("Saving update \(c.title)")
+                                        c.saveAsNSManagedObject()
+                                    }
+                                    
+                                    //Download from parse
+                                    SyncManager.fullDownload({
+                                        (success: Bool) in
+                                        
+                                        //Upload new to parse
+                                        SyncManager.fullUpload(courses, completion: {
+                                            (success: Bool) in
+                                            
+                                            //FINALY DONE!
+                                            loadingHUD.dismiss()
+                                            self.continueToHome()
+                                        })
+                                    })
+                                    
+                                })
+                            })
+                        }
+                        
+                        //Pearson - Register account
+                        else {
                             
                             //Create parse account with details
                             let parseUser = PFUser()
@@ -70,14 +107,9 @@ class LoginViewController: CenterViewController, UITextFieldDelegate {
                                     PearsonAPI.retreiveCourses(pearsonUser!, completion: {
                                         courses in
                                         
-                                        //Save all courses to core data
-                                        for course in courses {
-                                            do {
-                                                try course.managedObjectContext?.save()
-                                                print("Saving \(course.title!)")
-                                            } catch let error as NSError {
-                                                print(error)
-                                            }
+                                        for c in courses {
+                                            print("Saving \(c.title)")
+                                            c.saveAsNSManagedObject()
                                         }
                                         
                                         //Finally done
@@ -85,7 +117,7 @@ class LoginViewController: CenterViewController, UITextFieldDelegate {
                                         self.continueToHome()
                                     })
                                 }
-                                
+                                    
                                 //Failed to create parse account
                                 else {
                                     loadingHUD.dismiss()
@@ -94,14 +126,22 @@ class LoginViewController: CenterViewController, UITextFieldDelegate {
                                 }
                             })
                         }
-                            
-                            //No account anywhere sorry yo
+                    }
+                        
+                    //No Pearson account
+                    else {
+                        loadingHUD.dismiss()
+                        
+                        if parseUser != nil {
+                            self.continueToHome()
+                        }
+                        
+                        //No account anywhere
                         else {
-                            loadingHUD.dismiss()
                             self.showBasicError("Login", message: "Invalid email/password")
                         }
-                    })
-                }
+                    }
+                })
                 //print(error["message"])
             })
             
@@ -137,11 +177,6 @@ class LoginViewController: CenterViewController, UITextFieldDelegate {
             //                    self.showBasicError("Login", message: error!.userInfo["error"] as! String)
             //                }
             //            })
-        }
-            
-            //Give error
-        else {
-            
         }
     }
     

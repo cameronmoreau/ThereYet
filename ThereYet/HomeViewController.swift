@@ -28,6 +28,12 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
+//        SyncManager.run({
+//            (error: NSError?) in
+//        })
+        
+        
+        
         self.locationManager.delegate = self
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
         self.locationManager.requestWhenInUseAuthorization()
