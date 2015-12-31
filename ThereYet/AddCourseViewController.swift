@@ -37,16 +37,22 @@ class AddCourseViewController: UITableViewController, UITextFieldDelegate {
     
     var saveButton: UIBarButtonItem!
     
-    var course: Course_RegularObject?
+    var course: Course?
+    var managedObjectContext: NSManagedObjectContext!
     
     var alreadySetUp = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+        
         if course == nil {
-            course = Course_RegularObject()
+            let entityDescripition = NSEntityDescription.entityForName("Course", inManagedObjectContext: managedObjectContext!)
+            course = Course(entity: entityDescripition!, insertIntoManagedObjectContext: managedObjectContext)
             course!.title = ""
+        } else if course!.pearson_id != nil {
+            titleTextField.userInteractionEnabled = false
         }
         
         dateFormatter.dateFormat = "h:mm a"
@@ -154,7 +160,7 @@ class AddCourseViewController: UITableViewController, UITextFieldDelegate {
         endsAtTextField.resignFirstResponder()
     }
     
-    func setUpViewController(course: Course_RegularObject) {
+    func setUpViewController(course: Course) {
         //title set up
         titleTextField.text = course.title
         
@@ -213,7 +219,12 @@ class AddCourseViewController: UITableViewController, UITextFieldDelegate {
         
         course?.pearson_id = nil
         
-        course?.saveAsNSManagedObject()
+        //course?.saveAsNSManagedObject()
+        do {
+            try managedObjectContext.save()
+        } catch {
+            print("Coulnt update")
+        }
         
         self.dismissViewControllerAnimated(true, completion: nil)
     }

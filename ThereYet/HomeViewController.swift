@@ -14,25 +14,23 @@ import MBCircularProgressBar
 
 class HomeViewController: CenterViewController, UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate {
     
+    @IBOutlet weak var progressBar: MBCircularProgressBarView!
     @IBOutlet weak var progressImage: UIImageView!
+    
     @IBOutlet weak var tableView: UITableView!
+    
+    @IBOutlet weak var labelHeading: UILabel!
+    @IBOutlet weak var labelTodaysClasses: UILabel!
+    @IBOutlet weak var labelCountDown: UILabel!
     
     let pearsonUser = PearsonUser()
     let locationManager = CLLocationManager()
     let locationStorage = LocationStorage()
     
-    @IBOutlet weak var progressBar: MBCircularProgressBarView!
-    
     var courses: [Course]!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        SyncManager.run({
-//            (error: NSError?) in
-//        })
-        
-        
         
         self.locationManager.delegate = self
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -40,7 +38,6 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
         self.locationManager.startUpdatingLocation()
         
         //Location data
-        print(CLLocationManager.locationServicesEnabled())
         
         if !CLLocationManager.locationServicesEnabled() {
             locationManager.requestWhenInUseAuthorization()
@@ -65,7 +62,7 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
             print(error)
         }
         
-        fixUIForClassesOver()
+        fixUIForClasses()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -97,12 +94,43 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
         // Dispose of any resources that can be recreated.
     }
     
-    func fixUIForClassesOver() {
+    func fixUIForClasses() {
         if courses.count == 0 {
             self.tableView.hidden = true
+            self.labelTodaysClasses.hidden = true
+            self.labelCountDown.text = "15 points earned"
+            self.labelHeading.text = "You're all done for today!"
+            
+            
+            self.labelHeading.sizeToFit()
+            self.labelCountDown.sizeToFit()
         } else {
             self.tableView.hidden = false
+            
+            let nextDate = courses[0].startsAt!
+            let currentDate = NSDate()
+            
+            let time = nextDate.timeIntervalSinceDate(currentDate)
+            self.labelCountDown.text = clockText(time)
+            
+            print(time)
         }
+    }
+    
+    func clockText(interval: NSTimeInterval) -> String {
+        let ti = NSInteger(interval)
+        var output = ""
+        
+        let minutes = (ti / 60) % 60
+        let hours = (ti / 3600)
+        
+        if hours > 0 {
+            output += String(format: "%d Hours ", arguments: [hours])
+        }
+        
+        return output + String(format: "%d Minutes", arguments: [minutes])
+        
+        //return NSString(format: "%0.2d:%0.2d:%0.2d.%0.3d",hours,minutes)
     }
     
     // MARK: - Table View
@@ -153,6 +181,7 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
         do
         {
             let results = try managedContext.executeFetchRequest(fetchRequest)
+            print(results)
             for managedObject in results
             {
                 let managedObjectData:NSManagedObject = managedObject as! NSManagedObject
