@@ -88,6 +88,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-ThereYet/Charts.framework"
   install_framework "Pods-ThereYet/JGProgressHUD.framework"
   install_framework "Pods-ThereYet/MBCircularProgressBar.framework"
+  install_framework "Pods-ThereYet/MultiSelectSegmentedControl.framework"
   install_framework "Pods-ThereYet/SwiftyJSON.framework"
   install_framework "Pods-ThereYet/THSegmentedControl.framework"
 fi
@@ -96,6 +97,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-ThereYet/Charts.framework"
   install_framework "Pods-ThereYet/JGProgressHUD.framework"
   install_framework "Pods-ThereYet/MBCircularProgressBar.framework"
+  install_framework "Pods-ThereYet/MultiSelectSegmentedControl.framework"
   install_framework "Pods-ThereYet/SwiftyJSON.framework"
   install_framework "Pods-ThereYet/THSegmentedControl.framework"
 fi

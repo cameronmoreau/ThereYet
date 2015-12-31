@@ -365,15 +365,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="61" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1a2-cH-Dnv">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="89" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1a2-cH-Dnv">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Cell" rowHeight="61" id="ccn-Hg-6Ug" customClass="TodaysCourseTableViewCell" customModule="ThereYet" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="92" width="600" height="61"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Cell" rowHeight="89" id="ccn-Hg-6Ug" customClass="TodaysCourseTableViewCell" customModule="ThereYet" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="92" width="600" height="89"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ccn-Hg-6Ug" id="EYL-Ls-vQb">
-                                            <rect key="frame" x="0.0" y="0.0" width="567" height="60.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="567" height="88.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calculus" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jgd-o6-9h3">
@@ -392,11 +392,11 @@
                                                     </variation>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="76r-B0-Hih">
-                                                    <rect key="frame" x="0.0" y="0.0" width="5" height="60"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="5" height="89"/>
                                                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10:00am - 10:50am" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K4G-8S-bCZ">
-                                                    <rect key="frame" x="13" y="32" width="546" height="21"/>
+                                                    <rect key="frame" x="13" y="32" width="546" height="17"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="150" id="drJ-iH-Kin"/>
                                                     </constraints>
@@ -409,23 +409,51 @@
                                                         </mask>
                                                     </variation>
                                                 </label>
+                                                <segmentedControl opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="w8X-Ec-ghl" customClass="MultiSelectSegmentedControl">
+                                                    <rect key="frame" x="13" y="52" width="546" height="29"/>
+                                                    <segments>
+                                                        <segment title="Sun"/>
+                                                        <segment title="Mon"/>
+                                                        <segment title="Tue"/>
+                                                        <segment title="Wed"/>
+                                                        <segment title="Thu"/>
+                                                        <segment title="Fri"/>
+                                                        <segment title="Sat"/>
+                                                    </segments>
+                                                    <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="0.0"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                            <real key="value" value="1"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                            <color key="value" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </segmentedControl>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="w8X-Ec-ghl" secondAttribute="trailing" constant="8" id="0Jk-Gj-o2V"/>
+                                                <constraint firstItem="w8X-Ec-ghl" firstAttribute="top" secondItem="K4G-8S-bCZ" secondAttribute="bottom" constant="3" id="6fr-nA-3bK"/>
                                                 <constraint firstItem="K4G-8S-bCZ" firstAttribute="leading" secondItem="jgd-o6-9h3" secondAttribute="leading" id="Aeo-iI-spb"/>
                                                 <constraint firstItem="K4G-8S-bCZ" firstAttribute="top" secondItem="jgd-o6-9h3" secondAttribute="bottom" constant="3" id="K0m-CN-EXZ"/>
                                                 <constraint firstAttribute="trailing" secondItem="K4G-8S-bCZ" secondAttribute="trailing" constant="8" id="LjJ-zr-hN0"/>
                                                 <constraint firstAttribute="trailing" secondItem="jgd-o6-9h3" secondAttribute="trailing" constant="8" id="LkJ-3g-6cw"/>
                                                 <constraint firstItem="76r-B0-Hih" firstAttribute="top" secondItem="EYL-Ls-vQb" secondAttribute="top" id="OOl-HN-Kef"/>
                                                 <constraint firstItem="76r-B0-Hih" firstAttribute="centerY" secondItem="EYL-Ls-vQb" secondAttribute="centerY" id="QAW-FK-Ujz"/>
+                                                <constraint firstItem="w8X-Ec-ghl" firstAttribute="leading" secondItem="76r-B0-Hih" secondAttribute="trailing" constant="8" id="Tre-9m-93d"/>
                                                 <constraint firstItem="jgd-o6-9h3" firstAttribute="leading" secondItem="76r-B0-Hih" secondAttribute="trailing" constant="8" symbolic="YES" id="UXQ-87-eyN"/>
+                                                <constraint firstAttribute="bottom" secondItem="w8X-Ec-ghl" secondAttribute="bottom" constant="8.5" id="cor-Id-7XR"/>
                                                 <constraint firstItem="jgd-o6-9h3" firstAttribute="leading" secondItem="EYL-Ls-vQb" secondAttribute="leading" constant="13" id="fI5-vC-gOi"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="K4G-8S-bCZ" secondAttribute="bottom" constant="-0.5" id="jYY-mg-AVC"/>
                                                 <constraint firstItem="jgd-o6-9h3" firstAttribute="top" secondItem="EYL-Ls-vQb" secondAttribute="topMargin" id="kfS-Vw-hjp"/>
                                                 <constraint firstItem="76r-B0-Hih" firstAttribute="leading" secondItem="EYL-Ls-vQb" secondAttribute="leading" id="zuh-Sh-NXj"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="colorView" destination="76r-B0-Hih" id="UhY-OL-cAu"/>
+                                            <outlet property="segmentedControl" destination="w8X-Ec-ghl" id="gEp-lT-UPk"/>
                                             <outlet property="timeLabel" destination="K4G-8S-bCZ" id="gaZ-6x-1MQ"/>
                                             <outlet property="titleLabel" destination="jgd-o6-9h3" id="3nD-oL-jGW"/>
                                             <segue destination="eyl-uO-Gtd" kind="show" identifier="editCourse" id="zDW-ko-ZFV"/>
@@ -1242,6 +1270,6 @@
         <image name="menu.png" width="20" height="15"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="9M0-MW-Mcv"/>
+        <segue reference="zDW-ko-ZFV"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -118,9 +118,12 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
+        let weekdayInt = NSCalendar.currentCalendar().components(.Weekday, fromDate: NSDate()).weekday-1
+        let weekday = "\(weekdayInt)"
+        
         courses  = [Course]()
         let fetchRequest = NSFetchRequest(entityName: "Course")
-        fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [NSPredicate(format: "classDays CONTAINS[cd] \(NSCalendar.currentCalendar().components(.Weekday, fromDate: NSDate()).weekday-1)"), NSPredicate(format: "startsAt > %@", NSDate())])
+        fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [NSPredicate(format: "classDays CONTAINS[cd] %@", weekday), NSPredicate(format: "startsAt > %@", NSDate())])
         let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
         
         do {
@@ -130,6 +133,14 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
         }
         
         fixUIForClasses()
+        
+        tableView.cellLayoutMarginsFollowReadableWidth = false
+    }
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        cell.separatorInset = UIEdgeInsetsMake(5, 0, 0, 0)
+        cell.preservesSuperviewLayoutMargins = false
+        cell.layoutMargins = UIEdgeInsetsMake(5, 0, 0, 0)
     }
     
     override func viewDidAppear(animated: Bool) {
