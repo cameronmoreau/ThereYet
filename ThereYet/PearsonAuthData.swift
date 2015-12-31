@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AuthData {
+class PearsonAuthData {
     
     var accessToken: String?
     var refreshToken: String?
@@ -49,6 +49,14 @@ class AuthData {
         defaults.setObject(nil, forKey: KEY_REFRESH_TOKEN)
         defaults.setObject(nil, forKey: KEY_EXPIRE_DATE)
         defaults.synchronize()
+    }
+    
+    func toDictionary() -> [String:AnyObject] {
+        return [
+            KEY_ACCESS_TOKEN: self.accessToken!,
+            KEY_REFRESH_TOKEN: self.refreshToken!,
+            KEY_EXPIRE_DATE: self.expireDate!
+        ]
     }
     
     func isExpired() -> Bool {

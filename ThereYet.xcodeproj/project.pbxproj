@@ -25,6 +25,8 @@
 		4998129D1C2C88ED00346D27 /* SideViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 499812941C2C88ED00346D27 /* SideViewController.storyboard */; };
 		4998129E1C2C88ED00346D27 /* SideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499812951C2C88ED00346D27 /* SideViewController.swift */; };
 		49E4F7A11C2BD43C00F7FFBA /* CoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E4F7A01C2BD43C00F7FFBA /* CoursesViewController.swift */; };
+		7E20D4B81C34974700F0469D /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E20D4B71C34974700F0469D /* CreateAccountViewController.swift */; };
+		7E20D4BA1C34BA5A00F0469D /* NSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E20D4B91C34BA5A00F0469D /* NSDate.swift */; };
 		7E4BC3881C2D84E100D818BD /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4BC3871C2D84E100D818BD /* UIView.swift */; };
 		7E57E6AC1C2CA05800AC907D /* RewardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E57E6AB1C2CA05800AC907D /* RewardsViewController.swift */; };
 		7E57E6B21C2CC66D00AC907D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E57E6B11C2CC66D00AC907D /* AudioToolbox.framework */; };
@@ -55,7 +57,7 @@
 		7ED52CBD1C23E8A40028172D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7ED52CBC1C23E8A40028172D /* Assets.xcassets */; };
 		7ED52CC01C23E8A40028172D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7ED52CBE1C23E8A40028172D /* LaunchScreen.storyboard */; };
 		7ED52CCC1C23E90A0028172D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED52CCB1C23E90A0028172D /* LoginViewController.swift */; };
-		7ED52CCE1C23E9120028172D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED52CCD1C23E9120028172D /* User.swift */; };
+		7ED52CCE1C23E9120028172D /* PearsonUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED52CCD1C23E9120028172D /* PearsonUser.swift */; };
 		7ED5DBE31C3242B30003329D /* SelectLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED5DBE21C3242B30003329D /* SelectLocationViewController.swift */; };
 		D28B8E7252BF7C2847AFF489 /* Pods_ThereYet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A2E4613E4D867E1E294C6C4 /* Pods_ThereYet.framework */; };
 /* End PBXBuildFile section */
@@ -81,6 +83,8 @@
 		499812951C2C88ED00346D27 /* SideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideViewController.swift; sourceTree = "<group>"; };
 		49E4F7A01C2BD43C00F7FFBA /* CoursesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursesViewController.swift; sourceTree = "<group>"; };
 		6A2E4613E4D867E1E294C6C4 /* Pods_ThereYet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ThereYet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7E20D4B71C34974700F0469D /* CreateAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
+		7E20D4B91C34BA5A00F0469D /* NSDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDate.swift; sourceTree = "<group>"; };
 		7E4BC3871C2D84E100D818BD /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		7E57E6AB1C2CA05800AC907D /* RewardsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RewardsViewController.swift; sourceTree = "<group>"; };
 		7E57E6B11C2CC66D00AC907D /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -114,7 +118,7 @@
 		7ED52CBF1C23E8A40028172D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7ED52CC11C23E8A40028172D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7ED52CCB1C23E90A0028172D /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		7ED52CCD1C23E9120028172D /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		7ED52CCD1C23E9120028172D /* PearsonUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PearsonUser.swift; sourceTree = "<group>"; };
 		7ED5DBE21C3242B30003329D /* SelectLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectLocationViewController.swift; sourceTree = "<group>"; };
 		977DCC34FFB2384614B29273 /* Pods-ThereYet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThereYet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ThereYet/Pods-ThereYet.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -187,6 +191,7 @@
 				7E57E6D01C2D06CC00AC907D /* BLKFlexibleHeightBar.swift */,
 				7E4BC3871C2D84E100D818BD /* UIView.swift */,
 				7EB320A91C33605F00AB26A8 /* UIViewController.swift */,
+				7E20D4B91C34BA5A00F0469D /* NSDate.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -261,6 +266,7 @@
 				7ED5DBE21C3242B30003329D /* SelectLocationViewController.swift */,
 				7E57E6AB1C2CA05800AC907D /* RewardsViewController.swift */,
 				7E7EE9601C2E43AC00553179 /* TodaysCourseTableViewCell.swift */,
+				7E20D4B71C34974700F0469D /* CreateAccountViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -268,7 +274,7 @@
 		7ED52CC81C23E8E10028172D /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				7ED52CCD1C23E9120028172D /* User.swift */,
+				7ED52CCD1C23E9120028172D /* PearsonUser.swift */,
 				7E9BBF4E1C26880700ECA0B7 /* PearsonAuthData.swift */,
 				7EA24C6A1C2BB748005705C5 /* Course.swift */,
 				7E57E6C51C2CC93200AC907D /* Offer.swift */,
@@ -442,10 +448,12 @@
 				7E57E6AC1C2CA05800AC907D /* RewardsViewController.swift in Sources */,
 				7E7307811C3442650046DAC8 /* BorderBottomTextField.swift in Sources */,
 				499812981C2C88ED00346D27 /* CUSTOMIZE.swift in Sources */,
+				7E20D4BA1C34BA5A00F0469D /* NSDate.swift in Sources */,
 				7EA24C471C2BA8A5005705C5 /* ThereYet.xcdatamodeld in Sources */,
 				7E57E6C61C2CC93200AC907D /* Offer.swift in Sources */,
 				7E9BBF4F1C26880700ECA0B7 /* PearsonAuthData.swift in Sources */,
 				7EB320A61C33570200AB26A8 /* MapboxAPI.swift in Sources */,
+				7E20D4B81C34974700F0469D /* CreateAccountViewController.swift in Sources */,
 				491A3C141C2CA4040093EB6D /* UIImageView+RenderingMode.swift in Sources */,
 				7ED52CCC1C23E90A0028172D /* LoginViewController.swift in Sources */,
 				7EB320A81C33597100AB26A8 /* LookupLocation.swift in Sources */,
@@ -456,7 +464,7 @@
 				7ED5DBE31C3242B30003329D /* SelectLocationViewController.swift in Sources */,
 				492362171C31CB6200460284 /* AddCourseViewController.swift in Sources */,
 				4998129C1C2C88ED00346D27 /* MenuItem.swift in Sources */,
-				7ED52CCE1C23E9120028172D /* User.swift in Sources */,
+				7ED52CCE1C23E9120028172D /* PearsonUser.swift in Sources */,
 				492362191C31CB6200460284 /* SelectColorViewController.swift in Sources */,
 				7EA24C6C1C2BB748005705C5 /* Course.swift in Sources */,
 				7E57E6C91C2CECF700AC907D /* UIColor.swift in Sources */,

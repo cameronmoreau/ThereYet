@@ -21,7 +21,7 @@ class PearsonAPI {
         case Refresh
     }
     
-    static func login(username: String, password: String, completion: ((user: User?, error: NSError?) -> ())) {
+    static func login(username: String, password: String, completion: ((user: PearsonUser?, error: NSError?) -> ())) {
         let params = [
             "client_id": self.clientId,
             "grant_type": "password",
@@ -43,7 +43,7 @@ class PearsonAPI {
                         let email = data["emailAddress"].stringValue
                         let username = data["userName"].stringValue
                         
-                        let user = User(id: id, firstName: firstName, lastName: lastName, username: username, email: email, auth: auth!)
+                        let user = PearsonUser(id: id, firstName: firstName, lastName: lastName, username: username, email: email, auth: auth!)
                         user.save()
                         
                         return completion(user: user, error: error)
@@ -57,7 +57,7 @@ class PearsonAPI {
         })
     }
     
-    static func refreshToken(auth: AuthData, completion: ((success: Bool, error: NSError?) -> ())) {
+    static func refreshToken(auth: PearsonAuthData, completion: ((success: Bool, error: NSError?) -> ())) {
         let params = [
             "client_id": self.clientId,
             "grant_type": "refresh_token",
@@ -73,7 +73,7 @@ class PearsonAPI {
         })
     }
     
-    static func retreiveCourses(user: User, completion: ((courses: [Course]) -> ())) {
+    static func retreiveCourses(user: PearsonUser, completion: ((courses: [Course]) -> ())) {
         var courses: [Course] = []
         let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
         let entity = NSEntityDescription.entityForName("Course", inManagedObjectContext: context)
@@ -127,7 +127,7 @@ class PearsonAPI {
     }
     
     private static func authRequest(type: AuthType, params: [String: AnyObject]?,
-        completion: ((auth: AuthData?, error: NSError?) -> ())) {
+        completion: ((auth: PearsonAuthData?, error: NSError?) -> ())) {
             
             Alamofire.request(.POST, "\(self.url)token", parameters: params)
                 .responseJSON { response in
@@ -143,7 +143,7 @@ class PearsonAPI {
                         if json["access_token"].isExists() {
                             
                             //Store details
-                            let auth = AuthData(accessToken: accessToken, refreshToken: refreshToken, expireDate: expireToken)
+                            let auth = PearsonAuthData(accessToken: accessToken, refreshToken: refreshToken, expireDate: expireToken)
                             auth.store()
                             
                             completion(auth: auth, error: nil)
@@ -161,7 +161,7 @@ class PearsonAPI {
             //TODO: Network error
     }
     
-    private static func apiRequest(auth: AuthData, path: String, completion: ((json: JSON?) -> ())) {
+    private static func apiRequest(auth: PearsonAuthData, path: String, completion: ((json: JSON?) -> ())) {
         let headers = [
             "X-Authorization": "Access_Token access_token=\(auth.accessToken!)"
         ]

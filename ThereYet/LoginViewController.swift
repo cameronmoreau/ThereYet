@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import JGProgressHUD
+import Parse
 
 class LoginViewController: CenterViewController, UITextFieldDelegate {
     @IBOutlet weak var textFieldUsername: UITextField!
@@ -24,42 +25,118 @@ class LoginViewController: CenterViewController, UITextFieldDelegate {
         
         //Attempt Login
         if formIsValid() {
+            let email = textFieldUsername.text!
+            let password = textFieldPassword.text!
+            
             let loadingHUD = JGProgressHUD(style: .Dark)
-            loadingHUD.textLabel.text = "Loading"
+            loadingHUD.textLabel.text = "Logging in"
             loadingHUD.showInView(self.view, animated: true)
             
-            //Login with pearson api
-            PearsonAPI.login(textFieldUsername.text!, password: textFieldPassword.text!, completion: {
-                (user: User?, error: NSError?) in
+            //Do a basic parse login
+            PFUser.logInWithUsernameInBackground(email, password: password, block: {
+                (parseUser: PFUser?, error: NSError?) in
                 
-                if user != nil {
-                    
-                    //Retreive user's courses
-                    PearsonAPI.retreiveCourses(user!, completion: {
-                        courses in
-                        
-                        //Save all courses to core data
-                        for course in courses {
-                            do {
-                                try course.managedObjectContext?.save()
-                                print("Saving \(course.title!)")
-                            } catch let error as NSError {
-                                print(error)
-                            }
-                        }
-                        
-                        loadingHUD.dismiss()
-                        
-                        //Contineu to home page
-                        let appDelegate = UIApplication.sharedApplication().delegate
-                        let containerViewController = ContainerViewController(initialMenuItem: MenuItems.menuItems(0)[0])
-                        appDelegate?.window??.rootViewController = containerViewController
-                    })
-                } else {
+                //var hasAuth = false
+                
+                //User was found, continue login as normal
+                if parseUser != nil {
                     loadingHUD.dismiss()
-                    self.showBasicError("Login", message: error!.userInfo["error"] as! String)
+                    self.continueToHome()
                 }
+                    
+                    //Check for Pearson account
+                else {
+                    PearsonAPI.login(email, password: password, completion: {
+                        (pearsonUser: PearsonUser?, error: NSError?) in
+                        
+                        //Pearson account was found
+                        if pearsonUser != nil {
+                            
+                            //Create parse account with details
+                            let parseUser = PFUser()
+                            parseUser.email = email
+                            parseUser.username = email
+                            parseUser.password = password
+                            parseUser["pearsonAuthData"] = pearsonUser!.authDataToObject()
+                            
+                            parseUser.signUpInBackgroundWithBlock({
+                                (success: Bool, error: NSError?) in
+                                
+                                //Parse account was created, fetch final details
+                                if success {
+                                    loadingHUD.textLabel.text = "Getting details from Pearson"
+                                    
+                                    //Retreive user's courses
+                                    PearsonAPI.retreiveCourses(pearsonUser!, completion: {
+                                        courses in
+                                        
+                                        //Save all courses to core data
+                                        for course in courses {
+                                            do {
+                                                try course.managedObjectContext?.save()
+                                                print("Saving \(course.title!)")
+                                            } catch let error as NSError {
+                                                print(error)
+                                            }
+                                        }
+                                        
+                                        //Finally done
+                                        loadingHUD.dismiss()
+                                        self.continueToHome()
+                                    })
+                                }
+                                
+                                //Failed to create parse account
+                                else {
+                                    loadingHUD.dismiss()
+                                    print(error)
+                                    self.showBasicError("Login", message: "Error migrating Pearson account")
+                                }
+                            })
+                        }
+                            
+                            //No account anywhere sorry yo
+                        else {
+                            loadingHUD.dismiss()
+                            self.showBasicError("Login", message: "Invalid email/password")
+                        }
+                    })
+                }
+                //print(error["message"])
             })
+            
+            //            //Login with pearson api
+            //            PearsonAPI.login(textFieldUsername.text!, password: textFieldPassword.text!, completion: {
+            //                (user: User?, error: NSError?) in
+            //
+            //                if user != nil {
+            //
+            //                    //Retreive user's courses
+            //                    PearsonAPI.retreiveCourses(user!, completion: {
+            //                        courses in
+            //
+            //                        //Save all courses to core data
+            //                        for course in courses {
+            //                            do {
+            //                                try course.managedObjectContext?.save()
+            //                                print("Saving \(course.title!)")
+            //                            } catch let error as NSError {
+            //                                print(error)
+            //                            }
+            //                        }
+            //
+            //                        loadingHUD.dismiss()
+            //
+            //                        //Contineu to home page
+            //                        let appDelegate = UIApplication.sharedApplication().delegate
+            //                        let containerViewController = ContainerViewController(initialMenuItem: MenuItems.menuItems(0)[0])
+            //                        appDelegate?.window??.rootViewController = containerViewController
+            //                    })
+            //                } else {
+            //                    loadingHUD.dismiss()
+            //                    self.showBasicError("Login", message: error!.userInfo["error"] as! String)
+            //                }
+            //            })
         }
             
             //Give error
@@ -92,6 +169,12 @@ class LoginViewController: CenterViewController, UITextFieldDelegate {
         }
         
         return true
+    }
+    
+    func continueToHome() {
+        let appDelegate = UIApplication.sharedApplication().delegate
+        let containerViewController = ContainerViewController(initialMenuItem: MenuItems.menuItems(0)[0])
+        appDelegate?.window??.rootViewController = containerViewController
     }
     
     //MARK: - Keyboard

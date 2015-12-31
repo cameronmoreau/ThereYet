@@ -9,9 +9,9 @@
 import Alamofire
 import SwiftyJSON
 
-class User {
+class PearsonUser {
     
-    let authData: AuthData!
+    let authData: PearsonAuthData!
     
     var id: Int?
     var firstName: String?
@@ -26,11 +26,11 @@ class User {
     private let KEY_USERNAME = "username"
     
     init() {
-        self.authData = AuthData()
+        self.authData = PearsonAuthData()
         loadData()
     }
     
-    init(id: Int, firstName: String, lastName: String, username: String, email: String, auth: AuthData) {
+    init(id: Int, firstName: String, lastName: String, username: String, email: String, auth: PearsonAuthData) {
         self.id = id
         self.firstName = firstName
         self.lastName = lastName
@@ -65,6 +65,12 @@ class User {
         defaults.setObject(nil, forKey: KEY_USERNAME)
         defaults.setObject(nil, forKey: KEY_EMAIL)
         defaults.synchronize()
+    }
+    
+    func authDataToObject() -> [String:AnyObject] {
+        var obj = self.authData!.toDictionary()
+        obj["id"] = self.id!
+        return obj
     }
     
     private func loadData() {

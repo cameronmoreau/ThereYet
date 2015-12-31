@@ -27,26 +27,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
         
         //Check if user is already logged in
-        let auth = AuthData()
-        if auth.hasData() {
-            if !auth.isExpired() {
-                self.skipLogin()
-            }
-            
-            //Refresh Token
-            else {
-                print("Start Refresh")
-                PearsonAPI.refreshToken(auth, completion: {
-                    (success, error) in
-                    
-                    print("Refresh \(success) \(error)")
-                    
-                    if success {
-                        self.skipLogin()
-                    }
-                })
-            }
+        if PFUser.currentUser() != nil {
+            self.skipLogin()
         }
+        
+//        let auth = AuthData()
+//        if auth.hasData() {
+//            if !auth.isExpired() {
+//                self.skipLogin()
+//            }
+//            
+//            //Refresh Token
+//            else {
+//                print("Start Refresh")
+//                PearsonAPI.refreshToken(auth, completion: {
+//                    (success, error) in
+//                    
+//                    print("Refresh \(success) \(error)")
+//                    
+//                    if success {
+//                        self.skipLogin()
+//                    }
+//                })
+//            }
+//        }
         
         return true
     }

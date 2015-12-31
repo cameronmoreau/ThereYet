@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 import CoreLocation
-import Charts
+import Parse
 import MBCircularProgressBar
 
 class HomeViewController: CenterViewController, UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate {
@@ -17,7 +17,7 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
     @IBOutlet weak var progressImage: UIImageView!
     @IBOutlet weak var tableView: UITableView!
     
-    var user: User!
+    let pearsonUser = PearsonUser()
     let locationManager = CLLocationManager()
     let locationStorage = LocationStorage()
     
@@ -26,8 +26,6 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.user = User()
         
         self.locationManager.delegate = self
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -159,8 +157,9 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
         switch menuItem.name {
             case "Sign Out":
                 deleteAllData("Course")
-                user.authData.destroy()
-                user.destroy()
+                pearsonUser.authData.destroy()
+                pearsonUser.destroy()
+                PFUser.logOut()
                 
                 self.navigateToViewController(MenuItem(storyboardID: "LoginViewController", name: "Login", color: UIColor.lightGrayColor(), action: .Navigation))
                 break
