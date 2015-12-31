@@ -210,6 +210,10 @@ class AddCourseViewController: UITableViewController, UITextFieldDelegate {
             } else {
                 classDayString = "\(classDayString)\(selectedIndex), "
             }
+            
+            if classDaysSegmentedControl.selectedIndexes().count == 1 {
+                classDayString = "\(selectedIndex)"
+            }
         }
         course?.classDays = classDayString
         

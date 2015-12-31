@@ -23,6 +23,8 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
     @IBOutlet weak var labelTodaysClasses: UILabel!
     @IBOutlet weak var labelCountDown: UILabel!
     
+    let kCheckInRadius: Double = 20 //in meters
+    
     let pearsonUser = PearsonUser()
     let locationManager = CLLocationManager()
     let locationStorage = LocationStorage()
@@ -56,6 +58,7 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
         
         courses  = [Course]()
         let fetchRequest = NSFetchRequest(entityName: "Course")
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "startsAt", ascending: true)]
         fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [NSPredicate(format: "classDays CONTAINS[cd] %@", weekday), NSPredicate(format: "startsAt > %@", NSDate())])
         let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
         
@@ -174,13 +177,51 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
-    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
-        let skip = UITableViewRowAction(style: .Normal, title: "Skip", handler: {
-            (action: UITableViewRowAction!, indexPath: NSIndexPath!) in
-            
-        })
+    func skip(course: Course) {
         
-        return [skip]
+    }
+    
+    func checkIn(course: Course) {
+        let currentLocation = CLLocation(latitude: locationStorage.location!.latitude, longitude: locationStorage.location!.longitude)
+        let courseLocation = CLLocation(latitude: (Double(course.locationLat!) as CLLocationDegrees), longitude: (Double(course.locationLng!) as CLLocationDegrees))
+        
+        let distance = courseLocation.distanceFromLocation(currentLocation)
+        
+        if distance <= kCheckInRadius {
+            print("CHECK IN!")
+        } else {
+            print("You're a liar. You aren't there yet.")
+        }
+    }
+    
+    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        if indexPath.row < courses.count {
+            let course = courses[indexPath.row]
+            
+            let skip = UITableViewRowAction(style: .Default, title: "Skip", handler: {
+                (action: UITableViewRowAction!, indexPath: NSIndexPath!) in
+                self.skip(course)
+            })
+            
+            let imHere = UITableViewRowAction(style: .Normal, title: "I'm Here", handler: {
+                (action: UITableViewRowAction!, indexPath: NSIndexPath!) in
+                self.checkIn(course)
+            })
+            
+            let ti = NSInteger(course.startsAt!.timeIntervalSinceDate(NSDate()))
+            let minutes = (ti / 60) % 60
+            let hours = (ti / 3600)
+            
+            if (hours == 0 && minutes <= 5) {
+                return [imHere]
+                //return [imHere, skip]
+            } else {
+                return nil
+                //return [skip]
+            }
+        } else {
+            return nil
+        }
     }
     
     func deleteAllData(entity: String) {
