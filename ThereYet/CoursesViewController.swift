@@ -73,7 +73,7 @@ class CoursesViewController: CenterViewController, UITableViewDataSource, UITabl
             cell.segmentedControl?.selectedSegmentIndexes = classDays
         }
         cell.segmentedControl?.tintColor = UIColor(rgba: course.hexColor!)
-        cell.segmentedControl?.layer.borderColor = UIColor(rgba: course.hexColor!).CGColor
+        //cell.segmentedControl?.layer.borderColor = UIColor(rgba: course.hexColor!).CGColor
         
         return cell
     }
