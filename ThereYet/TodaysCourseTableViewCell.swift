@@ -8,12 +8,16 @@
 
 import UIKit
 
+import MultiSelectSegmentedControl
+
 class TodaysCourseTableViewCell: UITableViewCell {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     
     @IBOutlet weak var colorView: UIView!
+    
+    @IBOutlet weak var segmentedControl: MultiSelectSegmentedControl?
 
     var colorViewBGColor: UIColor!
     

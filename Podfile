@@ -9,4 +9,5 @@ target 'ThereYet' do
   pod 'SwiftyJSON', '~> 2.3.2'
   pod 'Charts', '~>2.1.6'
   pod 'THSegmentedControl', :git => 'https://github.com/tayhalla/THSegmentedControl.git', :tag => '0.1.7'
+  pod 'MultiSelectSegmentedControl', :git=> 'https://github.com/yonat/MultiSelectSegmentedControl.git', :tag => '1.1.0'
 end

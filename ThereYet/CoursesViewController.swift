@@ -30,6 +30,14 @@ class CoursesViewController: CenterViewController, UITableViewDataSource, UITabl
         }
         
         tableView.reloadData()
+        
+        tableView.cellLayoutMarginsFollowReadableWidth = false
+    }
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        cell.separatorInset = UIEdgeInsetsMake(5, 0, 0, 0)
+        cell.preservesSuperviewLayoutMargins = false
+        cell.layoutMargins = UIEdgeInsetsMake(5, 0, 0, 0)
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -53,6 +61,19 @@ class CoursesViewController: CenterViewController, UITableViewDataSource, UITabl
         
         cell.colorViewBGColor = UIColor(rgba: course.hexColor!)
         cell.colorView.backgroundColor = UIColor(rgba: course.hexColor!)
+        
+        let tempClassDaysArray = course.classDays?.componentsSeparatedByString(", ")
+        let classDays = NSMutableIndexSet()
+        if tempClassDaysArray != nil {
+            for classDay in tempClassDaysArray! {
+                classDays.addIndex(Int(classDay)!)
+            }
+        }
+        if classDays.count > 0 {
+            cell.segmentedControl?.selectedSegmentIndexes = classDays
+        }
+        cell.segmentedControl?.tintColor = UIColor(rgba: course.hexColor!)
+        cell.segmentedControl?.layer.borderColor = UIColor(rgba: course.hexColor!).CGColor
         
         return cell
     }
