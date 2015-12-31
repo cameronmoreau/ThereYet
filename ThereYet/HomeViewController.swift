@@ -22,7 +22,8 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
     let locationStorage = LocationStorage()
     
     @IBOutlet weak var progressBar: MBCircularProgressBarView!
-    let tempCoursesCount = 2
+    
+    var courses: [Course]!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,9 +48,15 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
-        //Hide courses if done
-        if tempCoursesCount == 0 {
-            self.tableView.hidden = true
+        courses  = [Course]()
+        let fetchRequest = NSFetchRequest(entityName: "Course")
+        fetchRequest.predicate = NSPredicate(format: "classDays CONTAINS[cd] \(NSCalendar.currentCalendar().components(.Weekday, fromDate: NSDate()).weekday-1)")
+        let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+        
+        do {
+            try courses = context.executeFetchRequest(fetchRequest) as! [Course]
+        } catch let error as NSError {
+            print(error)
         }
     }
     
@@ -88,13 +95,22 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tempCoursesCount
+        return courses.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! TodaysCourseTableViewCell
         
-        //TODO: configure cell
+        let course = courses[indexPath.row]
+        
+        cell.titleLabel.text = course.title
+        
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "h:mm a"
+        cell.timeLabel.text = "\(dateFormatter.stringFromDate(course.startsAt!)) - \(dateFormatter.stringFromDate(course.endsAt!))"
+        
+        cell.colorViewBGColor = UIColor(rgba: course.hexColor!)
+        cell.colorView.backgroundColor = UIColor(rgba: course.hexColor!)
         
         return cell
     }
