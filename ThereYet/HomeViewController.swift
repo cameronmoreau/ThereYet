@@ -199,7 +199,7 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
         let distance = courseLocation.distanceFromLocation(currentLocation)
         
         if distance <= kCheckInRadius {
-            print("CHECK IN!")
+            print("CHECK IN!") 
         } else {
             print("You're a liar. You aren't there yet.")
         }
