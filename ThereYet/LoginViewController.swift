@@ -14,6 +14,7 @@ import Parse
 class LoginViewController: CenterViewController, UITextFieldDelegate {
     @IBOutlet weak var textFieldUsername: UITextField!
     @IBOutlet weak var textFieldPassword: UITextField!
+    @IBOutlet weak var logoImage: UIImageView!
     
     //Lol delete this later
     @IBAction func fuckItShipIt(sender: UIButton) {
@@ -213,6 +214,12 @@ class LoginViewController: CenterViewController, UITextFieldDelegate {
     }
     
     //MARK: - Keyboard
+    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+        //logoImage.frame = CGRectMake(logoImage.frame.origin.x, logoImage.frame.origin.x, logoImage.frame.width, 0)
+        
+        return true
+    }
+    
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         switch(textField) {
         case textFieldUsername:

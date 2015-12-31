@@ -68,6 +68,17 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
             print(error)
         }
         
+        
+        if courses.count > 0 {
+            let localNotification = UILocalNotification()
+            localNotification.fireDate = NSDate(timeIntervalSinceNow: 5)
+            localNotification.alertBody = "\(courses[0].title!) is starting soon"
+            localNotification.category = "CLASS"
+            localNotification.timeZone = NSTimeZone.defaultTimeZone()
+            
+            UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
+        }
+        
         fixUIForClasses()
         
         tableView.cellLayoutMarginsFollowReadableWidth = false

@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
+        
         //Parse stuff
         Offer.registerSubclass()
         
@@ -30,6 +31,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if PFUser.currentUser() != nil {
             self.skipLogin()
         }
+        
+        //Push notifications
+        application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Sound, .Badge, .Alert], categories: nil))
+        
+        let hereAction = UIMutableUserNotificationAction()
+        hereAction.identifier = "HERE_CLASS"
+        hereAction.title = "I'm Here"
+        hereAction.activationMode = .Foreground
+        hereAction.authenticationRequired = false
+        hereAction.destructive = false
+        
+        let skipAction = UIMutableUserNotificationAction()
+        skipAction.identifier = "SKIP_CLASS"
+        skipAction.title = "Skip"
+        skipAction.activationMode = .Background
+        skipAction.authenticationRequired = false
+        skipAction.destructive = true
+        
+        let classUpcommingCategory = UIMutableUserNotificationCategory()
+        classUpcommingCategory.identifier = "CLASS"
+        classUpcommingCategory.setActions([hereAction, skipAction], forContext: .Default)
+        classUpcommingCategory.setActions([skipAction, hereAction], forContext: .Minimal)
+        
+        let categories = Set<UIUserNotificationCategory>(arrayLiteral: classUpcommingCategory)
+        let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: categories)
+        UIApplication.sharedApplication().registerUserNotificationSettings(settings)
         
 //        let auth = AuthData()
 //        if auth.hasData() {
