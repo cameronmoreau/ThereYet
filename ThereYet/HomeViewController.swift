@@ -56,7 +56,7 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
         
         courses  = [Course]()
         let fetchRequest = NSFetchRequest(entityName: "Course")
-        fetchRequest.predicate = NSPredicate(format: "classDays CONTAINS[cd] \(NSCalendar.currentCalendar().components(.Weekday, fromDate: NSDate()).weekday-1)")
+        fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [NSPredicate(format: "classDays CONTAINS[cd] \(NSCalendar.currentCalendar().components(.Weekday, fromDate: NSDate()).weekday-1)"), NSPredicate(format: "startsAt > %@", NSDate())])
         let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
         
         do {
@@ -64,6 +64,8 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
         } catch let error as NSError {
             print(error)
         }
+        
+        fixUIForClassesOver()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -93,6 +95,14 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func fixUIForClassesOver() {
+        if courses.count == 0 {
+            self.tableView.hidden = true
+        } else {
+            self.tableView.hidden = false
+        }
     }
     
     // MARK: - Table View

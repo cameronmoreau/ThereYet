@@ -26,6 +26,8 @@ class AddCourseViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var startsAtLabel: UILabel!
     @IBOutlet weak var endsAtLabel: UILabel!
     
+    var isAdding = true
+    
     let datePicker = UIDatePicker()
     let dateFormatter = NSDateFormatter()
     
@@ -57,12 +59,12 @@ class AddCourseViewController: UITableViewController, UITextFieldDelegate {
         self.navigationItem.rightBarButtonItem = saveButton
         
         NSTimer.scheduledTimerWithTimeInterval(0.001, target: self, selector: Selector("checkValidity"), userInfo: nil, repeats: true)
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
         
-        updateTableView()
+        if !isAdding {
+            self.title = "Edit Course"
+            
+            self.navigationItem.rightBarButtonItem = nil
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -71,10 +73,10 @@ class AddCourseViewController: UITableViewController, UITextFieldDelegate {
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         
         if !alreadySetUp {
-            let kClassDaysSegmentedControlPadding: CGFloat = 8
             classDaysSegmentedControl = THSegmentedControl(segments: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"])
-            classDaysSegmentedControl.frame = CGRectMake(kClassDaysSegmentedControlPadding, classDaysCell.frame.size.height/2-36/2, classDaysCell.frame.size.width-(kClassDaysSegmentedControlPadding*2), 36)
+            classDaysSegmentedControl.frame = CGRectMake(0, 0, classDaysCell.frame.size.width, classDaysCell.frame.size.height)
             classDaysSegmentedControl.tintColor = self.navigationController?.navigationBar.barTintColor
+            classDaysSegmentedControl.layer.cornerRadius = 0
             classDaysCell.addSubview(classDaysSegmentedControl)
             
             let toolBar = UIToolbar()
@@ -84,9 +86,36 @@ class AddCourseViewController: UITableViewController, UITextFieldDelegate {
             toolBar.sizeToFit()
             toolBar.userInteractionEnabled = true
             let spaceButton = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil)
+            let spaceButton2 = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil)
             let cancelButton = UIBarButtonItem(title: "Cancel", style: .Plain, target: self, action: "datePickerCancelTap")
             let doneButton = UIBarButtonItem(title: "Done", style: .Plain, target: self, action: "datePickerDoneTap")
-            toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
+            let lblTitle = UILabel(frame: CGRectMake(0, 0, 150, 20))
+            lblTitle.backgroundColor = UIColor.clearColor()
+            lblTitle.textColor = UIColor.blackColor()
+            lblTitle.font = UIFont.systemFontOfSize(16.0, weight: UIFontWeightMedium)
+            lblTitle.textAlignment = .Center
+            lblTitle.text = "Select Start"
+            let titleButton = UIBarButtonItem(customView: lblTitle)
+            toolBar.setItems([cancelButton, spaceButton, titleButton, spaceButton2, doneButton], animated: false)
+            
+            let toolBar2 = UIToolbar()
+            toolBar2.barStyle = .Default
+            toolBar2.translucent = true
+            toolBar2.tintColor = self.navigationController?.navigationBar.barTintColor
+            toolBar2.sizeToFit()
+            toolBar2.userInteractionEnabled = true
+            let spaceButton2_ = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil)
+            let spaceButton3 = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil)
+            let cancelButton2 = UIBarButtonItem(title: "Cancel", style: .Plain, target: self, action: "datePickerCancelTap")
+            let doneButton2 = UIBarButtonItem(title: "Done", style: .Plain, target: self, action: "datePickerDoneTap")
+            let lblTitle2 = UILabel(frame: CGRectMake(0, 0, 150, 20))
+            lblTitle2.backgroundColor = UIColor.clearColor()
+            lblTitle2.textColor = UIColor.blackColor()
+            lblTitle2.font = UIFont.systemFontOfSize(16.0, weight: UIFontWeightMedium)
+            lblTitle2.textAlignment = .Center
+            lblTitle2.text = "Select End"
+            let titleButton2 = UIBarButtonItem(customView: lblTitle2)
+            toolBar2.setItems([cancelButton2, spaceButton2_, titleButton2, spaceButton3, doneButton2], animated: false)
             
             datePicker.datePickerMode = .Time
             
@@ -94,7 +123,7 @@ class AddCourseViewController: UITableViewController, UITextFieldDelegate {
             startsAtTextField.inputAccessoryView = toolBar
             
             endsAtTextField.inputView = datePicker
-            endsAtTextField.inputAccessoryView = toolBar
+            endsAtTextField.inputAccessoryView = toolBar2
             
             if course != nil {
                 setUpViewController(course!)
@@ -133,7 +162,7 @@ class AddCourseViewController: UITableViewController, UITextFieldDelegate {
         if (course.hexColor != nil) {
             if course.hexColor!.characters.count != 0 {
                 colorCell.textLabel?.text = ""
-                colorCell.backgroundColor = UIColor(rgba: "#\(course.hexColor!)")
+                colorCell.backgroundColor = UIColor(rgba: "\(course.hexColor!)")
             }
         }
         
@@ -202,15 +231,6 @@ class AddCourseViewController: UITableViewController, UITextFieldDelegate {
         return true
     }
     
-    func updateTableView() {
-        if course != nil {
-            if course!.hexColor != nil {
-                colorCell.textLabel?.text = ""
-                colorCell.backgroundColor = UIColor(rgba: course!.hexColor!)
-            }
-        }
-    }
-    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "selectLocationSegue" {
             let mapVC = segue.destinationViewController as! SelectLocationViewController
@@ -244,5 +264,14 @@ extension AddCourseViewController : SelectLocationDelegate {
         locationCell.detailTextLabel?.text = "\(location.latitude), \(location.longitude)"
         locationCell.detailTextLabel?.textColor = UIColor.lightGrayColor()
         //self.navigationController?.popViewControllerAnimated(true)
+    }
+}
+
+class NoCopyPasteTextField: UITextField {
+    override func canPerformAction(action: Selector, withSender sender: AnyObject?) -> Bool {
+        if action == "paste:" {
+            return false
+        }
+        return super.canPerformAction(action, withSender: sender)
     }
 }

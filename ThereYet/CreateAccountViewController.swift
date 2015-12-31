@@ -59,10 +59,6 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
         for f in fields {
             f.delegate = self
         }
-        
-        //Tap anywhere to dismiss keyboard
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
-        view.addGestureRecognizer(tap)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -71,11 +67,17 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
         //        navigationController?.navigationBar.translucent = true
         //        navigationController?.navigationBar.backgroundColor = UIColor.clearColor()
         //        navigationController?.view.backgroundColor = UIColor.clearColor()
+        
+        self.textFieldName.becomeFirstResponder()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func backTapped() {
+        self.navigationController?.popViewControllerAnimated(true)
     }
     
     func formIsValid() -> Bool {
@@ -112,10 +114,6 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
         }
         
         return true
-    }
-    
-    func dismissKeyboard() {
-        view.endEditing(true)
     }
     
 }
