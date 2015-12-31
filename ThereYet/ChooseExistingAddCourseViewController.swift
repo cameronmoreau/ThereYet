@@ -102,6 +102,7 @@ class ChooseExistingAddCourseViewController: UIViewController, UITableViewDataSo
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "addClassTapped2" {
             let vc = segue.destinationViewController as! AddCourseViewController
+            vc.isAdding = true
             if let indexPath = selectedIndexPath {
                 if (indexPath.section != 1 && indexPath.row < courses.count) {
                     let tempCourse = courses[indexPath.row]

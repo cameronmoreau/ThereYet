@@ -18,8 +18,8 @@ class SelectColorViewController: UIViewController, UICollectionViewDelegate, UIC
     
     let colors: [String] = ["#D3D3D3", "#F44336", "#E91E63", "#9C27B0", "#673AB7", "#3F51B5", "#2196F3", "#03A9F4", "#00BCD4", "#009688", "#4CAF50", "#8BC34A", "#CDDC39", "#FFEB3B", "#FFC107", "#FF9800", "#FF5722", "#795548"]
     
-    override func viewDidDisappear(animated: Bool) {
-        super.viewDidDisappear(animated)
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
         
         if selectedIndex != nil {
             addCourseViewController.course?.hexColor = colors[selectedIndex!.row]

@@ -16,6 +16,8 @@ class CoursesViewController: CenterViewController, UITableViewDataSource, UITabl
     var courses: [Course]!
     
     override func viewWillAppear(animated: Bool) {
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
+        
         courses  = [Course]()
         let fetchRequest = NSFetchRequest(entityName: "Course")
         fetchRequest.predicate = NSPredicate(format: "pearson_id == nil")
@@ -55,11 +57,48 @@ class CoursesViewController: CenterViewController, UITableViewDataSource, UITabl
         return cell
     }
     
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == .Delete {
+            let course = courses[indexPath.row]
+            
+            let context: NSManagedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+            context.deleteObject(course)
+            courses.removeAtIndex(indexPath.row)
+            do {
+                try context.save()
+            } catch {
+                print("Couldn't delete course, \(course).")
+            }
+            
+            self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+        }
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "addClassTapped" {
             let navController = segue.destinationViewController as! UINavigationController
             let vc = navController.viewControllers.first as! ChooseExistingAddCourseViewController
             vc.color = self.color
+        }
+        
+        if segue.identifier == "editCourse" {
+            let vc = segue.destinationViewController as! AddCourseViewController
+            vc.isAdding = false
+            
+            let tempCourse = courses[tableView.indexPathForSelectedRow!.row]
+            
+            let course = Course_RegularObject()
+            course.pearson_id = tempCourse.pearson_id
+            course.hexColor = tempCourse.hexColor
+            course.title = tempCourse.title
+            course.createdAt = tempCourse.createdAt
+            course.locationLat = tempCourse.locationLat
+            course.locationLng = tempCourse.locationLng
+            course.startsAt = tempCourse.startsAt
+            course.endsAt = tempCourse.endsAt
+            course.classDays = tempCourse.classDays
+            
+            vc.course = course
         }
     }
     

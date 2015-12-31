@@ -258,6 +258,7 @@
 			isa = PBXGroup;
 			children = (
 				7ED52CCB1C23E90A0028172D /* LoginViewController.swift */,
+				7E20D4B71C34974700F0469D /* CreateAccountViewController.swift */,
 				4990FA341C28DE5F00164F6F /* HomeViewController.swift */,
 				49E4F7A01C2BD43C00F7FFBA /* CoursesViewController.swift */,
 				492362151C31CB6200460284 /* ChooseExistingAddCourseViewController.swift */,
@@ -266,7 +267,6 @@
 				7ED5DBE21C3242B30003329D /* SelectLocationViewController.swift */,
 				7E57E6AB1C2CA05800AC907D /* RewardsViewController.swift */,
 				7E7EE9601C2E43AC00553179 /* TodaysCourseTableViewCell.swift */,
-				7E20D4B71C34974700F0469D /* CreateAccountViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
