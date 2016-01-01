@@ -16,6 +16,7 @@
 		492362191C31CB6200460284 /* SelectColorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492362161C31CB6200460284 /* SelectColorViewController.swift */; };
 		4990FA351C28DE5F00164F6F /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4990FA341C28DE5F00164F6F /* HomeViewController.swift */; };
 		4991C2E21C36FB7E0026213E /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4991C2E11C36FB7E0026213E /* SettingsViewController.swift */; };
+		4991C2E41C36FE740026213E /* OverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4991C2E31C36FE740026213E /* OverviewViewController.swift */; };
 		499812961C2C88ED00346D27 /* CenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4998128D1C2C88ED00346D27 /* CenterViewController.swift */; };
 		499812971C2C88ED00346D27 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4998128E1C2C88ED00346D27 /* ContainerViewController.swift */; };
 		499812981C2C88ED00346D27 /* CUSTOMIZE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4998128F1C2C88ED00346D27 /* CUSTOMIZE.swift */; };
@@ -76,6 +77,7 @@
 		492362161C31CB6200460284 /* SelectColorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectColorViewController.swift; sourceTree = "<group>"; };
 		4990FA341C28DE5F00164F6F /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		4991C2E11C36FB7E0026213E /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		4991C2E31C36FE740026213E /* OverviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverviewViewController.swift; sourceTree = "<group>"; };
 		4998128D1C2C88ED00346D27 /* CenterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CenterViewController.swift; sourceTree = "<group>"; };
 		4998128E1C2C88ED00346D27 /* ContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		4998128F1C2C88ED00346D27 /* CUSTOMIZE.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CUSTOMIZE.swift; sourceTree = "<group>"; };
@@ -267,6 +269,7 @@
 				7ED52CCB1C23E90A0028172D /* LoginViewController.swift */,
 				7E20D4B71C34974700F0469D /* CreateAccountViewController.swift */,
 				4990FA341C28DE5F00164F6F /* HomeViewController.swift */,
+				4991C2E31C36FE740026213E /* OverviewViewController.swift */,
 				49E4F7A01C2BD43C00F7FFBA /* CoursesViewController.swift */,
 				492362151C31CB6200460284 /* ChooseExistingAddCourseViewController.swift */,
 				492362141C31CB6200460284 /* AddCourseViewController.swift */,
@@ -480,6 +483,7 @@
 				7EA24C6C1C2BB748005705C5 /* Course.swift in Sources */,
 				7E57E6C91C2CECF700AC907D /* UIColor.swift in Sources */,
 				499812961C2C88ED00346D27 /* CenterViewController.swift in Sources */,
+				4991C2E41C36FE740026213E /* OverviewViewController.swift in Sources */,
 				7E20D4BC1C34D44A00F0469D /* SyncManager.swift in Sources */,
 				4990FA351C28DE5F00164F6F /* HomeViewController.swift in Sources */,
 				499812971C2C88ED00346D27 /* ContainerViewController.swift in Sources */,

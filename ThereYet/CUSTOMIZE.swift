@@ -45,7 +45,7 @@ class MenuItems {
         if section == 0 {
             return [
                 MenuItem(storyboardID: "HomeViewController", name: "Home", image: UIImage(named: "ic_side_home")?.imageWithRenderingMode(.AlwaysTemplate), highlightedImage: nil, color: mainColor, action: .Navigation),
-                MenuItem(storyboardID: "HomeViewController", name: "Overview", image: UIImage(named: "ic_side_overview")?.imageWithRenderingMode(.AlwaysTemplate), highlightedImage: nil, color: mainColor, action: .Navigation),
+                MenuItem(storyboardID: "OverviewViewController", name: "Overview", image: UIImage(named: "ic_side_overview")?.imageWithRenderingMode(.AlwaysTemplate), highlightedImage: nil, color: mainColor, action: .Navigation),
                 MenuItem(storyboardID: "CoursesViewController", name: "My Classes", image: UIImage(named: "ic_side_courses")?.imageWithRenderingMode(.AlwaysTemplate), highlightedImage: nil, color: mainColor, action: .Navigation),
                 MenuItem(storyboardID: "RewardsViewController", name: "My Rewards", image: UIImage(named: "ic_side_rewards")?.imageWithRenderingMode(.AlwaysTemplate), highlightedImage: nil, color: mainColor, action: .Navigation),
                 MenuItem(storyboardID: "SettingsViewController", name: "Settings", image: UIImage(named: "ic_side_settings")?.imageWithRenderingMode(.AlwaysTemplate), highlightedImage: nil, color: mainColor, action: .Navigation)
