@@ -22,6 +22,10 @@ class Course: NSManagedObject {
     @NSManaged var classDays: String?
     @NSManaged var createdAt: NSDate?
     @NSManaged var updatedAt: NSDate?
+    
+    func update() {
+    
+    }
 
 }
 

@@ -46,6 +46,7 @@
 		7E73077E1C339FEC0046DAC8 /* SignPainter.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7E73077D1C339ECE0046DAC8 /* SignPainter.otf */; };
 		7E7307811C3442650046DAC8 /* BorderBottomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7307801C3442650046DAC8 /* BorderBottomTextField.swift */; };
 		7E7EE9611C2E43AC00553179 /* TodaysCourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7EE9601C2E43AC00553179 /* TodaysCourseTableViewCell.swift */; };
+		7E8FD16C1C36EAA4006DDBAE /* CheckIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8FD16B1C36EAA3006DDBAE /* CheckIn.swift */; };
 		7E9B19AD1C3311F2003EFFF4 /* LocationStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9B19AC1C3311F2003EFFF4 /* LocationStorage.swift */; };
 		7E9BBF4D1C263A5200ECA0B7 /* PearsonAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9BBF4C1C263A5200ECA0B7 /* PearsonAPI.swift */; };
 		7E9BBF4F1C26880700ECA0B7 /* PearsonAuthData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9BBF4E1C26880700ECA0B7 /* PearsonAuthData.swift */; };
@@ -106,6 +107,7 @@
 		7E73077D1C339ECE0046DAC8 /* SignPainter.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SignPainter.otf; sourceTree = "<group>"; };
 		7E7307801C3442650046DAC8 /* BorderBottomTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorderBottomTextField.swift; sourceTree = "<group>"; };
 		7E7EE9601C2E43AC00553179 /* TodaysCourseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodaysCourseTableViewCell.swift; sourceTree = "<group>"; };
+		7E8FD16B1C36EAA3006DDBAE /* CheckIn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckIn.swift; sourceTree = "<group>"; };
 		7E9B19AC1C3311F2003EFFF4 /* LocationStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationStorage.swift; sourceTree = "<group>"; };
 		7E9BBF4C1C263A5200ECA0B7 /* PearsonAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PearsonAPI.swift; sourceTree = "<group>"; };
 		7E9BBF4E1C26880700ECA0B7 /* PearsonAuthData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PearsonAuthData.swift; sourceTree = "<group>"; };
@@ -283,6 +285,7 @@
 				7E57E6C51C2CC93200AC907D /* Offer.swift */,
 				7E9B19AC1C3311F2003EFFF4 /* LocationStorage.swift */,
 				7EB320A71C33597100AB26A8 /* LookupLocation.swift */,
+				7E8FD16B1C36EAA3006DDBAE /* CheckIn.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -464,6 +467,7 @@
 				7E9BBF4D1C263A5200ECA0B7 /* PearsonAPI.swift in Sources */,
 				7E7EE9611C2E43AC00553179 /* TodaysCourseTableViewCell.swift in Sources */,
 				7ED52CB61C23E8A40028172D /* AppDelegate.swift in Sources */,
+				7E8FD16C1C36EAA4006DDBAE /* CheckIn.swift in Sources */,
 				7ED5DBE31C3242B30003329D /* SelectLocationViewController.swift in Sources */,
 				492362171C31CB6200460284 /* AddCourseViewController.swift in Sources */,
 				4998129C1C2C88ED00346D27 /* MenuItem.swift in Sources */,

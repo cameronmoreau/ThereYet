@@ -86,7 +86,10 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
     override func viewDidAppear(animated: Bool) {
         let time: NSTimeInterval = 1
         
-        let progress = CGFloat((coursesCompleted * 100 / courses.count * 100) / 100)
+        var progress: CGFloat = 100
+        if courses.count > 0 {
+            progress = CGFloat((coursesCompleted * 100 / courses.count * 100) / 100)
+        }
         self.progressBar.setValue(progress, animateWithDuration: time)
         
         //Show check
@@ -181,10 +184,12 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
     
     //MARK: - Helper functions
     func fixUIForClasses() {
-        if courses.count == 0 {
+        self.btnHere.hidden = true
+        
+        
+        if courses.count == coursesCompleted {
             self.tableView.hidden = true
             self.labelTodaysClasses.hidden = true
-            self.btnHere.hidden = true
             self.labelCountDown.text = "15 points earned"
             self.labelHeading.text = "You're all done for today!"
             
@@ -193,11 +198,16 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
             self.labelCountDown.sizeToFit()
         } else {
             self.tableView.hidden = false
+            
+            //Class in next 5 minutes
+            if shouldShowThere() {
+                self.btnHere.hidden = false
+            }
         }
     }
     
     func clockText(interval: NSTimeInterval) -> String {
-        let ti = NSInteger(interval)
+        let ti = Int(interval) + 60
         var output = ""
         
         let minutes = (ti / 60) % 60
@@ -212,8 +222,11 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
     
     //accidently broke this
     func shouldShowThere() -> Bool {
-        print((NSDate().timeIntervalSince1970 - self.timeUntilNextClass!))
-        return Int(NSDate().timeIntervalSince1970 - self.timeUntilNextClass!) < kCheckInTime
+        if let time = self.timeUntilNextClass {
+            return Int(time) < kCheckInTime
+        }
+        
+        return false
     }
     
     func deleteAllData(entity: String) {
@@ -301,6 +314,12 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
 
         //If a location was found, store it
         if let location = manager.location {
+            
+            //Check for checkin
+            if shouldShowThere() {
+                checkIn(courses[coursesCompleted])
+            }
+            
             manager.startMonitoringSignificantLocationChanges()
             locationStorage.updateLocation(location.coordinate)
         }
