@@ -32,6 +32,14 @@ class CoursesViewController: CenterViewController, UITableViewDataSource, UITabl
         tableView.reloadData()
         
         tableView.cellLayoutMarginsFollowReadableWidth = false
+        
+        if courses.count == 0 {
+            updateUIForEmptyState()
+        }
+    }
+    
+    func updateUIForEmptyState() {
+        
     }
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
@@ -93,6 +101,8 @@ class CoursesViewController: CenterViewController, UITableViewDataSource, UITabl
             
             self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         }
+        
+        updateUIForEmptyState()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

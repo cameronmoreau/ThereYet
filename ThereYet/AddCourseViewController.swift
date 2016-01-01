@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 import CoreLocation
 
-import THSegmentedControl
+import MultiSelectSegmentedControl
 
 class AddCourseViewController: UITableViewController, UITextFieldDelegate {
     
@@ -33,7 +33,7 @@ class AddCourseViewController: UITableViewController, UITextFieldDelegate {
     
     @IBOutlet weak var locationCell: UITableViewCell!
     
-    var classDaysSegmentedControl: THSegmentedControl!
+    var classDaysSegmentedControl: MultiSelectSegmentedControl!
     
     var saveButton: UIBarButtonItem!
     
@@ -79,7 +79,7 @@ class AddCourseViewController: UITableViewController, UITextFieldDelegate {
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         
         if !alreadySetUp {
-            classDaysSegmentedControl = THSegmentedControl(segments: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"])
+            classDaysSegmentedControl = MultiSelectSegmentedControl(items: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"])
             classDaysSegmentedControl.frame = CGRectMake(0, 0, classDaysCell.frame.size.width, classDaysCell.frame.size.height)
             classDaysSegmentedControl.tintColor = self.navigationController?.navigationBar.barTintColor
             classDaysSegmentedControl.layer.cornerRadius = 0
@@ -173,14 +173,14 @@ class AddCourseViewController: UITableViewController, UITextFieldDelegate {
         }
         
         let tempClassDaysArray = course.classDays?.componentsSeparatedByString(", ")
-        var classDaysArray = [Int]()
+        let classDays = NSMutableIndexSet()
         if tempClassDaysArray != nil {
             for classDay in tempClassDaysArray! {
-                classDaysArray.append(Int(classDay)!)
+                classDays.addIndex(Int(classDay)!)
             }
         }
-        if classDaysArray.count > 0 {
-            classDaysSegmentedControl.setSelectedIndexes(NSOrderedSet(array: classDaysArray))
+        if classDays.count > 0 {
+            classDaysSegmentedControl.selectedSegmentIndexes = classDays
         }
         
         //start/end date set up
@@ -202,16 +202,16 @@ class AddCourseViewController: UITableViewController, UITextFieldDelegate {
     
     func addCourse() {
         var classDayString: String!
-        for selectedIndex in classDaysSegmentedControl.selectedIndexes() {
-            if (selectedIndex as! Int) == (classDaysSegmentedControl.selectedIndexes().lastObject as! Int) {
-                classDayString = "\(classDayString)\(selectedIndex)"
-            } else if (selectedIndex as! Int) == (classDaysSegmentedControl.selectedIndexes().firstObject as! Int) {
+        for selectedIndex in classDaysSegmentedControl.selectedSegmentIndexes {
+            if selectedIndex == classDaysSegmentedControl.selectedSegmentIndexes.firstIndex {
                 classDayString = "\(selectedIndex), "
+            } else if selectedIndex == classDaysSegmentedControl.selectedSegmentIndexes.lastIndex {
+                classDayString = "\(classDayString)\(selectedIndex)"
             } else {
                 classDayString = "\(classDayString)\(selectedIndex), "
             }
             
-            if classDaysSegmentedControl.selectedIndexes().count == 1 {
+            if classDaysSegmentedControl.selectedSegmentIndexes.count == 1 {
                 classDayString = "\(selectedIndex)"
             }
         }
@@ -234,7 +234,7 @@ class AddCourseViewController: UITableViewController, UITextFieldDelegate {
     }
     
     func checkValidity() {
-        if (course != nil && course?.hexColor != nil &&  titleTextField.text?.characters.count > 0 && course?.locationLat != 0 && course?.locationLng != 0 && course?.locationLat != nil && course?.locationLng != nil && course?.startsAt != nil && course?.endsAt != nil && classDaysSegmentedControl.selectedIndexes().count != 0) {
+        if (course != nil && course?.hexColor != nil &&  titleTextField.text?.characters.count > 0 && course?.locationLat != 0 && course?.locationLng != 0 && course?.locationLat != nil && course?.locationLng != nil && course?.startsAt != nil && course?.endsAt != nil && classDaysSegmentedControl.selectedSegmentIndexes.count != 0) {
             saveButton.enabled = true
         } else {
             saveButton.enabled = false

@@ -6,7 +6,6 @@ PODS:
   - MBCircularProgressBar (0.3.4)
   - MultiSelectSegmentedControl (1.1.0)
   - SwiftyJSON (2.3.2)
-  - THSegmentedControl (0.1.6)
   - TPKeyboardAvoiding (1.2.11)
 
 DEPENDENCIES:
@@ -18,8 +17,6 @@ DEPENDENCIES:
   - MultiSelectSegmentedControl (from `https://github.com/yonat/MultiSelectSegmentedControl.git`,
     tag `1.1.0`)
   - SwiftyJSON (~> 2.3.2)
-  - THSegmentedControl (from `https://github.com/tayhalla/THSegmentedControl.git`,
-    tag `0.1.7`)
   - TPKeyboardAvoiding (from `https://github.com/michaeltyson/TPKeyboardAvoiding.git`,
     tag `1.2.11`)
 
@@ -27,9 +24,6 @@ EXTERNAL SOURCES:
   MultiSelectSegmentedControl:
     :git: https://github.com/yonat/MultiSelectSegmentedControl.git
     :tag: 1.1.0
-  THSegmentedControl:
-    :git: https://github.com/tayhalla/THSegmentedControl.git
-    :tag: 0.1.7
   TPKeyboardAvoiding:
     :git: https://github.com/michaeltyson/TPKeyboardAvoiding.git
     :tag: 1.2.11
@@ -38,9 +32,6 @@ CHECKOUT OPTIONS:
   MultiSelectSegmentedControl:
     :git: https://github.com/yonat/MultiSelectSegmentedControl.git
     :tag: 1.1.0
-  THSegmentedControl:
-    :git: https://github.com/tayhalla/THSegmentedControl.git
-    :tag: 0.1.7
   TPKeyboardAvoiding:
     :git: https://github.com/michaeltyson/TPKeyboardAvoiding.git
     :tag: 1.2.11
@@ -53,7 +44,6 @@ SPEC CHECKSUMS:
   MBCircularProgressBar: ff3b8e2f441214d9ee122a24ba0d4d00cc7de881
   MultiSelectSegmentedControl: 54fb23c997b971eff621cfcf965ff1613d99c3d2
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
-  THSegmentedControl: 67d441118e5e3d67fb0246ca5e1a7710c530dc2b
   TPKeyboardAvoiding: e5ce146b313de063957bfa75a13f1e9b0ff18ab7
 
 COCOAPODS: 0.39.0

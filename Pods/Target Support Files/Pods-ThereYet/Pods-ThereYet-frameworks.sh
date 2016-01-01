@@ -90,7 +90,6 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-ThereYet/MBCircularProgressBar.framework"
   install_framework "Pods-ThereYet/MultiSelectSegmentedControl.framework"
   install_framework "Pods-ThereYet/SwiftyJSON.framework"
-  install_framework "Pods-ThereYet/THSegmentedControl.framework"
   install_framework "Pods-ThereYet/TPKeyboardAvoiding.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
@@ -100,6 +99,5 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-ThereYet/MBCircularProgressBar.framework"
   install_framework "Pods-ThereYet/MultiSelectSegmentedControl.framework"
   install_framework "Pods-ThereYet/SwiftyJSON.framework"
-  install_framework "Pods-ThereYet/THSegmentedControl.framework"
   install_framework "Pods-ThereYet/TPKeyboardAvoiding.framework"
 fi

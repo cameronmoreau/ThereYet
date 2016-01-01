@@ -16,6 +16,9 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
     
     @IBAction func btnHerePressed(sender: AnyObject) {
         self.locationManager.startUpdatingLocation()
+        if courses.count > 0 {
+            self.checkIn(courses[0])
+        }
     }
     
     @IBOutlet weak var progressBar: MBCircularProgressBarView!
