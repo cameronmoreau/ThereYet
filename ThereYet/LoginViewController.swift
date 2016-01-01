@@ -198,6 +198,10 @@ class LoginViewController: CenterViewController, UITextFieldDelegate {
         super.didReceiveMemoryWarning()
     }
     
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return .LightContent
+    }
+    
     func formIsValid() -> Bool {
         if textFieldUsername.text!.isEmpty || textFieldPassword.text!.isEmpty {
             self.showBasicError("Login", message: "Username and password is required")

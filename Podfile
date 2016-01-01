@@ -10,4 +10,5 @@ target 'ThereYet' do
   pod 'Charts', '~>2.1.6'
   pod 'THSegmentedControl', :git => 'https://github.com/tayhalla/THSegmentedControl.git', :tag => '0.1.7'
   pod 'MultiSelectSegmentedControl', :git=> 'https://github.com/yonat/MultiSelectSegmentedControl.git', :tag => '1.1.0'
+  pod 'TPKeyboardAvoiding', :git => 'https://github.com/michaeltyson/TPKeyboardAvoiding.git', :tag => '1.2.11'
 end

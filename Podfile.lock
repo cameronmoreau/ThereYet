@@ -7,6 +7,7 @@ PODS:
   - MultiSelectSegmentedControl (1.1.0)
   - SwiftyJSON (2.3.2)
   - THSegmentedControl (0.1.6)
+  - TPKeyboardAvoiding (1.2.11)
 
 DEPENDENCIES:
   - Alamofire (~> 3.1.4)
@@ -19,6 +20,8 @@ DEPENDENCIES:
   - SwiftyJSON (~> 2.3.2)
   - THSegmentedControl (from `https://github.com/tayhalla/THSegmentedControl.git`,
     tag `0.1.7`)
+  - TPKeyboardAvoiding (from `https://github.com/michaeltyson/TPKeyboardAvoiding.git`,
+    tag `1.2.11`)
 
 EXTERNAL SOURCES:
   MultiSelectSegmentedControl:
@@ -27,6 +30,9 @@ EXTERNAL SOURCES:
   THSegmentedControl:
     :git: https://github.com/tayhalla/THSegmentedControl.git
     :tag: 0.1.7
+  TPKeyboardAvoiding:
+    :git: https://github.com/michaeltyson/TPKeyboardAvoiding.git
+    :tag: 1.2.11
 
 CHECKOUT OPTIONS:
   MultiSelectSegmentedControl:
@@ -35,6 +41,9 @@ CHECKOUT OPTIONS:
   THSegmentedControl:
     :git: https://github.com/tayhalla/THSegmentedControl.git
     :tag: 0.1.7
+  TPKeyboardAvoiding:
+    :git: https://github.com/michaeltyson/TPKeyboardAvoiding.git
+    :tag: 1.2.11
 
 SPEC CHECKSUMS:
   Alamofire: fbc829692f351fa1d8a31dd75fd7f7f56fea31fb
@@ -45,5 +54,6 @@ SPEC CHECKSUMS:
   MultiSelectSegmentedControl: 54fb23c997b971eff621cfcf965ff1613d99c3d2
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
   THSegmentedControl: 67d441118e5e3d67fb0246ca5e1a7710c530dc2b
+  TPKeyboardAvoiding: e5ce146b313de063957bfa75a13f1e9b0ff18ab7
 
 COCOAPODS: 0.39.0

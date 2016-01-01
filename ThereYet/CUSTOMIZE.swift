@@ -17,12 +17,12 @@ class MenuItems {
     }
     
     static func numRowsInSection() -> Array<Int> {
-        return [1, 1]
+        return [5, 0]
     }
     
     static func sectionTitles() -> Array<String>? {
         //type empty string ("") to hide a specific header
-        return ["", "Debug"]
+        return ["", ""]
     }
     
     static func indexPathForMenuItem(menuItem: MenuItem) -> NSIndexPath? {
@@ -48,12 +48,11 @@ class MenuItems {
                 MenuItem(storyboardID: "OverviewViewController", name: "Overview", image: UIImage(named: "ic_side_overview")?.imageWithRenderingMode(.AlwaysTemplate), highlightedImage: nil, color: mainColor, action: .Navigation),
                 MenuItem(storyboardID: "CoursesViewController", name: "My Classes", image: UIImage(named: "ic_side_courses")?.imageWithRenderingMode(.AlwaysTemplate), highlightedImage: nil, color: mainColor, action: .Navigation),
                 MenuItem(storyboardID: "RewardsViewController", name: "My Rewards", image: UIImage(named: "ic_side_rewards")?.imageWithRenderingMode(.AlwaysTemplate), highlightedImage: nil, color: mainColor, action: .Navigation),
-                MenuItem(storyboardID: "SettingsViewController", name: "Settings", image: UIImage(named: "ic_side_settings")?.imageWithRenderingMode(.AlwaysTemplate), highlightedImage: nil, color: mainColor, action: .Navigation)
-            ]
+                MenuItem(storyboardID: "SettingsViewController", name: "Settings", image: UIImage(named: "ic_side_settings")?.imageWithRenderingMode(.AlwaysTemplate), highlightedImage: nil, color: mainColor, action: .Navigation)]
         } else if section == 1 {
-            return [MenuItem(storyboardID: nil, name: "Show Schedule", image: nil, highlightedImage: nil, color: UIColor.blueColor(), action: .Selector),
-                MenuItem(storyboardID: nil, name: "Show Login Data", image: nil, highlightedImage: nil, color: UIColor.greenColor(), action: .Selector),
-                MenuItem(storyboardID: nil, name: "Sign Out", image: nil, highlightedImage: nil, color: UIColor.redColor(), action: .Selector),]
+            return [/*MenuItem(storyboardID: nil, name: "Show Schedule", image: nil, highlightedImage: nil, color: UIColor.blueColor(), action: .Selector),
+                MenuItem(storyboardID: nil, name: "Show Login Data", image: nil, highlightedImage: nil, color: UIColor.greenColor(), action: .Selector),*/
+                /*MenuItem(storyboardID: nil, name: "Sign Out", image: nil, highlightedImage: nil, color: UIColor.redColor(), action: .Selector)*/]
         } else {
             return []
         }

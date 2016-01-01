@@ -325,7 +325,7 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
         }
     }
 
-    //MARK: - Navigation
+    //MARK: - Menu Actions
     override func performAction(menuItem: MenuItem) {
         super.performAction(menuItem)
         
@@ -336,7 +336,12 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
                 pearsonUser.destroy()
                 PFUser.logOut()
                 
-                self.navigateToViewController(MenuItem(storyboardID: "LoginViewController", name: "Login", color: UIColor.lightGrayColor(), action: .Navigation))
+                let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+                let loginVC = storyboard.instantiateViewControllerWithIdentifier("LoginViewController")
+                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                appDelegate.window?.rootViewController = loginVC
+                
+                //self.navigateToViewController(MenuItem(storyboardID: "LoginViewController", name: "Login", color: UIColor.lightGrayColor(), action: .Navigation))
                 break
             
             case "Show Schedule":

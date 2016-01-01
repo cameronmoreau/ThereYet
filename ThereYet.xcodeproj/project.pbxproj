@@ -175,6 +175,26 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		4991C2E51C36FFCC0026213E /* Add Course */ = {
+			isa = PBXGroup;
+			children = (
+				492362151C31CB6200460284 /* ChooseExistingAddCourseViewController.swift */,
+				492362141C31CB6200460284 /* AddCourseViewController.swift */,
+				492362161C31CB6200460284 /* SelectColorViewController.swift */,
+				7ED5DBE21C3242B30003329D /* SelectLocationViewController.swift */,
+			);
+			name = "Add Course";
+			sourceTree = "<group>";
+		};
+		4991C2E61C36FFEC0026213E /* Sign in/Sign up */ = {
+			isa = PBXGroup;
+			children = (
+				7ED52CCB1C23E90A0028172D /* LoginViewController.swift */,
+				7E20D4B71C34974700F0469D /* CreateAccountViewController.swift */,
+			);
+			name = "Sign in/Sign up";
+			sourceTree = "<group>";
+		};
 		4998129F1C2C88EF00346D27 /* AWSideBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -215,6 +235,7 @@
 		7E73077F1C34424C0046DAC8 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				7E7EE9601C2E43AC00553179 /* TodaysCourseTableViewCell.swift */,
 				7E7307801C3442650046DAC8 /* BorderBottomTextField.swift */,
 			);
 			name = UI;
@@ -266,17 +287,12 @@
 		7ED52CC71C23E8DA0028172D /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				7ED52CCB1C23E90A0028172D /* LoginViewController.swift */,
-				7E20D4B71C34974700F0469D /* CreateAccountViewController.swift */,
+				4991C2E61C36FFEC0026213E /* Sign in/Sign up */,
 				4990FA341C28DE5F00164F6F /* HomeViewController.swift */,
 				4991C2E31C36FE740026213E /* OverviewViewController.swift */,
 				49E4F7A01C2BD43C00F7FFBA /* CoursesViewController.swift */,
-				492362151C31CB6200460284 /* ChooseExistingAddCourseViewController.swift */,
-				492362141C31CB6200460284 /* AddCourseViewController.swift */,
-				492362161C31CB6200460284 /* SelectColorViewController.swift */,
-				7ED5DBE21C3242B30003329D /* SelectLocationViewController.swift */,
+				4991C2E51C36FFCC0026213E /* Add Course */,
 				7E57E6AB1C2CA05800AC907D /* RewardsViewController.swift */,
-				7E7EE9601C2E43AC00553179 /* TodaysCourseTableViewCell.swift */,
 				4991C2E11C36FB7E0026213E /* SettingsViewController.swift */,
 			);
 			name = Controllers;
@@ -362,6 +378,7 @@
 				TargetAttributes = {
 					7ED52CB11C23E8A40028172D = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = 4H74MSJ3C8;
 					};
 				};
 			};
@@ -596,6 +613,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -606,6 +624,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "ThereYet/ThereYet-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -615,6 +634,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -624,6 +644,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = idappthat.mobi.ThereYet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "ThereYet/ThereYet-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
