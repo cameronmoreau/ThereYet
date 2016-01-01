@@ -17,6 +17,7 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
     @IBAction func btnHerePressed(sender: AnyObject) {
         self.locationManager.startUpdatingLocation()
         if courses.count > 0 {
+            //print(courses[0])
             self.checkIn(courses[0])
         }
     }
@@ -31,6 +32,8 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
     @IBOutlet weak var labelCountDown: UILabel!
     @IBOutlet weak var btnHere: UIButton!
     
+    var kNumCoursesTotal = 0
+    
     let kCheckInRadius: Double = 20 //in meters
     let kCheckInTime = 300 //in seconds
     var timeUntilNextClass: NSTimeInterval?
@@ -40,7 +43,6 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
     let locationStorage = LocationStorage()
     
     var courses: [Course]!
-    var coursesCompleted = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,13 +59,6 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
         self.tableView.cellLayoutMarginsFollowReadableWidth = false
         
         loadCourses()
-        
-        //Amount of courses Completed
-        for c in courses! {
-            if c.startsAt?.timeIntervalSinceNow < 0 {
-                coursesCompleted += 1
-            }
-        }
         
         //setupForNextClass()
         updateNextClassInterval()
@@ -91,7 +86,8 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
         
         var progress: CGFloat = 100
         if courses.count > 0 {
-            progress = CGFloat((coursesCompleted * 100 / courses.count * 100) / 100)
+            //print(courses.count, kNumCoursesTotal)
+            progress = CGFloat(Double(Double(courses.count)/Double(kNumCoursesTotal)) * 100)
         }
         self.progressBar.setValue(progress, animateWithDuration: time)
         
@@ -125,26 +121,26 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
     
     //MARK: - Base Functions
     func loadCourses() {
+        let fetchRequest1 = NSFetchRequest(entityName: "Course")
+        let context1 = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+        var tempArray = [Course]()
+        do {
+            try tempArray = context1.executeFetchRequest(fetchRequest1) as! [Course]
+        } catch let error as NSError {
+            print(error)
+        }
+        kNumCoursesTotal = tempArray.count
+        
+        //---------------------
+        
         let weekdayInt = NSCalendar.currentCalendar().components(.Weekday, fromDate: NSDate()).weekday-1
         let weekday = "\(weekdayInt)"
         
         courses  = [Course]()
         
-        //Get the base day staring at 12 am
-        let cal = NSCalendar.currentCalendar()
-        let calComps = cal.components([.Day, .Month, .Year], fromDate: NSDate())
-        
-        let baseDay = NSDateComponents()
-        baseDay.year = calComps.year
-        baseDay.month = calComps.month
-        baseDay.day = calComps.day
-        
-        //base day
-        let today = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)?.dateFromComponents(baseDay)
-
         let fetchRequest = NSFetchRequest(entityName: "Course")
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "startsAt", ascending: true)]
-        fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [NSPredicate(format: "classDays CONTAINS[cd] %@", weekday), NSPredicate(format: "startsAt > %@", today!)])
+        fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [NSPredicate(format: "classDays CONTAINS[cd] %@", weekday), NSPredicate(format: "startsAt > %@", convertDateToBaseDate(NSDate()))])
         let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
         
         do {
@@ -154,10 +150,24 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
         }
     }
     
+    func convertDateToBaseDate(date: NSDate) -> NSDate {
+        let calComps = NSCalendar.currentCalendar().components([.Day, .Month, .Year, .Hour, .Minute], fromDate: date)
+        
+        let baseDayMonthYear = NSDateComponents()
+        baseDayMonthYear.year = 1997
+        baseDayMonthYear.month = 1
+        baseDayMonthYear.day = 4
+        baseDayMonthYear.hour = calComps.hour
+        baseDayMonthYear.minute = calComps.minute
+        
+        //base day
+        return NSCalendar.currentCalendar().dateFromComponents(baseDayMonthYear)!
+    }
+    
     func updateNextClassInterval() {
-        if self.courses.count - coursesCompleted > 0 {
-            let nextDate = courses[coursesCompleted].startsAt!
-            let currentDate = NSDate()
+        if self.courses.count > 0 {
+            let nextDate = courses[0].startsAt!
+            let currentDate = convertDateToBaseDate(NSDate())
             
             self.timeUntilNextClass = nextDate.timeIntervalSinceDate(currentDate)
             self.labelCountDown.text = clockText(timeUntilNextClass!)
@@ -198,8 +208,7 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
     func fixUIForClasses() {
         self.btnHere.hidden = true
         
-        
-        if courses.count == coursesCompleted {
+        if courses.count == 0 {
             self.tableView.hidden = true
             self.labelTodaysClasses.hidden = true
             self.labelCountDown.text = "15 points earned"
@@ -212,8 +221,10 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
             self.tableView.hidden = false
             
             //Class in next 5 minutes
-            if shouldShowThere() {
-                self.btnHere.hidden = false
+            if let time = self.timeUntilNextClass {
+                if Int(time) < kCheckInTime {
+                    self.btnHere.hidden = false
+                }
             }
         }
     }
@@ -230,15 +241,6 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
         }
         
         return output + String(format: "%d Minutes", arguments: [minutes])
-    }
-    
-    //accidently broke this
-    func shouldShowThere() -> Bool {
-        if let time = self.timeUntilNextClass {
-            return Int(time) < kCheckInTime
-        }
-        
-        return false
     }
     
     func deleteAllData(entity: String) {
@@ -267,13 +269,13 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return courses.count - self.coursesCompleted
+        return courses.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! TodaysCourseTableViewCell
         
-        let course = courses[indexPath.row + self.coursesCompleted]
+        let course = courses[indexPath.row]
         
         cell.titleLabel.text = course.title
         
@@ -293,21 +295,29 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
     
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         if indexPath.row < courses.count {
-            let course = courses[indexPath.row + self.coursesCompleted]
+            let course = courses[indexPath.row]
             
             let skip = UITableViewRowAction(style: .Default, title: "Skip", handler: {
                 (action: UITableViewRowAction!, indexPath: NSIndexPath!) in
                 self.skip(course)
             })
-            
+
             let imHere = UITableViewRowAction(style: .Normal, title: "I'm Here", handler: {
                 (action: UITableViewRowAction!, indexPath: NSIndexPath!) in
                 self.checkIn(course)
             })
+
+            let ti = NSInteger(course.startsAt!.timeIntervalSinceDate(convertDateToBaseDate(NSDate())))
+            let minutes = (ti / 60) % 60
+            let hours = (ti / 3600)
+
+            //print(hours, minutes)
             
-            if shouldShowThere() {
+            if (hours == 0 && minutes <= 5) {
                 return [imHere]
+                //return [imHere, skip]
             } else {
+                //return nil
                 return [skip]
             }
         } else {
@@ -326,12 +336,6 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
 
         //If a location was found, store it
         if let location = manager.location {
-            
-            //Check for checkin
-            if shouldShowThere() {
-                //checkIn(courses[coursesCompleted])
-            }
-            
             manager.startMonitoringSignificantLocationChanges()
             locationStorage.updateLocation(location.coordinate)
         }
