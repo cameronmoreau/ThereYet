@@ -14,6 +14,10 @@ import MBCircularProgressBar
 
 class HomeViewController: CenterViewController, UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate {
     
+    @IBAction func btnHerePressed(sender: AnyObject) {
+        self.locationManager.startUpdatingLocation()
+    }
+    
     @IBOutlet weak var progressBar: MBCircularProgressBarView!
     @IBOutlet weak var progressImage: UIImageView!
     
@@ -22,53 +26,52 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
     @IBOutlet weak var labelHeading: UILabel!
     @IBOutlet weak var labelTodaysClasses: UILabel!
     @IBOutlet weak var labelCountDown: UILabel!
+    @IBOutlet weak var btnHere: UIButton!
     
     let kCheckInRadius: Double = 20 //in meters
+    let kCheckInTime = 300 //in seconds
+    var timeUntilNextClass: NSTimeInterval?
     
     let pearsonUser = PearsonUser()
     let locationManager = CLLocationManager()
     let locationStorage = LocationStorage()
     
     var courses: [Course]!
+    var coursesCompleted = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //Location
         self.locationManager.delegate = self
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
         self.locationManager.requestWhenInUseAuthorization()
         self.locationManager.startUpdatingLocation()
         
-        //Location data
-        
-        if !CLLocationManager.locationServicesEnabled() {
-            locationManager.requestWhenInUseAuthorization()
-        } else {
-//            self.locationManager.delegate = self
-//            self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-//            self.locationManager.startUpdatingLocation()
-        }
-        
         //Table
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        self.tableView.cellLayoutMarginsFollowReadableWidth = false
         
-        let weekdayInt = NSCalendar.currentCalendar().components(.Weekday, fromDate: NSDate()).weekday-1
-        let weekday = "\(weekdayInt)"
+        loadCourses()
         
-        courses  = [Course]()
-        let fetchRequest = NSFetchRequest(entityName: "Course")
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "startsAt", ascending: true)]
-        fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [NSPredicate(format: "classDays CONTAINS[cd] %@", weekday), NSPredicate(format: "startsAt > %@", NSDate())])
-        let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
-        
-        do {
-            try courses = context.executeFetchRequest(fetchRequest) as! [Course]
-        } catch let error as NSError {
-            print(error)
+        //Amount of courses Completed
+        for c in courses! {
+            if c.startsAt?.timeIntervalSinceNow < 0 {
+                coursesCompleted += 1
+            }
         }
         
+        //setupForNextClass()
+        updateNextClassInterval()
+        fixUIForClasses()
         
+        //Location data - needs to be fixed later
+        if !CLLocationManager.locationServicesEnabled() {
+            locationManager.requestWhenInUseAuthorization()
+        }
+        
+        //Temp notification
         if courses.count > 0 {
             let localNotification = UILocalNotification()
             localNotification.fireDate = NSDate(timeIntervalSinceNow: 5)
@@ -78,33 +81,28 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
             
             UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
         }
-        
-        fixUIForClasses()
-        
-        tableView.cellLayoutMarginsFollowReadableWidth = false
-    }
-    
-    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        cell.separatorInset = UIEdgeInsetsMake(5, 0, 0, 0)
-        cell.preservesSuperviewLayoutMargins = false
-        cell.layoutMargins = UIEdgeInsetsMake(5, 0, 0, 0)
     }
     
     override func viewDidAppear(animated: Bool) {
         let time: NSTimeInterval = 1
-        self.progressBar.setValue(100, animateWithDuration: time)
         
-        let delay = time * Double(NSEC_PER_SEC)
-        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
-        dispatch_after(delayTime, dispatch_get_main_queue()) {
-            self.progressImage.image = UIImage(named: "ic_check.png")
-            
-            let transition = CATransition()
-            transition.duration = 1
-            transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-            transition.type = kCATransitionFade
-            
-            self.progressImage.layer.addAnimation(transition, forKey: nil)
+        let progress = CGFloat((coursesCompleted * 100 / courses.count * 100) / 100)
+        self.progressBar.setValue(progress, animateWithDuration: time)
+        
+        //Show check
+        if progress == 100 {
+            let delay = time * Double(NSEC_PER_SEC)
+            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+            dispatch_after(delayTime, dispatch_get_main_queue()) {
+                self.progressImage.image = UIImage(named: "ic_check.png")
+                
+                let transition = CATransition()
+                transition.duration = 1
+                transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+                transition.type = kCATransitionFade
+                
+                self.progressImage.layer.addAnimation(transition, forKey: nil)
+            }
         }
     }
     
@@ -119,10 +117,74 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
         // Dispose of any resources that can be recreated.
     }
     
+    //MARK: - Base Functions
+    func loadCourses() {
+        let weekdayInt = NSCalendar.currentCalendar().components(.Weekday, fromDate: NSDate()).weekday-1
+        let weekday = "\(weekdayInt)"
+        
+        courses  = [Course]()
+        
+        //Get the base day staring at 12 am
+        let cal = NSCalendar.currentCalendar()
+        let calComps = cal.components([.Day, .Month, .Year], fromDate: NSDate())
+        
+        let baseDay = NSDateComponents()
+        baseDay.year = calComps.year
+        baseDay.month = calComps.month
+        baseDay.day = calComps.day
+        
+        //base day
+        let today = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)?.dateFromComponents(baseDay)
+
+        let fetchRequest = NSFetchRequest(entityName: "Course")
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "startsAt", ascending: true)]
+        fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [NSPredicate(format: "classDays CONTAINS[cd] %@", weekday), NSPredicate(format: "startsAt > %@", today!)])
+        let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+        
+        do {
+            try courses = context.executeFetchRequest(fetchRequest) as! [Course]
+        } catch let error as NSError {
+            print(error)
+        }
+    }
+    
+    func updateNextClassInterval() {
+        if self.courses.count - coursesCompleted > 0 {
+            let nextDate = courses[coursesCompleted].startsAt!
+            let currentDate = NSDate()
+            
+            self.timeUntilNextClass = nextDate.timeIntervalSinceDate(currentDate)
+            self.labelCountDown.text = clockText(timeUntilNextClass!)
+        }
+    }
+    
+    func checkIn(course: Course) {
+        let currentLocation = CLLocation(latitude: locationStorage.location!.latitude, longitude: locationStorage.location!.longitude)
+        let courseLocation = CLLocation(latitude: (Double(course.locationLat!) as CLLocationDegrees), longitude: (Double(course.locationLng!) as CLLocationDegrees))
+        
+        print(courseLocation)
+        
+        let distance = courseLocation.distanceFromLocation(currentLocation)
+        print(distance)
+        
+        if distance <= kCheckInRadius {
+            print("CHECK IN!")
+        } else {
+            print("You're a liar. You aren't there yet.")
+        }
+    }
+    
+    func skip(course: Course) {
+        
+    }
+    
+    
+    //MARK: - Helper functions
     func fixUIForClasses() {
         if courses.count == 0 {
             self.tableView.hidden = true
             self.labelTodaysClasses.hidden = true
+            self.btnHere.hidden = true
             self.labelCountDown.text = "15 points earned"
             self.labelHeading.text = "You're all done for today!"
             
@@ -131,14 +193,6 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
             self.labelCountDown.sizeToFit()
         } else {
             self.tableView.hidden = false
-            
-            let nextDate = courses[0].startsAt!
-            let currentDate = NSDate()
-            
-            let time = nextDate.timeIntervalSinceDate(currentDate)
-            self.labelCountDown.text = clockText(time)
-            
-            print(time)
         }
     }
     
@@ -154,85 +208,12 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
         }
         
         return output + String(format: "%d Minutes", arguments: [minutes])
-        
-        //return NSString(format: "%0.2d:%0.2d:%0.2d.%0.3d",hours,minutes)
     }
     
-    // MARK: - Table View
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return courses.count
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! TodaysCourseTableViewCell
-        
-        let course = courses[indexPath.row]
-        
-        cell.titleLabel.text = course.title
-        
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "h:mm a"
-        cell.timeLabel.text = "\(dateFormatter.stringFromDate(course.startsAt!)) - \(dateFormatter.stringFromDate(course.endsAt!))"
-        
-        cell.colorViewBGColor = UIColor(rgba: course.hexColor!)
-        cell.colorView.backgroundColor = UIColor(rgba: course.hexColor!)
-        
-        return cell
-    }
-    
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
-    }
-    
-    func skip(course: Course) {
-        
-    }
-    
-    func checkIn(course: Course) {
-        let currentLocation = CLLocation(latitude: locationStorage.location!.latitude, longitude: locationStorage.location!.longitude)
-        let courseLocation = CLLocation(latitude: (Double(course.locationLat!) as CLLocationDegrees), longitude: (Double(course.locationLng!) as CLLocationDegrees))
-        
-        let distance = courseLocation.distanceFromLocation(currentLocation)
-        
-        if distance <= kCheckInRadius {
-            print("CHECK IN!") 
-        } else {
-            print("You're a liar. You aren't there yet.")
-        }
-    }
-    
-    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
-        if indexPath.row < courses.count {
-            let course = courses[indexPath.row]
-            
-            let skip = UITableViewRowAction(style: .Default, title: "Skip", handler: {
-                (action: UITableViewRowAction!, indexPath: NSIndexPath!) in
-                self.skip(course)
-            })
-            
-            let imHere = UITableViewRowAction(style: .Normal, title: "I'm Here", handler: {
-                (action: UITableViewRowAction!, indexPath: NSIndexPath!) in
-                self.checkIn(course)
-            })
-            
-            let ti = NSInteger(course.startsAt!.timeIntervalSinceDate(NSDate()))
-            let minutes = (ti / 60) % 60
-            let hours = (ti / 3600)
-            
-            if (hours == 0 && minutes <= 5) {
-                return [imHere]
-                //return [imHere, skip]
-            } else {
-                return nil
-                //return [skip]
-            }
-        } else {
-            return nil
-        }
+    //accidently broke this
+    func shouldShowThere() -> Bool {
+        print((NSDate().timeIntervalSince1970 - self.timeUntilNextClass!))
+        return Int(NSDate().timeIntervalSince1970 - self.timeUntilNextClass!) < kCheckInTime
     }
     
     func deleteAllData(entity: String) {
@@ -255,6 +236,66 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
         }
     }
     
+    // MARK: - Table View
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return courses.count - self.coursesCompleted
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! TodaysCourseTableViewCell
+        
+        let course = courses[indexPath.row + self.coursesCompleted]
+        
+        cell.titleLabel.text = course.title
+        
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "h:mm a"
+        cell.timeLabel.text = "\(dateFormatter.stringFromDate(course.startsAt!)) - \(dateFormatter.stringFromDate(course.endsAt!))"
+        
+        cell.colorViewBGColor = UIColor(rgba: course.hexColor!)
+        cell.colorView.backgroundColor = UIColor(rgba: course.hexColor!)
+        
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+    
+    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        if indexPath.row < courses.count {
+            let course = courses[indexPath.row + self.coursesCompleted]
+            
+            let skip = UITableViewRowAction(style: .Default, title: "Skip", handler: {
+                (action: UITableViewRowAction!, indexPath: NSIndexPath!) in
+                self.skip(course)
+            })
+            
+            let imHere = UITableViewRowAction(style: .Normal, title: "I'm Here", handler: {
+                (action: UITableViewRowAction!, indexPath: NSIndexPath!) in
+                self.checkIn(course)
+            })
+            
+            if shouldShowThere() {
+                return [imHere]
+            } else {
+                return [skip]
+            }
+        } else {
+            return nil
+        }
+    }
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        cell.separatorInset = UIEdgeInsetsMake(5, 0, 0, 0)
+        cell.preservesSuperviewLayoutMargins = false
+        cell.layoutMargins = UIEdgeInsetsMake(5, 0, 0, 0)
+    }
+    
     // MARK: - Location
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
 
@@ -265,16 +306,7 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
         }
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
+    //MARK: - Navigation
     override func performAction(menuItem: MenuItem) {
         super.performAction(menuItem)
         

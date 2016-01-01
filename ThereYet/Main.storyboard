@@ -641,6 +641,25 @@ ThereYet or Pearson's Account</string>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l78-IE-9TR">
+                                <rect key="frame" x="211" y="322" width="179" height="32"/>
+                                <color key="backgroundColor" red="0.086274509799999996" green="0.52941176469999995" blue="0.74117647060000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="179" id="QSN-dw-QpE"/>
+                                    <constraint firstAttribute="height" constant="32" id="rLd-36-tfX"/>
+                                </constraints>
+                                <state key="normal" title="I'm here!">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="btnHerePressed:" destination="LUb-zc-fB6" eventType="touchUpInside" id="2xq-hb-Vkf"/>
+                                </connections>
+                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Next class in" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XbU-LJ-A37">
                                 <rect key="frame" x="20" y="248" width="560" height="28"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
@@ -652,11 +671,13 @@ ThereYet or Pearson's Account</string>
                         <constraints>
                             <constraint firstItem="IXo-a0-8ny" firstAttribute="centerX" secondItem="wky-YO-cEc" secondAttribute="centerX" id="5cx-XG-9zd"/>
                             <constraint firstItem="XbU-LJ-A37" firstAttribute="top" secondItem="IXo-a0-8ny" secondAttribute="bottom" constant="20" id="Bqt-CA-C8E"/>
+                            <constraint firstItem="l78-IE-9TR" firstAttribute="centerX" secondItem="wky-YO-cEc" secondAttribute="centerX" id="Hts-1I-B8W"/>
                             <constraint firstItem="XbU-LJ-A37" firstAttribute="centerX" secondItem="wky-YO-cEc" secondAttribute="centerX" id="IOl-Hk-aP0"/>
                             <constraint firstItem="vWc-QZ-kRT" firstAttribute="trailing" secondItem="wky-YO-cEc" secondAttribute="trailingMargin" id="MPL-03-xi1"/>
                             <constraint firstItem="vWc-QZ-kRT" firstAttribute="centerX" secondItem="wky-YO-cEc" secondAttribute="centerX" id="OXk-aW-wzY"/>
                             <constraint firstItem="bkz-PG-WUg" firstAttribute="leading" secondItem="wky-YO-cEc" secondAttribute="leadingMargin" constant="-12" id="ST8-xC-w3O"/>
                             <constraint firstItem="JRh-9F-ZBJ" firstAttribute="centerX" secondItem="vWc-QZ-kRT" secondAttribute="centerX" id="TV7-DB-GH5"/>
+                            <constraint firstItem="l78-IE-9TR" firstAttribute="top" secondItem="vWc-QZ-kRT" secondAttribute="bottom" constant="26" id="a5K-7M-OnD"/>
                             <constraint firstItem="vWc-QZ-kRT" firstAttribute="top" secondItem="IXo-a0-8ny" secondAttribute="bottom" constant="47" id="b9j-7b-uCD"/>
                             <constraint firstItem="JRh-9F-ZBJ" firstAttribute="bottom" secondItem="883-1b-UkI" secondAttribute="top" id="euu-46-j0b"/>
                             <constraint firstItem="vWc-QZ-kRT" firstAttribute="leading" secondItem="wky-YO-cEc" secondAttribute="leadingMargin" id="k4C-ya-l5e"/>
@@ -671,6 +692,7 @@ ThereYet or Pearson's Account</string>
                         <barButtonItem key="leftBarButtonItem" image="menu.png" id="VGG-xd-tmx"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="btnHere" destination="l78-IE-9TR" id="JOI-G4-LpT"/>
                         <outlet property="labelCountDown" destination="vWc-QZ-kRT" id="cyv-dQ-zl2"/>
                         <outlet property="labelHeading" destination="XbU-LJ-A37" id="B7u-ae-Rep"/>
                         <outlet property="labelTodaysClasses" destination="bkz-PG-WUg" id="mGQ-PR-MHx"/>

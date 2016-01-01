@@ -39,16 +39,13 @@ class SelectLocationViewController: UIViewController, MGLMapViewDelegate, UISear
             }
         }
         
-        self.mapView.setCenterCoordinate(selectedLocation, zoomLevel: 18, animated: true)
+        self.mapView.setCenterCoordinate(selectedLocation, zoomLevel: 16, animated: true)
         self.view.addSubview(generateFrameMarker())
     }
     
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
-    
-        if selectedLocation != nil {
-            delegate?.locationSelected(selectedLocation)
-        }
+        delegate?.locationSelected(selectedLocation)
     }
     
     private func generateFrameMarker() -> UIImageView {
@@ -66,6 +63,10 @@ class SelectLocationViewController: UIViewController, MGLMapViewDelegate, UISear
     }
     
     //MARK: - Mapbox
+    func mapViewDidFinishLoadingMap(mapView: MGLMapView) {
+        selectedLocation = mapView.centerCoordinate
+    }
+    
     func mapView(mapView: MGLMapView, regionDidChangeAnimated animated: Bool) {
         selectedLocation = mapView.centerCoordinate
     }

@@ -252,7 +252,6 @@ class AddCourseViewController: UITableViewController, UITextFieldDelegate {
             mapVC.delegate = self
             
             //Set previous location
-            print(course?.locationLat)
             if (course?.locationLat != 0 && course?.locationLng != 0 && course?.locationLat != nil && course?.locationLng != nil) {
                 mapVC.selectedLocation = CLLocationCoordinate2DMake(course?.locationLat as! Double, course?.locationLng as! Double)
             }
