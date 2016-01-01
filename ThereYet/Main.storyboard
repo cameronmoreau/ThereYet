@@ -834,6 +834,70 @@ ThereYet or Pearson's Account</string>
             <point key="canvasLocation" x="1684" y="1745"/>
         </scene>
         <!--Navigation Controller-->
+        <scene sceneID="fJJ-Kn-4Ew">
+            <objects>
+                <navigationController storyboardIdentifier="SettingsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="d84-au-wrc" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="9kH-1r-qfg">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="1wk-W2-36B" kind="relationship" relationship="rootViewController" id="jFF-Uo-1qj"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IBb-VE-1ju" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1020" y="2411"/>
+        </scene>
+        <!--Settings-->
+        <scene sceneID="gcB-tu-XVR">
+            <objects>
+                <viewController id="1wk-W2-36B" customClass="SettingsViewController" customModule="ThereYet" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="6pv-h8-4mT"/>
+                        <viewControllerLayoutGuide type="bottom" id="LPl-C9-SGO"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="NuJ-g6-piV">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="3hp-5r-Ob9">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="sp0-x9-koX" style="IBUITableViewCellStyleDefault" id="18u-k7-B1D">
+                                        <rect key="frame" x="0.0" y="113.5" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="18u-k7-B1D" id="8Co-Yr-0Cj">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sp0-x9-koX">
+                                                    <rect key="frame" x="15" y="0.0" width="570" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="1wk-W2-36B" id="Rsi-a1-s9o"/>
+                                    <outlet property="delegate" destination="1wk-W2-36B" id="2IB-xC-9eg"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Settings" id="NaW-Hg-5hN"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dLu-23-zdp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1684" y="2411"/>
+        </scene>
+        <!--Navigation Controller-->
         <scene sceneID="jIc-te-ISn">
             <objects>
                 <navigationController id="7vk-fg-boy" sceneMemberID="viewController">

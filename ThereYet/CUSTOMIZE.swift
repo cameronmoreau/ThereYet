@@ -48,7 +48,7 @@ class MenuItems {
                 MenuItem(storyboardID: "HomeViewController", name: "Overview", image: UIImage(named: "ic_side_overview")?.imageWithRenderingMode(.AlwaysTemplate), highlightedImage: nil, color: mainColor, action: .Navigation),
                 MenuItem(storyboardID: "CoursesViewController", name: "My Classes", image: UIImage(named: "ic_side_courses")?.imageWithRenderingMode(.AlwaysTemplate), highlightedImage: nil, color: mainColor, action: .Navigation),
                 MenuItem(storyboardID: "RewardsViewController", name: "My Rewards", image: UIImage(named: "ic_side_rewards")?.imageWithRenderingMode(.AlwaysTemplate), highlightedImage: nil, color: mainColor, action: .Navigation),
-                MenuItem(storyboardID: "HomeViewController", name: "Setting", image: UIImage(named: "ic_side_settings")?.imageWithRenderingMode(.AlwaysTemplate), highlightedImage: nil, color: mainColor, action: .Navigation)
+                MenuItem(storyboardID: "SettingsViewController", name: "Settings", image: UIImage(named: "ic_side_settings")?.imageWithRenderingMode(.AlwaysTemplate), highlightedImage: nil, color: mainColor, action: .Navigation)
             ]
         } else if section == 1 {
             return [MenuItem(storyboardID: nil, name: "Show Schedule", image: nil, highlightedImage: nil, color: UIColor.blueColor(), action: .Selector),
