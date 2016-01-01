@@ -177,6 +177,15 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
             print("CHECK IN!")
         } else {
             print("You're a liar. You aren't there yet.")
+            
+            let alertController = UIAlertController(title: "You aren't there yet!", message: "You are \(Int(distance)) meters from the location of your class! Nice try!", preferredStyle: .Alert)
+            
+            let cancelAction = UIAlertAction(title: "Darn, you caught me!", style: .Cancel) { (action:UIAlertAction!) in
+                
+            }
+            alertController.addAction(cancelAction)
+            
+            self.presentViewController(alertController, animated: true, completion:nil)
         }
     }
     
@@ -320,7 +329,7 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
             
             //Check for checkin
             if shouldShowThere() {
-                checkIn(courses[coursesCompleted])
+                //checkIn(courses[coursesCompleted])
             }
             
             manager.startMonitoringSignificantLocationChanges()

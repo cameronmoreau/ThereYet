@@ -113,4 +113,27 @@ class Course_RegularObject {
         
         return course
     }
+    
+    func updateCorrespondingNSManagedObject(courseToEdit: Course?) {
+        let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+        
+        courseToEdit?.pearson_id = self.pearson_id
+        courseToEdit?.hexColor = self.hexColor
+        courseToEdit?.title = self.title
+        courseToEdit?.createdAt = self.createdAt
+        courseToEdit?.locationLat = self.locationLat
+        courseToEdit?.locationLng = self.locationLng
+        courseToEdit?.startsAt = self.startsAt
+        courseToEdit?.endsAt = self.endsAt
+        courseToEdit?.classDays = self.classDays
+        
+        print(courseToEdit)
+        
+        do {
+            try context.save()
+        } catch {
+            print("could not update the course object in Core Data")
+        }
+    }
+    
 }

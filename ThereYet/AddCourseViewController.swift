@@ -37,19 +37,22 @@ class AddCourseViewController: UITableViewController, UITextFieldDelegate {
     
     var saveButton: UIBarButtonItem!
     
-    var course: Course?
-    var managedObjectContext: NSManagedObjectContext!
+    var courseToEdit: Course?
+    var course: Course_RegularObject?
+    //var course: Course?
+    //var managedObjectContext: NSManagedObjectContext!
     
     var alreadySetUp = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+        //managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
         
         if course == nil {
-            let entityDescripition = NSEntityDescription.entityForName("Course", inManagedObjectContext: managedObjectContext!)
-            course = Course(entity: entityDescripition!, insertIntoManagedObjectContext: managedObjectContext)
+            //let entityDescripition = NSEntityDescription.entityForName("Course", inManagedObjectContext: managedObjectContext!)
+            //course = Course(entity: entityDescripition!, insertIntoManagedObjectContext: managedObjectContext)
+            course = Course_RegularObject()
             course!.title = ""
         } else if course!.pearson_id != nil {
             titleTextField.userInteractionEnabled = false
@@ -139,6 +142,35 @@ class AddCourseViewController: UITableViewController, UITextFieldDelegate {
         }
     }
     
+    override func willMoveToParentViewController(parent: UIViewController?) { //back button pressed
+        if (!isAdding && alreadySetUp) {
+            if classDaysSegmentedControl != nil {
+                var classDayString: String!
+                for selectedIndex in classDaysSegmentedControl.selectedSegmentIndexes {
+                    if selectedIndex == classDaysSegmentedControl.selectedSegmentIndexes.firstIndex {
+                        classDayString = "\(selectedIndex), "
+                    } else if selectedIndex == classDaysSegmentedControl.selectedSegmentIndexes.lastIndex {
+                        classDayString = "\(classDayString)\(selectedIndex)"
+                    } else {
+                        classDayString = "\(classDayString)\(selectedIndex), "
+                    }
+                    
+                    if classDaysSegmentedControl.selectedSegmentIndexes.count == 1 {
+                        classDayString = "\(selectedIndex)"
+                    }
+                }
+                
+                course?.classDays = classDayString
+            }
+            
+            if titleTextField != nil {
+                course?.title = titleTextField.text
+            }
+            
+            course?.updateCorrespondingNSManagedObject(courseToEdit!)
+        }
+    }
+    
     func datePickerDoneTap() {
         if startsAtTextField.isFirstResponder() {
             course?.startsAt = datePicker.date
@@ -160,7 +192,7 @@ class AddCourseViewController: UITableViewController, UITextFieldDelegate {
         endsAtTextField.resignFirstResponder()
     }
     
-    func setUpViewController(course: Course) {
+    func setUpViewController(course: Course_RegularObject) {
         //title set up
         titleTextField.text = course.title
         
@@ -223,12 +255,12 @@ class AddCourseViewController: UITableViewController, UITextFieldDelegate {
         
         course?.pearson_id = nil
         
-        //course?.saveAsNSManagedObject()
-        do {
+        course?.saveAsNSManagedObject()
+        /*do {
             try managedObjectContext.save()
         } catch {
-            print("Coulnt update")
-        }
+            print("Couldn't update")
+        }*/
         
         self.dismissViewControllerAnimated(true, completion: nil)
     }
