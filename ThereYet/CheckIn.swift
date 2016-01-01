@@ -9,5 +9,9 @@
 import CoreData
 
 class CheckIn: NSManagedObject {
-
+    
+    @NSManaged var course: Course?
+    @NSManaged var timestamp: NSDate?
+    @NSManaged var points: NSNumber?
+    
 }
