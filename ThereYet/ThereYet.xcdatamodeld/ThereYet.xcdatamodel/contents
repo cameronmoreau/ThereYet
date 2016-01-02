@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15C50" minimumToolsVersion="Xcode 7.0">
-    <entity name="CheckIn" syncable="YES">
+    <entity name="CheckIn" representedClassName=".CheckIn" syncable="YES">
         <attribute name="points" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="timestamp" optional="YES" attributeType="Date" syncable="YES"/>
         <relationship name="course" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Course" syncable="YES"/>
@@ -19,6 +19,6 @@
     </entity>
     <elements>
         <element name="Course" positionX="-45" positionY="0" width="128" height="30"/>
-        <element name="CheckIn" positionX="-45" positionY="72" width="128" height="30"/>
+        <element name="CheckIn" positionX="-45" positionY="72" width="128" height="90"/>
     </elements>
 </model>
