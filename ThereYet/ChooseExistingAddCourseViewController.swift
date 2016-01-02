@@ -21,7 +21,7 @@ class ChooseExistingAddCourseViewController: UIViewController, UITableViewDataSo
         }
     }
     
-    var courses: [Course]!
+    var courses = [Course]()
     var selectedIndexPath: NSIndexPath?
     
     override func viewDidLoad() {
@@ -29,7 +29,6 @@ class ChooseExistingAddCourseViewController: UIViewController, UITableViewDataSo
         
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
         
-        courses = [Course]()
         let fetchRequest = NSFetchRequest(entityName: "Course")
         fetchRequest.predicate = NSPredicate(format: "pearson_id != nil && hexColor == nil")
         let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
@@ -104,21 +103,7 @@ class ChooseExistingAddCourseViewController: UIViewController, UITableViewDataSo
             vc.isAdding = true
             if let indexPath = selectedIndexPath {
                 if (indexPath.section != 1 && indexPath.row < courses.count) {
-                    let tempCourse = courses[indexPath.row]
-                    
-                    let course = Course_RegularObject()
-                    course.pearson_id = tempCourse.pearson_id
-                    course.hexColor = tempCourse.hexColor
-                    course.title = tempCourse.title
-                    course.createdAt = tempCourse.createdAt
-                    course.locationLat = tempCourse.locationLat
-                    course.locationLng = tempCourse.locationLng
-                    course.startsAt = tempCourse.startsAt
-                    course.endsAt = tempCourse.endsAt
-                    course.classDays = tempCourse.classDays
-                    
-                    vc.course = course
-                    //vc.course = courses[indexPath.row]
+                    vc.originalCourse = courses[indexPath.row]
                 }
             }
         }

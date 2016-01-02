@@ -20,7 +20,7 @@ class CoursesViewController: CenterViewController, UITableViewDataSource, UITabl
         
         courses  = [Course]()
         let fetchRequest = NSFetchRequest(entityName: "Course")
-        fetchRequest.predicate = NSPredicate(format: "pearson_id == nil")
+        fetchRequest.predicate = NSPredicate(format: "hexColor != nil")
         let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
         
         do {
@@ -115,23 +115,7 @@ class CoursesViewController: CenterViewController, UITableViewDataSource, UITabl
         if segue.identifier == "editCourse" {
             let vc = segue.destinationViewController as! AddCourseViewController
             vc.isAdding = false
-            
-            let tempCourse = courses[tableView.indexPathForSelectedRow!.row]
-            
-            let course = Course_RegularObject()
-            course.pearson_id = tempCourse.pearson_id
-            course.hexColor = tempCourse.hexColor
-            course.title = tempCourse.title
-            course.createdAt = tempCourse.createdAt
-            course.locationLat = tempCourse.locationLat
-            course.locationLng = tempCourse.locationLng
-            course.startsAt = tempCourse.startsAt
-            course.endsAt = tempCourse.endsAt
-            course.classDays = tempCourse.classDays
-            
-            vc.courseToEdit = tempCourse
-            vc.course = course
-            //vc.course = courses[tableView.indexPathForSelectedRow!.row]
+            vc.originalCourse = courses[tableView.indexPathForSelectedRow!.row]
         }
     }
     

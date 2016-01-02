@@ -37,24 +37,23 @@ class AddCourseViewController: UITableViewController, UITextFieldDelegate {
     
     var saveButton: UIBarButtonItem!
     
-    var courseToEdit: Course?
-    var course: Course_RegularObject?
-    //var course: Course?
-    //var managedObjectContext: NSManagedObjectContext!
+    var course: Course_RegularObject!
+    var originalCourse: Course?
     
     var alreadySetUp = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
-        
-        if course == nil {
-            //let entityDescripition = NSEntityDescription.entityForName("Course", inManagedObjectContext: managedObjectContext!)
-            //course = Course(entity: entityDescripition!, insertIntoManagedObjectContext: managedObjectContext)
+        if let ogCourse = originalCourse {
+            course = ogCourse.toRegularObject()
+        } else {
             course = Course_RegularObject()
             course!.title = ""
-        } else if course!.pearson_id != nil {
+        }
+        
+        //Disable editing for pearson
+        if course.pearson_id != nil {
             titleTextField.userInteractionEnabled = false
         }
         
@@ -167,7 +166,10 @@ class AddCourseViewController: UITableViewController, UITextFieldDelegate {
                 course?.title = titleTextField.text
             }
             
-            course?.updateCorrespondingNSManagedObject(courseToEdit!)
+            //Update original
+            if originalCourse != nil && !isAdding {
+                course.updateCorrespondingNSManagedObject(originalCourse!)
+            }
         }
     }
     
@@ -247,20 +249,18 @@ class AddCourseViewController: UITableViewController, UITextFieldDelegate {
                 classDayString = "\(selectedIndex)"
             }
         }
-        course?.classDays = classDayString
         
-        course?.title = titleTextField.text
+        course.classDays = classDayString
+        course.title = titleTextField.text
         
-        course?.createdAt = NSDate()
+        if originalCourse != nil {
+            course.updateCorrespondingNSManagedObject(originalCourse!)
+        }
         
-        course?.pearson_id = nil
-        
-        course?.saveAsNSManagedObject()
-        /*do {
-            try managedObjectContext.save()
-        } catch {
-            print("Couldn't update")
-        }*/
+        //Not pearson
+        else {
+            course.saveAsNSManagedObject()
+        }
         
         self.dismissViewControllerAnimated(true, completion: nil)
     }
