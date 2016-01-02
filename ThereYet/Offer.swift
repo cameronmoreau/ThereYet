@@ -8,24 +8,16 @@
 
 import Parse
 
-class Offer: PFObject, PFSubclassing {
+class Offer {
     
-    override class func initialize() {
-        struct Static {
-            static var onceToken : dispatch_once_t = 0;
-        }
-        dispatch_once(&Static.onceToken) {
-            self.registerSubclass()
-        }
+    var sponsor: PFObject?
+    var title: String?
+    var points: Int?
+    
+    init(sponsor: PFObject, object: [String: AnyObject]) {
+        self.sponsor = sponsor
+        self.title = object["title"] as? String
+        self.points = object["points"] as? Int
     }
-    
-    static func parseClassName() -> String {
-        return "Offer"
-    }
-    
-    @NSManaged var title: String!
-    @NSManaged var desc: String!
-    @NSManaged var company: String!
-    @NSManaged var points: NSNumber!
 
 }

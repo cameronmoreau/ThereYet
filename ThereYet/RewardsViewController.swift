@@ -26,8 +26,8 @@ class RewardsViewController: CenterViewController, UITableViewDataSource, UITabl
         case History
     }
     
-    var offers: [Offer] = []
-    //var giftCards:
+    var offers = [Offer]()
+    var giftCards = [GiftCard]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,15 +39,9 @@ class RewardsViewController: CenterViewController, UITableViewDataSource, UITabl
         loadingHUD.textLabel.text = "Loading"
         loadingHUD.showInView(self.view, animated: true)
         
-        self.fetchOffers({
-            (offers: [Offer]?) in
-            
+        self.loadData({
             loadingHUD.dismiss()
-            
-            if offers != nil {
-                self.offers = offers!
-                self.tableView.reloadData()
-            }
+            self.tableView.reloadData()
         })
     }
 
@@ -66,47 +60,71 @@ class RewardsViewController: CenterViewController, UITableViewDataSource, UITabl
         case TYPE.Offers.rawValue:
             return offers.count
             
+        case TYPE.GiftCards.rawValue:
+            return giftCards.count
+            
         default:
             return 0
         }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell: UITableViewCell!
-        
         if viewTab.selectedSegmentIndex == TYPE.GiftCards.rawValue {
-            cell = tableView.dequeueReusableCellWithIdentifier("GiftCardCell")
+            let cell = tableView.dequeueReusableCellWithIdentifier("GiftCardCell") as! GiftCardTableViewCell
+            cell.setGiftCard(self.giftCards[indexPath.row])
+            return cell
         }
         
         else {
-            cell = tableView.dequeueReusableCellWithIdentifier("OfferCell")
-            
+            let cell = tableView.dequeueReusableCellWithIdentifier("OfferCell")! as UITableViewCell
             let offer = self.offers[indexPath.row]
             cell.textLabel?.text = offer.title
-            cell.detailTextLabel?.text = offer.company
-            
+            cell.detailTextLabel?.text = offer.sponsor!["title"] as? String
+            return cell
+        }
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if viewTab.selectedSegmentIndex == TYPE.GiftCards.rawValue {
+            return 138
         }
         
-        return cell
+        return 44
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
-    func fetchOffers(completion: ((offers: [Offer]?) -> ())) {
-        let query = PFQuery(className: Offer.parseClassName())
-        query.limit = 25
+    func loadData(completion: (() -> ())) {
+        let query = PFQuery(className: "Sponsor")
         
         query.findObjectsInBackgroundWithBlock({
             (objects: [PFObject]?, error: NSError?) in
             
-            if error == nil {
-                completion(offers: objects as? [Offer])
-            } else {
-                completion(offers: nil)
+            if let sponsors = objects {
+                for sponsor in sponsors {
+                    
+                    //Gift cards
+                    if let gcs = sponsor["giftCards"] {
+                        for gc in gcs as! [AnyObject] {
+                            self.giftCards.append(GiftCard(sponsor: sponsor, object: gc as! [String:AnyObject]))
+                        }
+                    }
+                    
+                    //Offers
+                    if let os = sponsor["offers"] {
+                        for o in os as! [AnyObject] {
+                            self.offers.append(Offer(sponsor: sponsor, object: o as! [String:AnyObject]))
+                        }
+                    }
+                }
             }
+            
+            print(self.giftCards)
+            completion()
         })
+        
     }
     
 
