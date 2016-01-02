@@ -39,22 +39,28 @@ class SettingsViewController: CenterViewController, UITableViewDataSource, UITab
         }
     }
     
-    func signOut() {
+    func deleteAllData(entity: String) {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
-        let fetchRequest = NSFetchRequest(entityName: "Course")
+        let fetchRequest = NSFetchRequest(entityName: entity)
         fetchRequest.returnsObjectsAsFaults = false
         
-        do {
+        do
+        {
             let results = try managedContext.executeFetchRequest(fetchRequest)
             print(results)
-            for managedObject in results {
+            for managedObject in results
+            {
                 let managedObjectData:NSManagedObject = managedObject as! NSManagedObject
                 managedContext.deleteObject(managedObjectData)
             }
         } catch let error as NSError {
-            print("Detele all data in Course error : \(error) \(error.userInfo)")
+            print("Detele all data in \(entity) error : \(error) \(error.userInfo)")
         }
+    }
+    
+    func signOut() {
+        deleteAllData("Course")
         
         let pearsonUser = PearsonUser()
         pearsonUser.authData.destroy()
