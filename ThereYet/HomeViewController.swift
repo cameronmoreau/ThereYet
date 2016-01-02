@@ -121,18 +121,6 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
     
     //MARK: - Base Functions
     func loadCourses() {
-        let fetchRequest1 = NSFetchRequest(entityName: "Course")
-        let context1 = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
-        var tempArray = [Course]()
-        do {
-            try tempArray = context1.executeFetchRequest(fetchRequest1) as! [Course]
-        } catch let error as NSError {
-            print(error)
-        }
-        kNumCoursesTotal = tempArray.count
-        
-        //---------------------
-        
         let weekdayInt = NSCalendar.currentCalendar().components(.Weekday, fromDate: NSDate()).weekday-1
         let weekday = "\(weekdayInt)"
         
@@ -145,6 +133,9 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
         
         do {
             try courses = context.executeFetchRequest(fetchRequest) as! [Course]
+            
+            kNumCoursesTotal = courses.count
+            
             var tempCourses = [Course]()
             for course in courses {
                 let ti = NSInteger(convertDateToBaseDate(course.startsAt!).timeIntervalSinceDate(convertDateToBaseDate(NSDate())))
