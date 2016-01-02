@@ -43,6 +43,10 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
     let locationStorage = LocationStorage()
     
     var courses: [Course]!
+    
+    var coursesPast: [Course]!
+    
+    var coursesCompleted = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,30 +86,7 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
     }
     
     override func viewDidAppear(animated: Bool) {
-        let time: NSTimeInterval = 1
-        
-        var progress: CGFloat = 100
-        if courses.count > 0 {
-            //print(courses.count, kNumCoursesTotal)
-            progress = CGFloat(Double(Double(courses.count)/Double(kNumCoursesTotal)) * 100)
-        }
-        self.progressBar.setValue(progress, animateWithDuration: time)
-        
-        //Show check
-        if progress == 100 {
-            let delay = time * Double(NSEC_PER_SEC)
-            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
-            dispatch_after(delayTime, dispatch_get_main_queue()) {
-                self.progressImage.image = UIImage(named: "ic_check.png")
-                
-                let transition = CATransition()
-                transition.duration = 1
-                transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-                transition.type = kCATransitionFade
-                
-                self.progressImage.layer.addAnimation(transition, forKey: nil)
-            }
-        }
+        updateProgressBar()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -137,10 +118,13 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
             kNumCoursesTotal = courses.count
             
             var tempCourses = [Course]()
+            coursesPast = [Course]()
             for course in courses {
                 let ti = NSInteger(convertDateToBaseDate(course.startsAt!).timeIntervalSinceDate(convertDateToBaseDate(NSDate())))
                 if ti > 0 {
                     tempCourses.append(course)
+                } else {
+                    coursesPast.append(course)
                 }
             }
             courses.removeAll()
@@ -164,9 +148,33 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
         return NSCalendar.currentCalendar().dateFromComponents(baseDayMonthYear)!
     }
     
+    func updateProgressBar() {
+        let time: NSTimeInterval = 1
+        
+        var progress: CGFloat = 100
+        print(coursesPast.count, kNumCoursesTotal, coursesCompleted)
+        progress = CGFloat(Double(Double(coursesPast.count+coursesCompleted)/Double(kNumCoursesTotal)) * 100)
+        self.progressBar.setValue(progress, animateWithDuration: time)
+        
+        if progress == 100 {
+            let delay = time * Double(NSEC_PER_SEC)
+            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+            dispatch_after(delayTime, dispatch_get_main_queue()) {
+                self.progressImage.image = UIImage(named: "ic_check.png")
+                
+                let transition = CATransition()
+                transition.duration = 1
+                transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+                transition.type = kCATransitionFade
+                
+                self.progressImage.layer.addAnimation(transition, forKey: nil)
+            }
+        }
+    }
+    
     func updateNextClassInterval() {
         if self.courses.count > 0 {
-            let nextDate = convertDateToBaseDate(courses[0].startsAt!)
+            let nextDate = convertDateToBaseDate(courses[coursesCompleted].startsAt!)
             let currentDate = convertDateToBaseDate(NSDate())
             
             self.timeUntilNextClass = nextDate.timeIntervalSinceDate(currentDate)
@@ -185,6 +193,10 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
         
         if distance <= kCheckInRadius {
             print("CHECK IN!")
+            coursesCompleted++
+            updateProgressBar()
+            updateNextClassInterval()
+            self.tableView.reloadData()
         } else {
             print("You're a liar. You aren't there yet.")
             
@@ -269,13 +281,13 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return courses.count
+        return courses.count-coursesCompleted
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! TodaysCourseTableViewCell
         
-        let course = courses[indexPath.row]
+        let course = courses[indexPath.row+coursesCompleted]
         
         cell.titleLabel.text = course.title
         
@@ -297,7 +309,7 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
     
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         if indexPath.row < courses.count {
-            let course = courses[indexPath.row]
+            let course = courses[indexPath.row+coursesCompleted]
             
             let skip = UITableViewRowAction(style: .Default, title: "Skip", handler: {
                 (action: UITableViewRowAction!, indexPath: NSIndexPath!) in
