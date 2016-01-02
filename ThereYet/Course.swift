@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import Parse
+import Foundation
 
 class Course: NSManagedObject {
 
@@ -23,10 +24,20 @@ class Course: NSManagedObject {
     @NSManaged var createdAt: NSDate?
     @NSManaged var updatedAt: NSDate?
     
-    func update() {
-    
+    func toRegularObject() -> Course_RegularObject {
+        let c = Course_RegularObject()
+        c.pearson_id = self.pearson_id
+        c.hexColor = self.hexColor
+        c.title = self.title
+        c.locationLat = self.locationLat
+        c.locationLng = self.locationLng
+        c.startsAt = self.startsAt
+        c.endsAt = self.endsAt
+        c.classDays = self.classDays
+        c.createdAt = self.createdAt
+        c.updatedAt = self.updatedAt
+        return c
     }
-
 }
 
 class Course_RegularObject {
@@ -39,8 +50,8 @@ class Course_RegularObject {
     var startsAt: NSDate?
     var endsAt: NSDate?
     var classDays: String?
-    var createdAt: NSDate?
     var updatedAt: NSDate?
+    var createdAt: NSDate?
     
     init() {
     }
@@ -56,8 +67,8 @@ class Course_RegularObject {
         self.startsAt = parseObject["startsAt"] as? NSDate
         self.endsAt = parseObject["endsAt"] as? NSDate
         self.classDays = parseObject["classDays"] as? String
-        self.createdAt = parseObject["createdAt"] as? NSDate
-        self.updatedAt = parseObject["updatedAt"] as? NSDate
+        self.createdAt = parseObject.createdAt! as NSDate
+        self.updatedAt = parseObject.updatedAt! as NSDate
     }
     
     //lol Fuck it ship it, too late now
@@ -90,21 +101,80 @@ class Course_RegularObject {
         return obj
     }
     
+    func daysOfWeek() -> [Int]? {
+        if let days = self.classDays {
+            var result = [Int]()
+            
+            let ds = days.componentsSeparatedByString(", ")
+            for d in ds {
+                result.append(Int(d)!)
+            }
+            
+            return result
+        }
+        
+        return nil
+    }
+    
+    func setupNotifications () {
+        //delete old
+        let notifications = UIApplication.sharedApplication().scheduledLocalNotifications! as [UILocalNotification]
+        for n in notifications {
+            let uuid = n.userInfo!["uuid"] as! String
+            if uuid.rangeOfString(self.title!) != nil {
+                print("Canceling notification")
+                UIApplication.sharedApplication().cancelLocalNotification(n)
+            }
+        }
+        
+        let calComps = NSCalendar.currentCalendar().components([.Day, .Month, .Year, .Hour, .Minute], fromDate: NSDate())
+        
+        let baseDayMonthYear = NSDateComponents()
+        baseDayMonthYear.year = 1997
+        baseDayMonthYear.month = 1
+        baseDayMonthYear.day = 4
+        baseDayMonthYear.hour = calComps.hour
+        baseDayMonthYear.minute = calComps.minute
+        
+        //setup new
+        if let days = self.daysOfWeek() {
+            for d in days {
+                let localNotification = UILocalNotification()
+                localNotification.userInfo = ["uuid": "\(self.title!)-\(d)"]
+                localNotification.fireDate = self.startsAt!.dateByAddingTimeInterval(-300)
+                localNotification.alertBody = "\(self.title!) is starting soon"
+                localNotification.category = "CLASS"
+                localNotification.timeZone = NSTimeZone.defaultTimeZone()
+                localNotification.repeatInterval = .WeekOfYear
+                
+                UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
+            }
+        }
+    }
+    
     func saveAsNSManagedObject() -> Course? {
         let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
-        
         let entity = NSEntityDescription.entityForName("Course", inManagedObjectContext: context)
         let course = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: context) as? Course
+        
         course?.pearson_id = self.pearson_id
         course?.hexColor = self.hexColor
         course?.title = self.title
-        course?.createdAt = self.createdAt
         course?.locationLat = self.locationLat
         course?.locationLng = self.locationLng
         course?.startsAt = self.startsAt
         course?.endsAt = self.endsAt
         course?.classDays = self.classDays
-
+        course?.createdAt = self.createdAt
+        course?.updatedAt = self.updatedAt
+        
+        if self.updatedAt == nil || self.createdAt == nil {
+            course?.createdAt = NSDate()
+            course?.updatedAt = NSDate()
+        }
+        
+        setupNotifications()
+        
         do {
             try context.save()
         } catch {
@@ -120,14 +190,14 @@ class Course_RegularObject {
         courseToEdit?.pearson_id = self.pearson_id
         courseToEdit?.hexColor = self.hexColor
         courseToEdit?.title = self.title
-        courseToEdit?.createdAt = self.createdAt
+        courseToEdit?.updatedAt = NSDate()
         courseToEdit?.locationLat = self.locationLat
         courseToEdit?.locationLng = self.locationLng
         courseToEdit?.startsAt = self.startsAt
         courseToEdit?.endsAt = self.endsAt
         courseToEdit?.classDays = self.classDays
         
-        print(courseToEdit)
+        setupNotifications()
         
         do {
             try context.save()

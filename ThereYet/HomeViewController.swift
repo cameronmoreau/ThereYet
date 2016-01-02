@@ -14,14 +14,11 @@ import MBCircularProgressBar
 
 class HomeViewController: CenterViewController, UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate {
     
-    @IBAction func btnHerePressed(sender: AnyObject) {
-        if let time = self.timeUntilNextClass {
-            if Int(time) < kCheckInTime {
-                self.shouldCheckIn = true
-                self.locationManager.startUpdatingLocation()
-            }
+    @IBAction func btnHerePressed(sender: AnyObject?) {
+        if canCheckIn() {
+            self.attemptedCheckin = false
+            self.locationManager.startUpdatingLocation()
         }
-        
     }
     
     @IBOutlet weak var progressBar: MBCircularProgressBarView!
@@ -35,7 +32,6 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
     @IBOutlet weak var btnHere: UIButton!
     
     var kNumCoursesTotal = 0
-    
     let kCheckInRadius: Double = 20 //in meters
     let kCheckInTime = 300 //in seconds
     var timeUntilNextClass: NSTimeInterval?
@@ -65,24 +61,13 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
         self.tableView.dataSource = self
         self.tableView.cellLayoutMarginsFollowReadableWidth = false
         
-        loadCourses()
+        loadData()
         updateNextClassInterval()
         fixUIForClasses()
         
         //Location data - needs to be fixed later
         if !CLLocationManager.locationServicesEnabled() {
             locationManager.requestWhenInUseAuthorization()
-        }
-        
-        //Temp notification
-        if courses.count > 0 {
-            let localNotification = UILocalNotification()
-            localNotification.fireDate = NSDate(timeIntervalSinceNow: 5)
-            localNotification.alertBody = "\(courses[0].title!) is starting soon"
-            localNotification.category = "CLASS"
-            localNotification.timeZone = NSTimeZone.defaultTimeZone()
-            
-            UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
         }
     }
     
@@ -102,20 +87,18 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
     }
     
     //MARK: - Base Functions
-    func loadCourses() {
+    func loadData() {
+        let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
         let weekdayInt = NSCalendar.currentCalendar().components(.Weekday, fromDate: NSDate()).weekday-1
         let weekday = "\(weekdayInt)"
         
-        courses  = [Course]()
-        
-        let fetchRequest = NSFetchRequest(entityName: "Course")
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "startsAt", ascending: true)]
-        fetchRequest.predicate = NSPredicate(format: "classDays CONTAINS[cd] %@", weekday)
-        let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+        //Courses
+        let courseFetch = NSFetchRequest(entityName: "Course")
+        courseFetch.sortDescriptors = [NSSortDescriptor(key: "startsAt", ascending: true)]
+        courseFetch.predicate = NSPredicate(format: "classDays CONTAINS[cd] %@", weekday)
         
         do {
-            try courses = context.executeFetchRequest(fetchRequest) as! [Course]
-            
+            try courses = context.executeFetchRequest(courseFetch) as! [Course]
             kNumCoursesTotal = courses.count
             
             var tempCourses = [Course]()
@@ -133,7 +116,22 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
         } catch let error as NSError {
             print(error)
         }
+        
+        //Last Checkin
+        let checkFetch = NSFetchRequest(entityName: "CheckIn")
+        checkFetch.sortDescriptors = [NSSortDescriptor(key: "timestamp", ascending: false)]
+        checkFetch.fetchLimit = 1
+        
+        var checkins = [CheckIn]()
+        
+        do {
+            try checkins = context.executeFetchRequest(checkFetch) as! [CheckIn]
+            self.lastCheckin = checkins.popLast()
+        } catch let error as NSError {
+            print(error)
+        }
     }
+    
     
     func convertDateToBaseDate(date: NSDate) -> NSDate {
         let calComps = NSCalendar.currentCalendar().components([.Day, .Month, .Year, .Hour, .Minute], fromDate: date)
@@ -183,14 +181,31 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
         }
     }
     
-    func checkIn(course: Course) {
-        let currentLocation = CLLocation(latitude: locationStorage.location!.latitude, longitude: locationStorage.location!.longitude)
+    func canCheckIn() -> Bool {
+        if attemptedCheckin {
+            return false
+        }
+        
+        if let next = timeUntilNextClass {
+            if Int(next) < kCheckInTime {
+                if let last = lastCheckin {
+                    let lastInterval = Int(last.timestamp!.timeIntervalSinceNow)
+                    if lastInterval + kCheckInTime > Int(next) && last.course == courses[0] {
+                        self.labelCountDown.text = "You have arrived!"
+                        return false
+                    }
+                }
+                
+                return true
+            }
+        }
+        
+        return false
+    }
+    
+    func checkIn(course: Course, currentLocation: CLLocation) {
         let courseLocation = CLLocation(latitude: (Double(course.locationLat!) as CLLocationDegrees), longitude: (Double(course.locationLng!) as CLLocationDegrees))
-        
-        print(courseLocation)
-        
         let distance = courseLocation.distanceFromLocation(currentLocation)
-        print(distance)
         
         if distance <= kCheckInRadius {
             print("CHECK IN!")
@@ -201,12 +216,26 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
         } else {
             print("You're a liar. You aren't there yet.")
             
+            checkIn?.timestamp = NSDate()
+            checkIn?.course = courses[0]
+            checkIn?.points = Int(10 / kNumCoursesTotal) // needs to be fixed if time
+            
+            do {
+                try context.save()
+                self.lastCheckin = checkIn
+                self.btnHere.hidden = true
+                self.labelCountDown.text = "You have arrived!"
+                
+                let alertController = UIAlertController(title: "Congrats!", message: "You earned \(checkIn!.points!) points", preferredStyle: .Alert)
+                alertController.addAction(UIAlertAction(title: "Okay", style: .Cancel, handler: nil))
+                self.presentViewController(alertController, animated: true, completion:nil)
+            } catch {
+                print("error saving")
+            }
+        } else {
             let alertController = UIAlertController(title: "You aren't there yet!", message: "You are \(Int(distance)) meters from the location of your class! Nice try!", preferredStyle: .Alert)
             
-            let cancelAction = UIAlertAction(title: "Darn, you caught me!", style: .Cancel) { (action:UIAlertAction!) in
-                
-            }
-            alertController.addAction(cancelAction)
+            alertController.addAction(UIAlertAction(title: "Darn, you caught me!", style: .Cancel, handler: nil))
             
             self.presentViewController(alertController, animated: true, completion:nil)
         }
@@ -233,12 +262,8 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
         } else {
             self.tableView.hidden = false
             
-            //Class in next 5 minutes
-            if let time = self.timeUntilNextClass {
-                if Int(time) < kCheckInTime {
-                    self.shouldCheckIn = true
-                    self.btnHere.hidden = false
-                }
+            if canCheckIn() {
+                self.btnHere.hidden = false
             }
         }
     }
@@ -280,8 +305,6 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
         cell.colorViewBGColor = UIColor(rgba: course.hexColor!)
         cell.colorView.backgroundColor = UIColor(rgba: course.hexColor!)
         
-        print(convertDateToBaseDate(course.startsAt!))
-        
         return cell
     }
     
@@ -300,14 +323,12 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
 
             let imHere = UITableViewRowAction(style: .Normal, title: "I'm Here", handler: {
                 (action: UITableViewRowAction!, indexPath: NSIndexPath!) in
-                self.checkIn(course)
+                self.btnHerePressed(nil)
             })
 
             let ti = NSInteger(convertDateToBaseDate(course.startsAt!).timeIntervalSinceDate(convertDateToBaseDate(NSDate())))
             let minutes = (ti / 60) % 60
             let hours = (ti / 3600)
-
-            //print(hours, minutes)
             
             if (hours == 0 && minutes <= 5) {
                 return [imHere]
@@ -332,9 +353,10 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
 
         //If a location was found, store it
         if let location = manager.location {
-            if self.shouldCheckIn {
-                self.checkIn(courses[0])
-                self.shouldCheckIn = false
+            if canCheckIn() {
+                self.attemptedCheckin = true
+                self.checkIn(courses[0], currentLocation: location)
+                manager.stopMonitoringSignificantLocationChanges()
             }
             
             manager.startMonitoringSignificantLocationChanges()

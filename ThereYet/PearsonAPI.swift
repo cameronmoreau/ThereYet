@@ -86,8 +86,6 @@ class PearsonAPI {
                     if !dataPath.isEmpty {
                         let course = Course_RegularObject()
                         course.pearson_id = Int(NSURL(string: "\(dataPath)")!.pathComponents![2])
-                        course.createdAt = NSDate()
-                        course.updatedAt = NSDate()
                         courses.append(course)
                     }
                 }
