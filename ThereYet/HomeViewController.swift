@@ -49,6 +49,7 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
     var coursesPast: [Course]!
     
     var coursesCompleted = 0
+    var shouldCheckIn = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
