@@ -92,7 +92,7 @@ class ContainerViewController: UIViewController, UIGestureRecognizerDelegate, Ce
     }
     
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        if otherGestureRecognizer.isKindOfClass(UISwipeGestureRecognizer) {
+        if otherGestureRecognizer.isKindOfClass(UISwipeGestureRecognizer)  {
             return false
         } else {
             return true

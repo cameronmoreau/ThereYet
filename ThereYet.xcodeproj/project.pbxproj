@@ -295,8 +295,8 @@
 				4991C2E31C36FE740026213E /* OverviewViewController.swift */,
 				49E4F7A01C2BD43C00F7FFBA /* CoursesViewController.swift */,
 				4991C2E51C36FFCC0026213E /* Add Course */,
-				7E57E6AB1C2CA05800AC907D /* RewardsViewController.swift */,
 				4991C2E11C36FB7E0026213E /* SettingsViewController.swift */,
+				7E57E6AB1C2CA05800AC907D /* RewardsViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";

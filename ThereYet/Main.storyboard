@@ -38,7 +38,7 @@
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="fVK-ON-LJE" kind="show" id="eyf-B7-T5q"/>
+                                    <segue destination="fVK-ON-LJE" kind="show" id="ML6-GX-WZ5"/>
                                 </connections>
                             </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="445-2K-hdm" customClass="TPKeyboardAvoidingScrollView">
@@ -493,9 +493,71 @@
                     <view key="view" contentMode="scaleToFill" id="wgt-Ze-Kr6">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eog-rs-dyB">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jU2-bO-T8I" customClass="BarChartView" customModule="Charts">
+                                        <rect key="frame" x="20" y="30" width="560" height="200"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="200" id="5Oz-If-N5d"/>
+                                            <constraint firstAttribute="height" constant="200" id="AtM-fl-bYo"/>
+                                            <constraint firstAttribute="width" constant="265" id="EeC-I0-k2P"/>
+                                        </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="5Oz-If-N5d"/>
+                                                <exclude reference="EeC-I0-k2P"/>
+                                            </mask>
+                                        </variation>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pSs-me-jSA" customClass="PieChartView" customModule="Charts">
+                                        <rect key="frame" x="20" y="260" width="560" height="500"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="500" id="fbF-Qe-fhs"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="jU2-bO-T8I" firstAttribute="leading" secondItem="Eog-rs-dyB" secondAttribute="leadingMargin" id="0Dp-lo-Csu"/>
+                                    <constraint firstAttribute="trailing" secondItem="jU2-bO-T8I" secondAttribute="trailing" constant="20" id="23i-CI-Nmp"/>
+                                    <constraint firstItem="pSs-me-jSA" firstAttribute="leading" secondItem="Eog-rs-dyB" secondAttribute="leading" constant="20" id="4If-gt-f2Z"/>
+                                    <constraint firstItem="jU2-bO-T8I" firstAttribute="centerX" secondItem="Eog-rs-dyB" secondAttribute="centerX" id="7yO-Kj-sjK"/>
+                                    <constraint firstAttribute="bottom" secondItem="jU2-bO-T8I" secondAttribute="bottom" constant="312" id="ATH-29-e5i"/>
+                                    <constraint firstItem="pSs-me-jSA" firstAttribute="centerX" secondItem="Eog-rs-dyB" secondAttribute="centerX" id="EKa-P9-BpG"/>
+                                    <constraint firstAttribute="trailing" secondItem="pSs-me-jSA" secondAttribute="trailing" constant="20" id="KIx-Zy-Cr3"/>
+                                    <constraint firstItem="pSs-me-jSA" firstAttribute="top" secondItem="jU2-bO-T8I" secondAttribute="bottom" constant="30" id="Luw-Tn-oTq"/>
+                                    <constraint firstItem="jU2-bO-T8I" firstAttribute="top" secondItem="Eog-rs-dyB" secondAttribute="top" constant="225" id="Q4k-Ob-TGB"/>
+                                    <constraint firstAttribute="bottom" secondItem="jU2-bO-T8I" secondAttribute="bottom" constant="175" id="QFK-GZ-Lhb"/>
+                                    <constraint firstItem="jU2-bO-T8I" firstAttribute="top" secondItem="Eog-rs-dyB" secondAttribute="top" constant="30" id="Z7f-GG-J1s"/>
+                                    <constraint firstAttribute="trailing" secondItem="jU2-bO-T8I" secondAttribute="trailing" constant="327" id="qbY-Ax-MbZ"/>
+                                    <constraint firstItem="jU2-bO-T8I" firstAttribute="leading" secondItem="Eog-rs-dyB" secondAttribute="leading" constant="20" id="tJh-pK-jpV"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="0Dp-lo-Csu"/>
+                                        <exclude reference="Q4k-Ob-TGB"/>
+                                        <exclude reference="QFK-GZ-Lhb"/>
+                                        <exclude reference="qbY-Ax-MbZ"/>
+                                    </mask>
+                                </variation>
+                            </scrollView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Eog-rs-dyB" firstAttribute="bottom" secondItem="xvV-qf-VMU" secondAttribute="top" id="5tl-7H-oa0"/>
+                            <constraint firstItem="Eog-rs-dyB" firstAttribute="leading" secondItem="wgt-Ze-Kr6" secondAttribute="leading" id="iEX-tJ-GiE"/>
+                            <constraint firstItem="Eog-rs-dyB" firstAttribute="top" secondItem="wgt-Ze-Kr6" secondAttribute="top" id="mco-MU-uoL"/>
+                            <constraint firstAttribute="trailing" secondItem="Eog-rs-dyB" secondAttribute="trailing" id="n15-oY-bKD"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Overview" id="Ga5-rG-7a8"/>
+                    <connections>
+                        <outlet property="barChart" destination="jU2-bO-T8I" id="YAp-IW-5qu"/>
+                        <outlet property="pieChart" destination="pSs-me-jSA" id="BPi-CL-JwA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e13-z6-zbS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

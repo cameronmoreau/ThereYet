@@ -183,7 +183,7 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
             
             checkIn?.timestamp = NSDate()
             checkIn?.course = courses[0]
-            checkIn?.points = Int(10 / kNumCoursesTotal) // needs to be fixed if time
+            checkIn?.points = Int(10 / kNumCoursesTotal) //FIXME: needs to be fixed if time
             
             do {
                 try context.save()
