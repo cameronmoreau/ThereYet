@@ -172,27 +172,15 @@ class AddCourseViewController: UITableViewController, UITextFieldDelegate {
     }
     
     func datePickerDoneTap() {
-        let calComps = NSCalendar.currentCalendar().components([.Day, .Month, .Year, .Hour, .Minute], fromDate: datePicker.date)
-        
-        let baseDayMonthYear = NSDateComponents()
-        baseDayMonthYear.year = 1997
-        baseDayMonthYear.month = 1
-        baseDayMonthYear.day = 4
-        baseDayMonthYear.hour = calComps.hour
-        baseDayMonthYear.minute = calComps.minute
-        
-        //base day
-        let baseDateWithTime: NSDate! = NSCalendar.currentCalendar().dateFromComponents(baseDayMonthYear)
-        
         if startsAtTextField.isFirstResponder() {
-            course?.startsAt = baseDateWithTime
-            startsAtLabel.text = dateFormatter.stringFromDate(baseDateWithTime)
+            course?.startsAt = datePicker.date
+            startsAtLabel.text = dateFormatter.stringFromDate(datePicker.date)
             startsAtTextField.resignFirstResponder()
             
             startsAtLabel.textColor = UIColor.lightGrayColor()
         } else if endsAtTextField.isFirstResponder()  {
-            course?.endsAt = baseDateWithTime
-            endsAtLabel.text = dateFormatter.stringFromDate(baseDateWithTime)
+            course?.endsAt = datePicker.date
+            endsAtLabel.text = dateFormatter.stringFromDate(datePicker.date)
             endsAtTextField.resignFirstResponder()
             
             endsAtLabel.textColor = UIColor.lightGrayColor()

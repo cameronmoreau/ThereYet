@@ -140,11 +140,20 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
         
         let fetchRequest = NSFetchRequest(entityName: "Course")
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "startsAt", ascending: true)]
-        fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [NSPredicate(format: "classDays CONTAINS[cd] %@", weekday), NSPredicate(format: "startsAt > %@", convertDateToBaseDate(NSDate()))])
+        fetchRequest.predicate = NSPredicate(format: "classDays CONTAINS[cd] %@", weekday)
         let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
         
         do {
             try courses = context.executeFetchRequest(fetchRequest) as! [Course]
+            var tempCourses = [Course]()
+            for course in courses {
+                let ti = NSInteger(convertDateToBaseDate(course.startsAt!).timeIntervalSinceDate(convertDateToBaseDate(NSDate())))
+                if ti > 0 {
+                    tempCourses.append(course)
+                }
+            }
+            courses.removeAll()
+            courses.appendContentsOf(tempCourses)
         } catch let error as NSError {
             print(error)
         }
@@ -166,7 +175,7 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
     
     func updateNextClassInterval() {
         if self.courses.count > 0 {
-            let nextDate = courses[0].startsAt!
+            let nextDate = convertDateToBaseDate(courses[0].startsAt!)
             let currentDate = convertDateToBaseDate(NSDate())
             
             self.timeUntilNextClass = nextDate.timeIntervalSinceDate(currentDate)
@@ -281,10 +290,12 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
         
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "h:mm a"
-        cell.timeLabel.text = "\(dateFormatter.stringFromDate(course.startsAt!)) - \(dateFormatter.stringFromDate(course.endsAt!))"
+        cell.timeLabel.text = "\(dateFormatter.stringFromDate(convertDateToBaseDate(course.startsAt!))) - \(dateFormatter.stringFromDate(course.endsAt!))"
         
         cell.colorViewBGColor = UIColor(rgba: course.hexColor!)
         cell.colorView.backgroundColor = UIColor(rgba: course.hexColor!)
+        
+        print(convertDateToBaseDate(course.startsAt!))
         
         return cell
     }
@@ -307,7 +318,7 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
                 self.checkIn(course)
             })
 
-            let ti = NSInteger(course.startsAt!.timeIntervalSinceDate(convertDateToBaseDate(NSDate())))
+            let ti = NSInteger(convertDateToBaseDate(course.startsAt!).timeIntervalSinceDate(convertDateToBaseDate(NSDate())))
             let minutes = (ti / 60) % 60
             let hours = (ti / 3600)
 
