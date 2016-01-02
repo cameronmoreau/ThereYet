@@ -243,15 +243,22 @@
 			name = UI;
 			sourceTree = "<group>";
 		};
-		7E9BBF491C263A1300ECA0B7 /* Helpers */ = {
+		7E9BBF491C263A1300ECA0B7 /* API */ = {
 			isa = PBXGroup;
 			children = (
 				7E9BBF4C1C263A5200ECA0B7 /* PearsonAPI.swift */,
 				7EB320A51C33570200AB26A8 /* MapboxAPI.swift */,
-				7E20D4BB1C34D44A00F0469D /* SyncManager.swift */,
-				7E7445261C3848F5002E65C3 /* CheckInManager.swift */,
 			);
-			name = Helpers;
+			name = API;
+			sourceTree = "<group>";
+		};
+		7ED445961C3857A20090B495 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				7E7445261C3848F5002E65C3 /* CheckInManager.swift */,
+				7E20D4BB1C34D44A00F0469D /* SyncManager.swift */,
+			);
+			name = Managers;
 			sourceTree = "<group>";
 		};
 		7ED52CA91C23E8A40028172D = {
@@ -275,9 +282,10 @@
 		7ED52CB41C23E8A40028172D /* ThereYet */ = {
 			isa = PBXGroup;
 			children = (
+				7ED445961C3857A20090B495 /* Managers */,
 				7E73077F1C34424C0046DAC8 /* UI */,
 				7E57E6C71C2CECE600AC907D /* Extensions */,
-				7E9BBF491C263A1300ECA0B7 /* Helpers */,
+				7E9BBF491C263A1300ECA0B7 /* API */,
 				7ED52CCA1C23E8F10028172D /* Resources */,
 				7ED52CC91C23E8E50028172D /* SupportingFiles */,
 				7ED52CC81C23E8E10028172D /* Models */,

@@ -62,11 +62,11 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
     }
     
     override func viewWillAppear(animated: Bool) {
-        //        navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
-        //        navigationController?.navigationBar.shadowImage = UIImage()
-        //        navigationController?.navigationBar.translucent = true
-        //        navigationController?.navigationBar.backgroundColor = UIColor.clearColor()
-        //        navigationController?.view.backgroundColor = UIColor.clearColor()
+//                navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
+//                navigationController?.navigationBar.shadowImage = UIImage()
+//                navigationController?.navigationBar.translucent = true
+//                navigationController?.navigationBar.backgroundColor = UIColor.clearColor()
+//                navigationController?.view.backgroundColor = UIColor.clearColor()
         
         self.textFieldName.becomeFirstResponder()
     }

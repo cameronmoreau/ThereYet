@@ -19,6 +19,20 @@ class CheckInManager {
         self.context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     }
     
+    func checkins() -> [CheckIn] {
+        let checkFetch = NSFetchRequest(entityName: "CheckIn")
+        checkFetch.sortDescriptors = [NSSortDescriptor(key: "timestamp", ascending: false)]
+        checkFetch.fetchLimit = 1
+        
+        do {
+            return try context.executeFetchRequest(checkFetch) as! [CheckIn]
+        } catch let error as NSError {
+            print(error)
+        }
+        
+        return []
+    }
+    
     func lastCheckin() -> CheckIn? {
         let checkFetch = NSFetchRequest(entityName: "CheckIn")
         checkFetch.sortDescriptors = [NSSortDescriptor(key: "timestamp", ascending: false)]
