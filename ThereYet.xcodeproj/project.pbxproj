@@ -58,6 +58,9 @@
 		7EB320A61C33570200AB26A8 /* MapboxAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB320A51C33570200AB26A8 /* MapboxAPI.swift */; };
 		7EB320A81C33597100AB26A8 /* LookupLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB320A71C33597100AB26A8 /* LookupLocation.swift */; };
 		7EB320AA1C33605F00AB26A8 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB320A91C33605F00AB26A8 /* UIViewController.swift */; };
+		7ED445981C385FE40090B495 /* GiftCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED445971C385FE40090B495 /* GiftCard.swift */; };
+		7ED4459A1C38677F0090B495 /* GiftCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED445991C38677F0090B495 /* GiftCardTableViewCell.swift */; };
+		7ED4459C1C3869570090B495 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7ED4459B1C3869570090B495 /* ParseUI.framework */; };
 		7ED52CB61C23E8A40028172D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED52CB51C23E8A40028172D /* AppDelegate.swift */; };
 		7ED52CBD1C23E8A40028172D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7ED52CBC1C23E8A40028172D /* Assets.xcassets */; };
 		7ED52CC01C23E8A40028172D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7ED52CBE1C23E8A40028172D /* LaunchScreen.storyboard */; };
@@ -122,6 +125,9 @@
 		7EB320A51C33570200AB26A8 /* MapboxAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapboxAPI.swift; sourceTree = "<group>"; };
 		7EB320A71C33597100AB26A8 /* LookupLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LookupLocation.swift; sourceTree = "<group>"; };
 		7EB320A91C33605F00AB26A8 /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
+		7ED445971C385FE40090B495 /* GiftCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GiftCard.swift; sourceTree = "<group>"; };
+		7ED445991C38677F0090B495 /* GiftCardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GiftCardTableViewCell.swift; sourceTree = "<group>"; };
+		7ED4459B1C3869570090B495 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 		7ED52CB21C23E8A40028172D /* ThereYet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ThereYet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7ED52CB51C23E8A40028172D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7ED52CBC1C23E8A40028172D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -140,6 +146,7 @@
 			files = (
 				7E57E6C41C2CC6B900AC907D /* libsqlite3.tbd in Frameworks */,
 				7E57E6C21C2CC6B100AC907D /* libz.tbd in Frameworks */,
+				7ED4459C1C3869570090B495 /* ParseUI.framework in Frameworks */,
 				7E57E6C01C2CC6A600AC907D /* SystemConfiguration.framework in Frameworks */,
 				492362101C31CAE200460284 /* Bolts.framework in Frameworks */,
 				7E57E6BE1C2CC69B00AC907D /* StoreKit.framework in Frameworks */,
@@ -160,6 +167,7 @@
 		2BE2A0D28FC1086A7B9FAA70 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7ED4459B1C3869570090B495 /* ParseUI.framework */,
 				7E57E6C31C2CC6B900AC907D /* libsqlite3.tbd */,
 				7E57E6C11C2CC6B100AC907D /* libz.tbd */,
 				4923620E1C31CAE200460284 /* Bolts.framework */,
@@ -239,6 +247,7 @@
 			children = (
 				7E7EE9601C2E43AC00553179 /* TodaysCourseTableViewCell.swift */,
 				7E7307801C3442650046DAC8 /* BorderBottomTextField.swift */,
+				7ED445991C38677F0090B495 /* GiftCardTableViewCell.swift */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -319,6 +328,7 @@
 				7E9B19AC1C3311F2003EFFF4 /* LocationStorage.swift */,
 				7EB320A71C33597100AB26A8 /* LookupLocation.swift */,
 				7E8FD16B1C36EAA3006DDBAE /* CheckIn.swift */,
+				7ED445971C385FE40090B495 /* GiftCard.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -492,6 +502,7 @@
 				7EA24C471C2BA8A5005705C5 /* ThereYet.xcdatamodeld in Sources */,
 				7E57E6C61C2CC93200AC907D /* Offer.swift in Sources */,
 				7E9BBF4F1C26880700ECA0B7 /* PearsonAuthData.swift in Sources */,
+				7ED4459A1C38677F0090B495 /* GiftCardTableViewCell.swift in Sources */,
 				7E7445271C3848F5002E65C3 /* CheckInManager.swift in Sources */,
 				7EB320A61C33570200AB26A8 /* MapboxAPI.swift in Sources */,
 				7E20D4B81C34974700F0469D /* CreateAccountViewController.swift in Sources */,
@@ -519,6 +530,7 @@
 				49E4F7A11C2BD43C00F7FFBA /* CoursesViewController.swift in Sources */,
 				7E9B19AD1C3311F2003EFFF4 /* LocationStorage.swift in Sources */,
 				7E57E6D11C2D06CC00AC907D /* BLKFlexibleHeightBar.swift in Sources */,
+				7ED445981C385FE40090B495 /* GiftCard.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

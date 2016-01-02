@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import Parse
+import ParseUI
 import Bolts
 
 @UIApplicationMain
@@ -21,7 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         //Parse stuff
-        Offer.registerSubclass()
+        //Offer.registerSubclass()
+        //PFImageView.regi
         
         Parse.enableLocalDatastore()
         Parse.setApplicationId("gzjwijvyKb8fPaIwQw4PqTBI2ieM20XikV7Umdlf", clientKey: "6SSyXw6piYNbxPBJ6eSTzgjEjufL6BWgK6Wj4aaC")
