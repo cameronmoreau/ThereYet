@@ -19,22 +19,34 @@ class OverviewViewController: CenterViewController, ChartViewDelegate {
     
     let fakeData = [""]
     
-    var courses: [Course]!
+    var courses = [Course]()
+    var checkIns = [CheckIn]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         loadCourses()
+        loadCheckIns()
         
         setupBarChart()
         
         setupPieChart()
     }
     
+    func loadCheckIns() {
+        let fetchRequest = NSFetchRequest(entityName: "CheckIn")
+        let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+        
+        do {
+            try checkIns = context.executeFetchRequest(fetchRequest) as! [CheckIn]
+        } catch let error as NSError {
+            print(error)
+        }
+    }
+    
     func loadCourses() {
-        courses  = [Course]()
         let fetchRequest = NSFetchRequest(entityName: "Course")
-        fetchRequest.predicate = NSPredicate(format: "pearson_id == nil")
+        fetchRequest.predicate = NSPredicate(format: "hexColor != nil")
         let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
         
         do {
@@ -83,15 +95,28 @@ class OverviewViewController: CenterViewController, ChartViewDelegate {
         barChart.legend.font = UIFont(name: "HelveticaNeue-Light", size: 11)!
         barChart.legend.xEntrySpace = 4.0
         
+        //----------------------------
+        
         var xVals = [String]()
         for course in courses {
             xVals.append(course.title!)
         }
         
         var yVals = [BarChartDataEntry]()
+        /*//RANDOM DATA
         for (var i = 0; i < courses.count; i++) {
             let val = Double(arc4random_uniform(UInt32(50 + 1)))
             yVals.append(BarChartDataEntry(value: val, xIndex: i))
+        }*/
+        
+        for (var i = 0; i < courses.count; i++) {
+            let course = courses[i]
+
+            var tempCheckIns = [CheckIn]()
+            tempCheckIns.appendContentsOf(checkIns)
+            tempCheckIns = tempCheckIns.filter({$0.course == course})
+            
+            yVals.append(BarChartDataEntry(value: Double(tempCheckIns.count), xIndex: i))
         }
         
         let set1 = BarChartDataSet(yVals: yVals, label: "Check-Ins")
@@ -118,7 +143,7 @@ class OverviewViewController: CenterViewController, ChartViewDelegate {
 
         pieChart.drawCenterTextEnabled = true
         
-        pieChart.centerText = "Attendance"
+        pieChart.centerText = "Attendance by Day"
         
         pieChart.drawHoleEnabled = true
         pieChart.rotationAngle = 0.0
@@ -138,7 +163,11 @@ class OverviewViewController: CenterViewController, ChartViewDelegate {
         var yVals1 = [BarChartDataEntry]()
         //IMPORTANT: In a PieChart, no values (Entry) should have the same xIndex (even if from different DataSets), since no values can be drawn above each other.
         for (var i = 0; i < 7; i++) {
-            yVals1.append(BarChartDataEntry(value:Double(arc4random_uniform(UInt32(mult)) + UInt32(mult) / 5), xIndex: i))
+            var checkInsThatAreOnBlankDay = [CheckIn]()
+            checkInsThatAreOnBlankDay.appendContentsOf(checkIns)
+            checkInsThatAreOnBlankDay = checkInsThatAreOnBlankDay.filter({NSCalendar.currentCalendar().components(.Weekday, fromDate: $0.timestamp!).weekday-1 == i})
+            
+            yVals1.append(BarChartDataEntry(value:Double(checkInsThatAreOnBlankDay.count)/Double(checkIns.count), xIndex: i))
         }
     
         let xVals = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
