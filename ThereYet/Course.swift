@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import Parse
+import Foundation
 
 class Course: NSManagedObject {
 
@@ -100,6 +101,57 @@ class Course_RegularObject {
         return obj
     }
     
+    func daysOfWeek() -> [Int]? {
+        if let days = self.classDays {
+            var result = [Int]()
+            
+            let ds = days.componentsSeparatedByString(", ")
+            for d in ds {
+                result.append(Int(d)!)
+            }
+            
+            return result
+        }
+        
+        return nil
+    }
+    
+    func setupNotifications () {
+        //delete old
+        let notifications = UIApplication.sharedApplication().scheduledLocalNotifications! as [UILocalNotification]
+        for n in notifications {
+            let uuid = n.userInfo!["uuid"] as! String
+            if uuid.rangeOfString(self.title!) != nil {
+                print("Canceling notification")
+                UIApplication.sharedApplication().cancelLocalNotification(n)
+            }
+        }
+        
+        let calComps = NSCalendar.currentCalendar().components([.Day, .Month, .Year, .Hour, .Minute], fromDate: NSDate())
+        
+        let baseDayMonthYear = NSDateComponents()
+        baseDayMonthYear.year = 1997
+        baseDayMonthYear.month = 1
+        baseDayMonthYear.day = 4
+        baseDayMonthYear.hour = calComps.hour
+        baseDayMonthYear.minute = calComps.minute
+        
+        //setup new
+        if let days = self.daysOfWeek() {
+            for d in days {
+                let localNotification = UILocalNotification()
+                localNotification.userInfo = ["uuid": "\(self.title!)-\(d)"]
+                localNotification.fireDate = self.startsAt!.dateByAddingTimeInterval(-300)
+                localNotification.alertBody = "\(self.title!) is starting soon"
+                localNotification.category = "CLASS"
+                localNotification.timeZone = NSTimeZone.defaultTimeZone()
+                localNotification.repeatInterval = .WeekOfYear
+                
+                UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
+            }
+        }
+    }
+    
     func saveAsNSManagedObject() -> Course? {
         let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
         let entity = NSEntityDescription.entityForName("Course", inManagedObjectContext: context)
@@ -120,6 +172,8 @@ class Course_RegularObject {
             course?.createdAt = NSDate()
             course?.updatedAt = NSDate()
         }
+        
+        setupNotifications()
         
         do {
             try context.save()
@@ -142,6 +196,8 @@ class Course_RegularObject {
         courseToEdit?.startsAt = self.startsAt
         courseToEdit?.endsAt = self.endsAt
         courseToEdit?.classDays = self.classDays
+        
+        setupNotifications()
         
         do {
             try context.save()

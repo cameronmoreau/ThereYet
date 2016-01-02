@@ -67,17 +67,6 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
         if !CLLocationManager.locationServicesEnabled() {
             locationManager.requestWhenInUseAuthorization()
         }
-        
-        //Temp notification
-        if courses.count > 0 {
-            let localNotification = UILocalNotification()
-            localNotification.fireDate = NSDate(timeIntervalSinceNow: 5)
-            localNotification.alertBody = "\(courses[0].title!) is starting soon"
-            localNotification.category = "CLASS"
-            localNotification.timeZone = NSTimeZone.defaultTimeZone()
-            
-            UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
-        }
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -194,7 +183,7 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
             if Int(next) < kCheckInTime {
                 if let last = lastCheckin {
                     let lastInterval = Int(last.timestamp!.timeIntervalSinceNow)
-                    if lastInterval + kCheckInTime > Int(next) {
+                    if lastInterval + kCheckInTime > Int(next) && last.course == courses[0] {
                         self.labelCountDown.text = "You have arrived!"
                         return false
                     }
@@ -305,8 +294,6 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
         cell.colorViewBGColor = UIColor(rgba: course.hexColor!)
         cell.colorView.backgroundColor = UIColor(rgba: course.hexColor!)
         
-        print(convertDateToBaseDate(course.startsAt!))
-        
         return cell
     }
     
@@ -331,8 +318,6 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
             let ti = NSInteger(convertDateToBaseDate(course.startsAt!).timeIntervalSinceDate(convertDateToBaseDate(NSDate())))
             let minutes = (ti / 60) % 60
             let hours = (ti / 3600)
-
-            //print(hours, minutes)
             
             if (hours == 0 && minutes <= 5) {
                 return [imHere]
