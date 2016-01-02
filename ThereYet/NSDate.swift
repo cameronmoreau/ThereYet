@@ -9,15 +9,27 @@
 import UIKit
 
 extension NSDate {
-    struct Date {
-        static let formatterISO8601: NSDateFormatter = {
-            let formatter = NSDateFormatter()
-            formatter.calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierISO8601)
-            formatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
-            formatter.timeZone = NSTimeZone(forSecondsFromGMT: 0)
-            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSX"
-            return formatter
-        }()
+    
+    func stripTime() -> NSDate {
+        let cal = NSCalendar.currentCalendar()
+        let calComps = cal.components([.Month, .Day, .Year], fromDate: self)
+        
+        let base = NSDateComponents()
+        base.year = calComps.year
+        base.month = calComps.month
+        base.day = calComps.day
+        
+        return cal.dateFromComponents(base)!
     }
-    var formattedISO8601: String { return Date.formatterISO8601.stringFromDate(self) }
+    
+    func convertToBaseDate() -> NSDate {
+        let cal = NSCalendar.currentCalendar()
+        let calComps = cal.components([.Hour, .Minute], fromDate: self)
+        
+        let base = NSDateComponents()
+        base.minute = calComps.minute
+        base.hour = calComps.hour
+        
+        return cal.dateFromComponents(base)!
+    }
 }

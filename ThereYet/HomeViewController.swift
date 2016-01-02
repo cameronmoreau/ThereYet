@@ -39,6 +39,7 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
     let pearsonUser = PearsonUser()
     let locationManager = CLLocationManager()
     let locationStorage = LocationStorage()
+    let checkinManager = CheckInManager()
     
     var courses = [Course]()
     var lastCheckin: CheckIn?
@@ -123,7 +124,8 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
             
             var tempCourses = [Course]()
             for course in courses {
-                let ti = NSInteger(convertDateToBaseDate(course.startsAt!).timeIntervalSinceDate(convertDateToBaseDate(NSDate())))
+                
+                let ti = NSInteger(course.startsAt!.convertToBaseDate().timeIntervalSinceDate(NSDate().convertToBaseDate()))
                 if ti > 0 {
                     tempCourses.append(course)
                 }
@@ -134,40 +136,14 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
             print(error)
         }
         
-        //Last Checkin
-        let checkFetch = NSFetchRequest(entityName: "CheckIn")
-        checkFetch.sortDescriptors = [NSSortDescriptor(key: "timestamp", ascending: false)]
-        checkFetch.fetchLimit = 1
-        
-        var checkins = [CheckIn]()
-        
-        do {
-            try checkins = context.executeFetchRequest(checkFetch) as! [CheckIn]
-            self.lastCheckin = checkins.popLast()
-        } catch let error as NSError {
-            print(error)
-        }
-    }
-    
-    
-    func convertDateToBaseDate(date: NSDate) -> NSDate {
-        let calComps = NSCalendar.currentCalendar().components([.Day, .Month, .Year, .Hour, .Minute], fromDate: date)
-        
-        let baseDayMonthYear = NSDateComponents()
-        baseDayMonthYear.year = 1997
-        baseDayMonthYear.month = 1
-        baseDayMonthYear.day = 4
-        baseDayMonthYear.hour = calComps.hour
-        baseDayMonthYear.minute = calComps.minute
-        
-        //base day
-        return NSCalendar.currentCalendar().dateFromComponents(baseDayMonthYear)!
+        //Checkins
+        self.lastCheckin = self.checkinManager.lastCheckin()
     }
     
     func updateNextClassInterval() {
         if self.courses.count > 0 {
-            let nextDate = convertDateToBaseDate(courses[0].startsAt!)
-            let currentDate = convertDateToBaseDate(NSDate())
+            let nextDate = courses[0].startsAt!.convertToBaseDate()
+            let currentDate = NSDate().convertToBaseDate()
             
             self.timeUntilNextClass = nextDate.timeIntervalSinceDate(currentDate)
             self.labelCountDown.text = clockText(timeUntilNextClass!)
@@ -242,7 +218,7 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
         if courses.count == 0 {
             self.tableView.hidden = true
             self.labelTodaysClasses.hidden = true
-            self.labelCountDown.text = "15 points earned"
+            self.labelCountDown.text = "\(self.checkinManager.totalPointsToday()) points earned"
             self.labelHeading.text = "You're all done for today!"
             
             
@@ -289,7 +265,7 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
         
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "h:mm a"
-        cell.timeLabel.text = "\(dateFormatter.stringFromDate(convertDateToBaseDate(course.startsAt!))) - \(dateFormatter.stringFromDate(course.endsAt!))"
+        cell.timeLabel.text = "\(dateFormatter.stringFromDate(course.startsAt!.convertToBaseDate())) - \(dateFormatter.stringFromDate(course.endsAt!))"
         
         cell.colorViewBGColor = UIColor(rgba: course.hexColor!)
         cell.colorView.backgroundColor = UIColor(rgba: course.hexColor!)
@@ -315,7 +291,7 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
                 self.btnHerePressed(nil)
             })
 
-            let ti = NSInteger(convertDateToBaseDate(course.startsAt!).timeIntervalSinceDate(convertDateToBaseDate(NSDate())))
+            let ti = NSInteger(course.startsAt!.convertToBaseDate().timeIntervalSinceDate(NSDate().convertToBaseDate()))
             let minutes = (ti / 60) % 60
             let hours = (ti / 3600)
             

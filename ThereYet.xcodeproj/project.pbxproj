@@ -47,6 +47,7 @@
 		7E57E6D11C2D06CC00AC907D /* BLKFlexibleHeightBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E57E6D01C2D06CC00AC907D /* BLKFlexibleHeightBar.swift */; };
 		7E73077E1C339FEC0046DAC8 /* SignPainter.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7E73077D1C339ECE0046DAC8 /* SignPainter.otf */; };
 		7E7307811C3442650046DAC8 /* BorderBottomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7307801C3442650046DAC8 /* BorderBottomTextField.swift */; };
+		7E7445271C3848F5002E65C3 /* CheckInManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7445261C3848F5002E65C3 /* CheckInManager.swift */; };
 		7E7EE9611C2E43AC00553179 /* TodaysCourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7EE9601C2E43AC00553179 /* TodaysCourseTableViewCell.swift */; };
 		7E8FD16C1C36EAA4006DDBAE /* CheckIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8FD16B1C36EAA3006DDBAE /* CheckIn.swift */; };
 		7E9B19AD1C3311F2003EFFF4 /* LocationStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9B19AC1C3311F2003EFFF4 /* LocationStorage.swift */; };
@@ -110,6 +111,7 @@
 		7E57E6D01C2D06CC00AC907D /* BLKFlexibleHeightBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLKFlexibleHeightBar.swift; sourceTree = "<group>"; };
 		7E73077D1C339ECE0046DAC8 /* SignPainter.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SignPainter.otf; sourceTree = "<group>"; };
 		7E7307801C3442650046DAC8 /* BorderBottomTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorderBottomTextField.swift; sourceTree = "<group>"; };
+		7E7445261C3848F5002E65C3 /* CheckInManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckInManager.swift; sourceTree = "<group>"; };
 		7E7EE9601C2E43AC00553179 /* TodaysCourseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodaysCourseTableViewCell.swift; sourceTree = "<group>"; };
 		7E8FD16B1C36EAA3006DDBAE /* CheckIn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckIn.swift; sourceTree = "<group>"; };
 		7E9B19AC1C3311F2003EFFF4 /* LocationStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationStorage.swift; sourceTree = "<group>"; };
@@ -247,6 +249,7 @@
 				7E9BBF4C1C263A5200ECA0B7 /* PearsonAPI.swift */,
 				7EB320A51C33570200AB26A8 /* MapboxAPI.swift */,
 				7E20D4BB1C34D44A00F0469D /* SyncManager.swift */,
+				7E7445261C3848F5002E65C3 /* CheckInManager.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -481,6 +484,7 @@
 				7EA24C471C2BA8A5005705C5 /* ThereYet.xcdatamodeld in Sources */,
 				7E57E6C61C2CC93200AC907D /* Offer.swift in Sources */,
 				7E9BBF4F1C26880700ECA0B7 /* PearsonAuthData.swift in Sources */,
+				7E7445271C3848F5002E65C3 /* CheckInManager.swift in Sources */,
 				7EB320A61C33570200AB26A8 /* MapboxAPI.swift in Sources */,
 				7E20D4B81C34974700F0469D /* CreateAccountViewController.swift in Sources */,
 				491A3C141C2CA4040093EB6D /* UIImageView+RenderingMode.swift in Sources */,
