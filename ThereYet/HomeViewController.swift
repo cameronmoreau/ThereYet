@@ -15,11 +15,13 @@ import MBCircularProgressBar
 class HomeViewController: CenterViewController, UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate {
     
     @IBAction func btnHerePressed(sender: AnyObject) {
-        self.locationManager.startUpdatingLocation()
-        if courses.count > 0 {
-            //print(courses[0])
-            self.checkIn(courses[0])
+        if let time = self.timeUntilNextClass {
+            if Int(time) < kCheckInTime {
+                self.shouldCheckIn = true
+                self.locationManager.startUpdatingLocation()
+            }
         }
+        
     }
     
     @IBOutlet weak var progressBar: MBCircularProgressBarView!
@@ -63,8 +65,6 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
         self.tableView.cellLayoutMarginsFollowReadableWidth = false
         
         loadCourses()
-        
-        //setupForNextClass()
         updateNextClassInterval()
         fixUIForClasses()
         
@@ -235,6 +235,7 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
             //Class in next 5 minutes
             if let time = self.timeUntilNextClass {
                 if Int(time) < kCheckInTime {
+                    self.shouldCheckIn = true
                     self.btnHere.hidden = false
                 }
             }
@@ -253,26 +254,6 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
         }
         
         return output + String(format: "%d Minutes", arguments: [minutes])
-    }
-    
-    func deleteAllData(entity: String) {
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let managedContext = appDelegate.managedObjectContext
-        let fetchRequest = NSFetchRequest(entityName: entity)
-        fetchRequest.returnsObjectsAsFaults = false
-        
-        do
-        {
-            let results = try managedContext.executeFetchRequest(fetchRequest)
-            print(results)
-            for managedObject in results
-            {
-                let managedObjectData:NSManagedObject = managedObject as! NSManagedObject
-                managedContext.deleteObject(managedObjectData)
-            }
-        } catch let error as NSError {
-            print("Detele all data in \(entity) error : \(error) \(error.userInfo)")
-        }
     }
     
     // MARK: - Table View
@@ -350,50 +331,13 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
 
         //If a location was found, store it
         if let location = manager.location {
+            if self.shouldCheckIn {
+                self.checkIn(courses[0])
+                self.shouldCheckIn = false
+            }
+            
             manager.startMonitoringSignificantLocationChanges()
             locationStorage.updateLocation(location.coordinate)
-        }
-    }
-
-    //MARK: - Menu Actions
-    override func performAction(menuItem: MenuItem) {
-        super.performAction(menuItem)
-        
-        switch menuItem.name {
-            case "Sign Out":
-                deleteAllData("Course")
-                pearsonUser.authData.destroy()
-                pearsonUser.destroy()
-                PFUser.logOut()
-                
-                let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-                let loginVC = storyboard.instantiateViewControllerWithIdentifier("LoginViewController")
-                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-                appDelegate.window?.rootViewController = loginVC
-                
-                //self.navigateToViewController(MenuItem(storyboardID: "LoginViewController", name: "Login", color: UIColor.lightGrayColor(), action: .Navigation))
-                break
-            
-            case "Show Schedule":
-                var courses  = [Course]()
-                let fetchRequest = NSFetchRequest(entityName: "Course")
-                let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
-                
-                do {
-                    try courses = context.executeFetchRequest(fetchRequest) as! [Course]
-                    
-                    for course in courses {
-                        print("Saved course \(course.title)")
-                    }
-                    
-                } catch let error as NSError {
-                    print(error)
-                }
-                
-                
-                break
-            default:
-                break
         }
     }
 
