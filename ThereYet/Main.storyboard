@@ -199,7 +199,7 @@
                                     </mask>
                                 </variation>
                             </scrollView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="apt-Rg-1wJ">
+                            <button opaque="NO" alpha="0.20000000000000001" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="apt-Rg-1wJ">
                                 <rect key="frame" x="20" y="20" width="115" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="EwD-bd-wzd"/>

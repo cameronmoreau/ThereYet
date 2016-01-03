@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import CoreLocation
+import Parse
 
 import MultiSelectSegmentedControl
 
@@ -18,7 +19,7 @@ class AddCourseViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var colorCell: UITableViewCell!
     
     @IBOutlet weak var classDaysCell: UITableViewCell!
-
+    
     @IBOutlet weak var startsAtCell: UITableViewCell!
     @IBOutlet weak var endsAtCell: UITableViewCell!
     @IBOutlet weak var startsAtTextField: UITextField!
@@ -47,6 +48,8 @@ class AddCourseViewController: UITableViewController, UITextFieldDelegate {
         
         if let ogCourse = originalCourse {
             course = ogCourse.toRegularObject()
+            print(ogCourse.parseKey)
+            print("id \(course.parseKey)")
         } else {
             course = Course_RegularObject()
             course!.title = ""
@@ -256,10 +259,33 @@ class AddCourseViewController: UITableViewController, UITextFieldDelegate {
         if originalCourse != nil {
             course.updateCorrespondingNSManagedObject(originalCourse!)
         }
-        
-        //Not pearson
+            
+            //Not pearson
         else {
             course.saveAsNSManagedObject()
+        }
+        
+        //Upload to parse
+        let pfCourse = course.toPFObject()
+        if let key = course.parseKey {
+            let query = PFQuery(className: "Course")
+            query.getObjectInBackgroundWithId(key) {
+                (pc: PFObject?, error: NSError?)  in
+                
+                if pc != nil {
+                    pc!["title"] = self.course.title
+                    pc!["hexColor"] = self.course.hexColor
+                    pc!["title"] = self.course.title
+                    pc!["startsAt"] = self.course.startsAt
+                    pc!["endsAt"] = self.course.endsAt
+                    pc!["classDays"] = self.course.classDays
+                    pc!["location"] = PFGeoPoint(latitude: self.course.locationLat as! Double, longitude: self.course.locationLng as! Double)
+                    pc!.saveInBackground()
+                }
+            }
+            
+        } else {
+            pfCourse.saveInBackground()
         }
         
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -299,7 +325,7 @@ class AddCourseViewController: UITableViewController, UITextFieldDelegate {
             }
         }
     }
-
+    
 }
 
 extension AddCourseViewController : SelectLocationDelegate {

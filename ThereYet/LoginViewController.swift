@@ -63,10 +63,11 @@ class LoginViewController: CenterViewController, UITextFieldDelegate {
                                 SyncManager.runInitalSync(courses, completion: {
                                     (courses: [Course_RegularObject]) in
                                     
+                                    var saved = [Course]()
+                                    
                                     //Save each new course
                                     for c in courses {
-                                        print("Saving update \(c.title)")
-                                        c.saveAsNSManagedObject()
+                                        saved.append(c.saveAsNSManagedObject()!)
                                     }
                                     
                                     //Download from parse
@@ -74,7 +75,7 @@ class LoginViewController: CenterViewController, UITextFieldDelegate {
                                         (success: Bool) in
                                         
                                         //Upload new to parse
-                                        SyncManager.fullUpload(courses, completion: {
+                                        SyncManager.fullUpload(courses, saved: saved, completion: {
                                             (success: Bool) in
                                             
                                             //FINALY DONE!
@@ -109,7 +110,6 @@ class LoginViewController: CenterViewController, UITextFieldDelegate {
                                         courses in
                                         
                                         for c in courses {
-                                            print("Saving \(c.title)")
                                             c.saveAsNSManagedObject()
                                         }
                                         

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15C50" minimumToolsVersion="Xcode 7.0">
     <entity name="CheckIn" representedClassName=".CheckIn" syncable="YES">
+        <attribute name="parseKey" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="points" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="timestamp" optional="YES" attributeType="Date" syncable="YES"/>
         <relationship name="course" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Course" syncable="YES"/>
@@ -12,13 +13,14 @@
         <attribute name="hexColor" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="locationLat" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="locationLng" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="parseKey" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="pearson_id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="startsAt" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="updatedAt" optional="YES" attributeType="Date" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Course" positionX="-45" positionY="0" width="128" height="30"/>
-        <element name="CheckIn" positionX="-45" positionY="72" width="128" height="90"/>
+        <element name="CheckIn" positionX="-45" positionY="72" width="128" height="105"/>
+        <element name="Course" positionX="-45" positionY="0" width="128" height="210"/>
     </elements>
 </model>

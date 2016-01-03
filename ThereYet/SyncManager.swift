@@ -31,10 +31,17 @@ class SyncManager {
         }
     }
     
-    static func fullUpload(courses: [Course_RegularObject], completion: ((success: Bool) -> ())) {
-        for c in courses {
+    static func fullUpload(courses: [Course_RegularObject], saved: [Course], completion: ((success: Bool) -> ())) {
+        for (i, c) in courses.enumerate() {
             let pfCourse = c.toPFObject()
-            pfCourse.saveInBackground()
+            pfCourse.saveInBackgroundWithBlock({
+                (success: Bool, error: NSError?) -> Void in
+                
+                if success {
+                    let c = Course_RegularObject(parseObject: pfCourse)
+                    c.updateCorrespondingNSManagedObject(saved[i])
+                }
+            })
         }
         
         completion(success: true)

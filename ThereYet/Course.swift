@@ -12,7 +12,8 @@ import Parse
 import Foundation
 
 class Course: NSManagedObject {
-
+    
+    @NSManaged var parseKey: String?
     @NSManaged var pearson_id: NSNumber?
     @NSManaged var hexColor: String?
     @NSManaged var title: String?
@@ -26,6 +27,7 @@ class Course: NSManagedObject {
     
     func toRegularObject() -> Course_RegularObject {
         let c = Course_RegularObject()
+        c.parseKey = self.parseKey
         c.pearson_id = self.pearson_id
         c.hexColor = self.hexColor
         c.title = self.title
@@ -42,6 +44,7 @@ class Course: NSManagedObject {
 
 class Course_RegularObject {
     
+    var parseKey: String?
     var pearson_id: NSNumber?
     var hexColor: String?
     var title: String?
@@ -59,6 +62,7 @@ class Course_RegularObject {
     init(parseObject: PFObject) {
         let location = parseObject["location"] as? PFGeoPoint
         
+        self.parseKey = parseObject.objectId
         self.pearson_id = parseObject["pearsonId"] as? NSNumber
         self.hexColor = parseObject["hexColor"] as? String
         self.title = parseObject["title"] as? String
@@ -76,6 +80,9 @@ class Course_RegularObject {
         let obj = PFObject(className: "Course")
         obj["user"] = PFUser.currentUser()
         
+        if self.parseKey != nil {
+            obj.objectId = self.parseKey
+        }
         if self.pearson_id != nil {
             obj["pearsonId"] = self.pearson_id
         }
@@ -157,6 +164,7 @@ class Course_RegularObject {
         let entity = NSEntityDescription.entityForName("Course", inManagedObjectContext: context)
         let course = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: context) as? Course
         
+        course?.parseKey = self.parseKey
         course?.pearson_id = self.pearson_id
         course?.hexColor = self.hexColor
         course?.title = self.title
@@ -187,6 +195,7 @@ class Course_RegularObject {
     func updateCorrespondingNSManagedObject(courseToEdit: Course?) {
         let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
         
+        courseToEdit?.parseKey = self.parseKey
         courseToEdit?.pearson_id = self.pearson_id
         courseToEdit?.hexColor = self.hexColor
         courseToEdit?.title = self.title
