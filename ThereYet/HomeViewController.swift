@@ -64,6 +64,8 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
         updateNextClassInterval()
         fixUIForClasses()
         
+        //loadFakeData()
+        
         //Location data - needs to be fixed later
         if !CLLocationManager.locationServicesEnabled() {
             locationManager.requestWhenInUseAuthorization()
@@ -380,6 +382,78 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
             manager.startMonitoringSignificantLocationChanges()
             locationStorage.updateLocation(location.coordinate)
         }
+    }
+    
+    func loadFakeData() {
+        let df = NSDateFormatter()
+        df.dateFormat = "yyyy-MM-dd HH:mm"
+        
+        //12 - 12:50 MWF
+        let course1 = Course_RegularObject()
+        course1.title = "Linear Algebra"
+        course1.startsAt = df.dateFromString("2015-12-07 12:00")
+        course1.endsAt = df.dateFromString("2015-12-07 12:50")
+        course1.hexColor = "#000000"
+        course1.classDays = "1, 3, 5"
+        course1.locationLat = 0
+        course1.locationLng = 0
+        let c1 = course1.saveAsNSManagedObject()
+        
+        //12-12:50 T TH
+        let course2 = Course_RegularObject()
+        course2.title = "Algorithms"
+        course2.startsAt = df.dateFromString("2015-12-07 12:00")
+        course2.endsAt = df.dateFromString("2015-12-07 12:50")
+        course2.hexColor = "#000000"
+        course2.classDays = "2, 4"
+        course2.locationLat = 0
+        course2.locationLng = 0
+        let c2 = course2.saveAsNSManagedObject()
+        
+        //1 - 2:30 MWF
+        let course3 = Course_RegularObject()
+        course3.title = "Physics"
+        course3.startsAt = df.dateFromString("2015-12-07 13:00")
+        course3.endsAt = df.dateFromString("2015-12-07 14:30")
+        course3.hexColor = "#000000"
+        course3.classDays = "1, 3, 5"
+        course3.locationLat = 0
+        course3.locationLng = 0
+        let c3 = course3.saveAsNSManagedObject()
+        
+        //Checkins - Monday
+        let check1 = CheckIn_RegularObject()
+        check1.course = c1
+        check1.timestamp = df.dateFromString("2015-12-07 11:59")
+        check1.points = 3
+        check1.saveAsNSManagedObject()
+        
+        //Tuesday
+        let check2 = CheckIn_RegularObject()
+        check2.course = c2
+        check2.timestamp = df.dateFromString("2015-12-08 11:56")
+        check2.points = 8
+        check2.saveAsNSManagedObject()
+        
+        //Wednesday
+        let check3 = CheckIn_RegularObject()
+        check3.course = c1
+        check3.timestamp = df.dateFromString("2015-12-09 11:58")
+        check3.points = 6
+        check3.saveAsNSManagedObject()
+        
+        let check4 = CheckIn_RegularObject()
+        check4.course = c3
+        check4.timestamp = df.dateFromString("2015-12-09 12:57")
+        check4.points = 5
+        check4.saveAsNSManagedObject()
+        
+        //Thursday
+        let check5 = CheckIn_RegularObject()
+        check5.course = c2
+        check5.timestamp = df.dateFromString("2015-12-10 11:57")
+        check5.points = 8
+        check5.saveAsNSManagedObject()
     }
 
 }
