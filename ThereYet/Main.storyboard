@@ -498,7 +498,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jU2-bO-T8I" customClass="BarChartView" customModule="Charts">
-                                        <rect key="frame" x="20" y="30" width="560" height="200"/>
+                                        <rect key="frame" x="20" y="260" width="560" height="200"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="200" id="5Oz-If-N5d"/>
@@ -513,10 +513,17 @@
                                         </variation>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pSs-me-jSA" customClass="PieChartView" customModule="Charts">
-                                        <rect key="frame" x="20" y="260" width="560" height="340"/>
+                                        <rect key="frame" x="20" y="490" width="560" height="280"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="340" id="fbF-Qe-fhs"/>
+                                            <constraint firstAttribute="height" constant="280" id="fbF-Qe-fhs"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NUf-g2-dFD" customClass="LineChartView" customModule="Charts">
+                                        <rect key="frame" x="20" y="30" width="560" height="200"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="200" id="MBA-N4-8cl"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -526,12 +533,15 @@
                                     <constraint firstItem="pSs-me-jSA" firstAttribute="leading" secondItem="Eog-rs-dyB" secondAttribute="leading" constant="20" id="4If-gt-f2Z"/>
                                     <constraint firstItem="jU2-bO-T8I" firstAttribute="centerX" secondItem="Eog-rs-dyB" secondAttribute="centerX" id="7yO-Kj-sjK"/>
                                     <constraint firstAttribute="bottom" secondItem="jU2-bO-T8I" secondAttribute="bottom" constant="312" id="ATH-29-e5i"/>
+                                    <constraint firstItem="jU2-bO-T8I" firstAttribute="top" secondItem="NUf-g2-dFD" secondAttribute="bottom" constant="30" id="CpQ-eT-biQ"/>
                                     <constraint firstItem="pSs-me-jSA" firstAttribute="centerX" secondItem="Eog-rs-dyB" secondAttribute="centerX" id="EKa-P9-BpG"/>
                                     <constraint firstAttribute="trailing" secondItem="pSs-me-jSA" secondAttribute="trailing" constant="20" id="KIx-Zy-Cr3"/>
                                     <constraint firstItem="pSs-me-jSA" firstAttribute="top" secondItem="jU2-bO-T8I" secondAttribute="bottom" constant="30" id="Luw-Tn-oTq"/>
                                     <constraint firstItem="jU2-bO-T8I" firstAttribute="top" secondItem="Eog-rs-dyB" secondAttribute="top" constant="225" id="Q4k-Ob-TGB"/>
                                     <constraint firstAttribute="bottom" secondItem="jU2-bO-T8I" secondAttribute="bottom" constant="175" id="QFK-GZ-Lhb"/>
-                                    <constraint firstItem="jU2-bO-T8I" firstAttribute="top" secondItem="Eog-rs-dyB" secondAttribute="top" constant="30" id="Z7f-GG-J1s"/>
+                                    <constraint firstAttribute="trailing" secondItem="NUf-g2-dFD" secondAttribute="trailing" constant="20" id="SXa-oP-Yka"/>
+                                    <constraint firstItem="NUf-g2-dFD" firstAttribute="leading" secondItem="Eog-rs-dyB" secondAttribute="leading" constant="20" id="e20-nc-qoZ"/>
+                                    <constraint firstItem="NUf-g2-dFD" firstAttribute="top" secondItem="Eog-rs-dyB" secondAttribute="top" constant="30" id="fYG-QW-4oH"/>
                                     <constraint firstAttribute="trailing" secondItem="jU2-bO-T8I" secondAttribute="trailing" constant="327" id="qbY-Ax-MbZ"/>
                                     <constraint firstItem="jU2-bO-T8I" firstAttribute="leading" secondItem="Eog-rs-dyB" secondAttribute="leading" constant="20" id="tJh-pK-jpV"/>
                                 </constraints>
@@ -556,6 +566,7 @@
                     <navigationItem key="navigationItem" title="Overview" id="Ga5-rG-7a8"/>
                     <connections>
                         <outlet property="barChart" destination="jU2-bO-T8I" id="YAp-IW-5qu"/>
+                        <outlet property="lineChart" destination="NUf-g2-dFD" id="fBN-Wk-iCf"/>
                         <outlet property="pieChart" destination="pSs-me-jSA" id="BPi-CL-JwA"/>
                     </connections>
                 </viewController>

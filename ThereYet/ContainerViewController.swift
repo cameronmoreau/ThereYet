@@ -83,7 +83,7 @@ class ContainerViewController: UIViewController, UIGestureRecognizerDelegate, Ce
         
         panGestureRecognizer = UIPanGestureRecognizer(target: self, action: "handlePanGesture:")
         panGestureRecognizer.delegate = self
-        panGestureRecognizer.minimumNumberOfTouches = 1
+        panGestureRecognizer.minimumNumberOfTouches = 2
         centerNavigationController.view.addGestureRecognizer(panGestureRecognizer)
     }
     

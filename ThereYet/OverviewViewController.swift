@@ -13,35 +13,24 @@ import Charts
 
 class OverviewViewController: CenterViewController, ChartViewDelegate {
 
+    @IBOutlet weak var lineChart: LineChartView!
     @IBOutlet weak var barChart: BarChartView!
-    
     @IBOutlet weak var pieChart: PieChartView!
     
-    let fakeData = [""]
+    var checkInManager = CheckInManager()
     
     var courses = [Course]()
     var checkIns = [CheckIn]()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
+    override func viewWillAppear(animated: Bool) {
         loadCourses()
-        loadCheckIns()
+        checkIns = checkInManager.checkins()
+        
+        setupLineChart()
         
         setupBarChart()
         
         setupPieChart()
-    }
-    
-    func loadCheckIns() {
-        let fetchRequest = NSFetchRequest(entityName: "CheckIn")
-        let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
-        
-        do {
-            try checkIns = context.executeFetchRequest(fetchRequest) as! [CheckIn]
-        } catch let error as NSError {
-            print(error)
-        }
     }
     
     func loadCourses() {
@@ -54,6 +43,77 @@ class OverviewViewController: CenterViewController, ChartViewDelegate {
         } catch let error as NSError {
             print(error)
         }
+    }
+    
+    func setupLineChart() {
+        lineChart.delegate = self
+        
+        lineChart.descriptionText = ""
+        lineChart.noDataTextDescription = "You need to provide data for the chart."
+        
+        lineChart.dragEnabled = false
+        lineChart.setScaleEnabled(false)
+        lineChart.pinchZoomEnabled = false
+        lineChart.drawGridBackgroundEnabled = false
+        
+        let leftAxis = lineChart.leftAxis
+        leftAxis.customAxisMax = 15.0
+        leftAxis.customAxisMin = 0.0
+        leftAxis.startAtZeroEnabled = false
+        leftAxis.gridLineDashLengths = [5, 5]
+        leftAxis.drawLimitLinesBehindDataEnabled = false
+        
+        lineChart.rightAxis.enabled = false
+        
+        lineChart.viewPortHandler.setMaximumScaleY(2)
+        lineChart.viewPortHandler.setMaximumScaleX(2)
+        
+        //BalloonMarker *marker = [[BalloonMarker alloc] initWithColor:[UIColor colorWithWhite:180/255. alpha:1.0] font:[UIFont systemFontOfSize:12.0] insets: UIEdgeInsetsMake(8.0, 8.0, 20.0, 8.0)];
+        //marker.minimumSize = CGSizeMake(80.f, 40.f);
+        //lineChart.marker = marker;
+        
+        lineChart.legend.form = .Line
+        
+        var xVals = [String]()
+        let df = NSDateFormatter()
+        df.dateStyle = .ShortStyle
+        for (var i = 0; i < checkIns.count; i++) {
+            if xVals.contains(df.stringFromDate(checkIns[i].timestamp!)) == false {
+                //print("Added! \(df.stringFromDate(checkIns[i].timestamp!))")
+                xVals.append(df.stringFromDate(checkIns[i].timestamp!))
+            }
+        }
+        
+        var yVals = [ChartDataEntry]()
+        for (var i = 0; i < xVals.count; i++) {
+            var checkInsForDate = [CheckIn]()
+            checkInsForDate.appendContentsOf(checkIns)
+            checkInsForDate = checkInsForDate.filter({df.stringFromDate($0.timestamp!) == xVals[i]})
+            
+            yVals.append(ChartDataEntry(value: Double(checkInsForDate.count), xIndex: i))
+        }
+        
+        let set1 = LineChartDataSet(yVals: yVals, label: "Check-Ins Per Day")
+        
+        set1.lineDashLengths = [5, 2.5]
+        set1.highlightLineDashLengths = [5, 2.5]
+        set1.setColor(UIColor.blackColor())
+        set1.setCircleColor(UIColor.blackColor())
+        set1.lineWidth = 1.0
+        set1.circleRadius = 3.0
+        set1.drawCircleHoleEnabled = false
+        set1.valueFont = UIFont.systemFontOfSize(9)
+        set1.fillAlpha = 65/255.0
+        set1.fillColor = UIColor.blackColor()
+        
+        var dataSets = [LineChartDataSet]()
+        dataSets.append(set1)
+        
+        let data = LineChartData(xVals: xVals, dataSets: dataSets)
+        
+        lineChart.data = data
+        
+        lineChart.animate(xAxisDuration: 2.5, easingOption: .EaseInOutQuart)
     }
     
     func setupBarChart() {
@@ -119,7 +179,7 @@ class OverviewViewController: CenterViewController, ChartViewDelegate {
             yVals.append(BarChartDataEntry(value: Double(tempCheckIns.count), xIndex: i))
         }
         
-        let set1 = BarChartDataSet(yVals: yVals, label: "Check-Ins")
+        let set1 = BarChartDataSet(yVals: yVals, label: "Check-Ins Per Course")
         set1.barSpace = 0.35
         
         var dataSets = [BarChartDataSet]()
@@ -143,7 +203,7 @@ class OverviewViewController: CenterViewController, ChartViewDelegate {
 
         pieChart.drawCenterTextEnabled = true
         
-        pieChart.centerText = "Attendance by Day"
+        pieChart.centerText = "Attendance Per\nWeekday"
         
         pieChart.drawHoleEnabled = true
         pieChart.rotationAngle = 0.0
@@ -157,8 +217,6 @@ class OverviewViewController: CenterViewController, ChartViewDelegate {
         l.yOffset = 0.0
         
         //-----------------------
-        
-        let mult = 100
         
         var yVals1 = [BarChartDataEntry]()
         //IMPORTANT: In a PieChart, no values (Entry) should have the same xIndex (even if from different DataSets), since no values can be drawn above each other.
@@ -177,7 +235,7 @@ class OverviewViewController: CenterViewController, ChartViewDelegate {
         
         //add a lot of colors
         var colors = [UIColor]()
-        colors.appendContentsOf(ChartColorTemplates.vordiplom())
+        colors.append(UIColor(red: 201/255.0, green: 101/255.0, blue: 76/255.0, alpha: 1))
         colors.appendContentsOf(ChartColorTemplates.joyful())
         colors.appendContentsOf(ChartColorTemplates.colorful())
         colors.appendContentsOf(ChartColorTemplates.liberty())
