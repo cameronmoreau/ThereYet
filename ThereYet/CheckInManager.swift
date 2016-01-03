@@ -21,6 +21,7 @@ class CheckInManager {
     
     func checkins() -> [CheckIn] {
         let checkFetch = NSFetchRequest(entityName: "CheckIn")
+        checkFetch.sortDescriptors = [NSSortDescriptor(key: "timestamp", ascending: true)]
         
         do {
             return try context.executeFetchRequest(checkFetch) as! [CheckIn]

@@ -107,6 +107,45 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
         // Dispose of any resources that can be recreated.
     }
     
+    func deleteAllData(entity: String) {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext
+        let fetchRequest = NSFetchRequest(entityName: entity)
+        fetchRequest.returnsObjectsAsFaults = false
+        
+        do
+        {
+            let results = try managedContext.executeFetchRequest(fetchRequest)
+            print(results)
+            for managedObject in results
+            {
+                let managedObjectData:NSManagedObject = managedObject as! NSManagedObject
+                managedContext.deleteObject(managedObjectData)
+            }
+        } catch let error as NSError {
+            print("Detele all data in \(entity) error : \(error) \(error.userInfo)")
+        }
+    }
+    
+    func signOut() {
+        deleteAllData("Course")
+        
+        let pearsonUser = PearsonUser()
+        pearsonUser.authData.destroy()
+        pearsonUser.destroy()
+        PFUser.logOut()
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        let loginVC = storyboard.instantiateViewControllerWithIdentifier("LoginViewController")
+        (UIApplication.sharedApplication().delegate as! AppDelegate).window?.rootViewController = loginVC
+    }
+    
+    override func performAction(menuItem: MenuItem) {
+        if menuItem.name == "Sign Out" {
+            signOut()
+        }
+    }
+    
     //MARK: - Base Functions
     func loadData() {
         let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
