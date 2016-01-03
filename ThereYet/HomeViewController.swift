@@ -128,6 +128,7 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
     }
     
     func signOut() {
+        deleteAllData("CheckIn")
         deleteAllData("Course")
         
         let pearsonUser = PearsonUser()
@@ -229,6 +230,19 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
                 self.lastCheckin = checkIn
                 self.btnHere.hidden = true
                 self.labelCountDown.text = "You have arrived!"
+                
+                //save points - update user
+                let u = PFUser.currentUser()!
+                let p = u["points"] as! Int
+                u["points"] = p + Int(checkIn!.points!)
+                u.saveInBackground()
+                
+                //Save to device
+                let defaults = NSUserDefaults.standardUserDefaults()
+                var dp = defaults.integerForKey("points")
+                dp += Int(checkIn!.points!)
+                defaults.setInteger(dp, forKey: "points")
+                defaults.synchronize()
                 
                 let alertController = UIAlertController(title: "Congrats!", message: "You earned \(checkIn!.points!) points", preferredStyle: .Alert)
                 alertController.addAction(UIAlertAction(title: "Okay", style: .Cancel, handler: nil))

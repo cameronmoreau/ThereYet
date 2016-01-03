@@ -31,6 +31,7 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
             user.email = textFieldEmail.text
             user.password = textFieldPassword.text
             user["name"] = textFieldName.text
+            user["points"] = 0
             
             user.signUpInBackgroundWithBlock({
                 (succeeded: Bool, error: NSError?) in

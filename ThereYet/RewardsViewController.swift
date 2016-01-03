@@ -28,7 +28,9 @@ class RewardsViewController: CenterViewController, UITableViewDataSource, UITabl
     
     var offers = [Offer]()
     var giftCards = [GiftCard]()
+    var purchases = [Purchase]()
     var totalPoints: UIBarButtonItem!
+    var points: Int!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +39,10 @@ class RewardsViewController: CenterViewController, UITableViewDataSource, UITabl
         tableView.dataSource = self
         
         //Points
-        totalPoints = UIBarButtonItem(title: "100 points", style: .Done, target: self, action: nil)
+        let defaults = NSUserDefaults.standardUserDefaults()
+        points = defaults.integerForKey("points")
+        
+        totalPoints = UIBarButtonItem(title: "\(points) points", style: .Done, target: self, action: nil)
         totalPoints.tintColor = UIColor.whiteColor()
         totalPoints.enabled = true
         self.navigationItem.rightBarButtonItem = totalPoints
@@ -70,6 +75,9 @@ class RewardsViewController: CenterViewController, UITableViewDataSource, UITabl
         case TYPE.GiftCards.rawValue:
             return giftCards.count
             
+        case TYPE.History.rawValue:
+            return purchases.count
+            
         default:
             return 0
         }
@@ -82,11 +90,17 @@ class RewardsViewController: CenterViewController, UITableViewDataSource, UITabl
             return cell
         }
         
-        else {
+        else if viewTab.selectedSegmentIndex == TYPE.Offers.rawValue {
             let cell = tableView.dequeueReusableCellWithIdentifier("OfferCell")! as UITableViewCell
             let offer = self.offers[indexPath.row]
-            cell.textLabel?.text = offer.title
+            cell.textLabel?.text = "\(offer.title!) (\(offer.points!) points)"
             cell.detailTextLabel?.text = offer.sponsor!["title"] as? String
+            return cell
+        }
+        
+        else {
+            let cell = tableView.dequeueReusableCellWithIdentifier("HistoryCell")! as UITableViewCell
+            cell.textLabel?.text = self.purchases[indexPath.row].toString()
             return cell
         }
     }
@@ -101,6 +115,66 @@ class RewardsViewController: CenterViewController, UITableViewDataSource, UITabl
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
+        let purchase = PFObject(className: "Purchase")
+        
+        switch(self.viewTab.selectedSegmentIndex) {
+        case TYPE.Offers.rawValue:
+            let o = self.offers[indexPath.row]
+            
+            if points < o.points {
+                self.showBasicError("Reward", message: "Not enouch points")
+            } else {
+                purchase["item"] = ["title": o.title!, "points": o.points!]
+                purchase["sponsor"] = o.sponsor
+                purchase["type"] = "offer"
+                
+                purchase.saveInBackground()
+                rewardSuccess(purchase, cost: o.points!)
+            }
+            
+            break
+            
+        case TYPE.GiftCards.rawValue:
+            let g = self.giftCards[indexPath.row]
+            
+            if points < g.points {
+                self.showBasicError("Reward", message: "Not enouch points")
+            } else {
+                purchase["item"] = ["amount": g.amount!, "points": g.points!]
+                purchase["sponsor"] = g.sponsor
+                purchase["type"] = "giftcard"
+                
+                purchase.saveInBackground()
+                rewardSuccess(purchase, cost: g.points!)
+            }
+            
+            break
+            
+        default:
+            break
+        }
+    }
+    
+    func rewardSuccess(purchase: PFObject, cost: Int) {
+        
+        //Update stored
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setInteger(points - cost, forKey: "points")
+        defaults.synchronize()
+        
+        let u = PFUser.currentUser()!
+        u["points"] = points - cost
+        u.saveInBackground()
+        
+        //Update text
+        totalPoints.title = "\(points - cost) points"
+        
+        self.purchases.append(Purchase(item: purchase["item"] as! [String:AnyObject], type: purchase["type"] as! String))
+        
+        let alertController = UIAlertController(title: "Reward Update", message: "You will receive an email shortly about your reward", preferredStyle: .Alert)
+        alertController.addAction(UIAlertAction(title: "Okay", style: .Cancel, handler: nil))
+        self.presentViewController(alertController, animated: true, completion:nil)
     }
     
     func loadData(completion: (() -> ())) {
@@ -128,8 +202,20 @@ class RewardsViewController: CenterViewController, UITableViewDataSource, UITabl
                 }
             }
             
-            print(self.giftCards)
-            completion()
+            //Purches
+            let query2 = PFQuery(className: "Purchase")
+            query2.findObjectsInBackgroundWithBlock({
+                (objects: [PFObject]?, error: NSError?) in
+                
+                if let ps = objects {
+                    for p in ps {
+                        self.purchases.append(Purchase(item: p["item"] as! [String:AnyObject], type: p["type"] as! String))
+                    }
+                }
+                
+                completion()
+            })
+            
         })
         
     }

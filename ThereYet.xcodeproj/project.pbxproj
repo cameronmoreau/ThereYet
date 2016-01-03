@@ -30,6 +30,7 @@
 		7E20D4B81C34974700F0469D /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E20D4B71C34974700F0469D /* CreateAccountViewController.swift */; };
 		7E20D4BA1C34BA5A00F0469D /* NSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E20D4B91C34BA5A00F0469D /* NSDate.swift */; };
 		7E20D4BC1C34D44A00F0469D /* SyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E20D4BB1C34D44A00F0469D /* SyncManager.swift */; };
+		7E3FCFC41C39A9ED00BE157F /* Purchase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3FCFC31C39A9ED00BE157F /* Purchase.swift */; };
 		7E4BC3881C2D84E100D818BD /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4BC3871C2D84E100D818BD /* UIView.swift */; };
 		7E57E6AC1C2CA05800AC907D /* RewardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E57E6AB1C2CA05800AC907D /* RewardsViewController.swift */; };
 		7E57E6B21C2CC66D00AC907D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E57E6B11C2CC66D00AC907D /* AudioToolbox.framework */; };
@@ -96,6 +97,7 @@
 		7E20D4B71C34974700F0469D /* CreateAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
 		7E20D4B91C34BA5A00F0469D /* NSDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDate.swift; sourceTree = "<group>"; };
 		7E20D4BB1C34D44A00F0469D /* SyncManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncManager.swift; sourceTree = "<group>"; };
+		7E3FCFC31C39A9ED00BE157F /* Purchase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Purchase.swift; sourceTree = "<group>"; };
 		7E4BC3871C2D84E100D818BD /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		7E57E6AB1C2CA05800AC907D /* RewardsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RewardsViewController.swift; sourceTree = "<group>"; };
 		7E57E6B11C2CC66D00AC907D /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -329,6 +331,7 @@
 				7EB320A71C33597100AB26A8 /* LookupLocation.swift */,
 				7E8FD16B1C36EAA3006DDBAE /* CheckIn.swift */,
 				7ED445971C385FE40090B495 /* GiftCard.swift */,
+				7E3FCFC31C39A9ED00BE157F /* Purchase.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -528,6 +531,7 @@
 				4990FA351C28DE5F00164F6F /* HomeViewController.swift in Sources */,
 				499812971C2C88ED00346D27 /* ContainerViewController.swift in Sources */,
 				49E4F7A11C2BD43C00F7FFBA /* CoursesViewController.swift in Sources */,
+				7E3FCFC41C39A9ED00BE157F /* Purchase.swift in Sources */,
 				7E9B19AD1C3311F2003EFFF4 /* LocationStorage.swift in Sources */,
 				7E57E6D11C2D06CC00AC907D /* BLKFlexibleHeightBar.swift in Sources */,
 				7ED445981C385FE40090B495 /* GiftCard.swift in Sources */,

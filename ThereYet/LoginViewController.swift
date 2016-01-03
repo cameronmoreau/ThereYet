@@ -40,6 +40,10 @@ class LoginViewController: CenterViewController, UITextFieldDelegate {
                 //User was found, check if associated to parse
                 if parseUser != nil {
                     
+                    let defaults = NSUserDefaults.standardUserDefaults()
+                    defaults.setInteger(parseUser!["points"] as! Int, forKey: "points")
+                    defaults.synchronize()
+                    
                     //User does not have a Pearson account
                     if parseUser!["pearsonAuthData"] == nil {
                         loadingHUD.dismiss()
@@ -97,6 +101,7 @@ class LoginViewController: CenterViewController, UITextFieldDelegate {
                             parseUser.username = email
                             parseUser.password = password
                             parseUser["pearsonAuthData"] = pearsonUser!.authDataToObject()
+                            parseUser["points"] = 0
                             
                             parseUser.signUpInBackgroundWithBlock({
                                 (success: Bool, error: NSError?) in
