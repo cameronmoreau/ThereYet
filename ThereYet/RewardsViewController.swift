@@ -28,12 +28,19 @@ class RewardsViewController: CenterViewController, UITableViewDataSource, UITabl
     
     var offers = [Offer]()
     var giftCards = [GiftCard]()
+    var totalPoints: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         viewTab.selectedSegmentIndex = 0
         tableView.delegate = self
         tableView.dataSource = self
+        
+        //Points
+        totalPoints = UIBarButtonItem(title: "100 points", style: .Done, target: self, action: nil)
+        totalPoints.tintColor = UIColor.whiteColor()
+        totalPoints.enabled = true
+        self.navigationItem.rightBarButtonItem = totalPoints
         
         let loadingHUD = JGProgressHUD(style: .Dark)
         loadingHUD.textLabel.text = "Loading"

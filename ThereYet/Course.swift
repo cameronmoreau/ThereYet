@@ -134,14 +134,14 @@ class Course_RegularObject {
             }
         }
         
-        let calComps = NSCalendar.currentCalendar().components([.Day, .Month, .Year, .Hour, .Minute], fromDate: NSDate())
-        
-        let baseDayMonthYear = NSDateComponents()
-        baseDayMonthYear.year = 1997
-        baseDayMonthYear.month = 1
-        baseDayMonthYear.day = 4
-        baseDayMonthYear.hour = calComps.hour
-        baseDayMonthYear.minute = calComps.minute
+//        let calComps = NSCalendar.currentCalendar().components([.Day, .Month, .Year, .Hour, .Minute], fromDate: NSDate())
+//        
+//        let baseDayMonthYear = NSDateComponents()
+//        baseDayMonthYear.year = 1997
+//        baseDayMonthYear.month = 1
+//        baseDayMonthYear.day = 4
+//        baseDayMonthYear.hour = calComps.hour
+//        baseDayMonthYear.minute = calComps.minute
         
         //setup new
         if let days = self.daysOfWeek() {
@@ -153,6 +153,9 @@ class Course_RegularObject {
                 localNotification.category = "CLASS"
                 localNotification.timeZone = NSTimeZone.defaultTimeZone()
                 localNotification.repeatInterval = .WeekOfYear
+                
+                print(self.startsAt)
+                print(localNotification.fireDate)
                 
                 UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
             }

@@ -18,7 +18,11 @@ class GiftCardTableViewCell: UITableViewCell {
     func setGiftCard(g: GiftCard) {
         self.sponsorImage.contentMode = .ScaleAspectFit
         self.sponsorImage.layer.cornerRadius = 6
+        self.sponsorImage.borderWidth = 1
+        self.sponsorImage.borderColor = UIColor.grayColor()
+        self.sponsorImage.backgroundColor = UIColor(rgba: g.sponsor!["colorSub"] as! String)
         self.sponsorImage.clipsToBounds = true
+        self.sponsorImage.bounds = CGRectInset(self.sponsorImage.frame, 10, 10);
         self.sponsorImage.file = g.sponsor!["logo"] as? PFFile
         self.sponsorImage.loadInBackground()
         

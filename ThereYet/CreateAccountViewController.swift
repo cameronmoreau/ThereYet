@@ -19,6 +19,8 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
     var fields: [UITextField]!
     
     @IBAction func createAccountPressed(sender: UIButton?) {
+        self.view.resignFirstResponder()
+        
         if(formIsValid()) {
             let loadingHUD = JGProgressHUD(style: .Dark)
             loadingHUD.textLabel.text = "Registering"
@@ -100,6 +102,10 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
         }
         
         return true
+    }
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return .LightContent
     }
     
     

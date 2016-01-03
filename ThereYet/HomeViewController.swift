@@ -133,7 +133,7 @@ class HomeViewController: CenterViewController, UITableViewDataSource, UITableVi
         let pearsonUser = PearsonUser()
         pearsonUser.authData.destroy()
         pearsonUser.destroy()
-        PFUser.logOut()
+        PFUser.logOutInBackground()
         
         let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
         let loginVC = storyboard.instantiateViewControllerWithIdentifier("LoginViewController")

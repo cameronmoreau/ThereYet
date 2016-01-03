@@ -982,12 +982,8 @@
                                     <action selector="tabPressed:" destination="kfX-ji-den" eventType="valueChanged" id="jQ4-bC-899"/>
                                 </connections>
                             </segmentedControl>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="P44-41-76E">
-                                <rect key="frame" x="0.0" y="108" width="600" height="44"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lYY-3b-6pg">
-                                <rect key="frame" x="0.0" y="152" width="600" height="448"/>
+                                <rect key="frame" x="0.0" y="108" width="600" height="492"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="GiftCardCell" rowHeight="138" id="jTt-iz-4Qu" customClass="GiftCardTableViewCell" customModule="ThereYet" customModuleProvider="target">
@@ -1070,20 +1066,17 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="P44-41-76E" secondAttribute="trailing" id="5RO-W4-6pL"/>
+                            <constraint firstItem="lYY-3b-6pg" firstAttribute="top" secondItem="eOy-ft-USX" secondAttribute="bottom" constant="8" id="05F-ge-aou"/>
                             <constraint firstItem="eOy-ft-USX" firstAttribute="top" secondItem="Mz3-mJ-cP8" secondAttribute="bottom" constant="8" symbolic="YES" id="Gwi-gc-DwJ"/>
-                            <constraint firstItem="lYY-3b-6pg" firstAttribute="top" secondItem="P44-41-76E" secondAttribute="bottom" id="Xt2-bg-ZRG"/>
-                            <constraint firstItem="P44-41-76E" firstAttribute="leading" secondItem="lYY-3b-6pg" secondAttribute="leading" id="aRT-QF-9bu"/>
-                            <constraint firstItem="P44-41-76E" firstAttribute="top" secondItem="eOy-ft-USX" secondAttribute="bottom" constant="8" id="dEH-bd-5Hx"/>
+                            <constraint firstItem="lYY-3b-6pg" firstAttribute="leading" secondItem="eVs-pw-JdF" secondAttribute="leadingMargin" constant="-20" id="L1F-EN-8dQ"/>
+                            <constraint firstItem="eOy-ft-USX" firstAttribute="centerX" secondItem="eVs-pw-JdF" secondAttribute="centerX" id="SsS-Bu-4ui"/>
                             <constraint firstItem="lYY-3b-6pg" firstAttribute="leading" secondItem="eVs-pw-JdF" secondAttribute="leading" id="i6Z-NS-rnV"/>
-                            <constraint firstItem="P44-41-76E" firstAttribute="trailing" secondItem="lYY-3b-6pg" secondAttribute="trailing" id="jQH-nR-HqR"/>
                             <constraint firstItem="lYY-3b-6pg" firstAttribute="bottom" secondItem="dXn-aL-3s0" secondAttribute="top" id="kVR-eG-Icm"/>
-                            <constraint firstItem="P44-41-76E" firstAttribute="centerX" secondItem="eOy-ft-USX" secondAttribute="centerX" id="wkd-M8-rGh"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="lYY-3b-6pg" secondAttribute="trailing" constant="-20" id="qUI-0x-xmj"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="My Rewards" id="0XN-Ov-3Ml"/>
                     <connections>
-                        <outlet property="search" destination="P44-41-76E" id="L40-gO-E8E"/>
                         <outlet property="tableView" destination="lYY-3b-6pg" id="C3d-jJ-r3U"/>
                         <outlet property="viewTab" destination="eOy-ft-USX" id="fAd-IQ-gey"/>
                     </connections>
