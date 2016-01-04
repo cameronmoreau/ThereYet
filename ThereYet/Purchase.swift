@@ -22,6 +22,6 @@ class Purchase {
             return "\(item!["title"]!)"
         }
         
-        return "\(item!["amount"]) gift card"
+        return "\(item!["amount"]!) gift card"
     }
 }
